@@ -182,8 +182,14 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding-block:.9rem;}
   .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex:none;}
-  .brand-mark-wrap{position:relative;height:32px;display:flex;align-items:center;flex:none;}
-  .brand-logo{height:32px;width:auto;max-width:170px;object-fit:contain;}
+  .brand-mark-wrap{
+    position:relative;height:32px;max-height:32px;width:auto;max-width:170px;
+    display:flex;align-items:center;flex:none;overflow:hidden;
+  }
+  .brand-logo{
+    display:block;height:32px;max-height:32px;width:auto;max-width:170px;
+    object-fit:contain;object-position:left center;
+  }
   .brand-logo.hidden{display:none;}
   .brand-mark-fallback{
     width:32px;height:32px;border:1px solid var(--brass-dim);border-radius:4px;
@@ -735,10 +741,10 @@
   <div class="wrap foot-grid">
     <div class="foot-brand">
       <a class="brand" href="#top" style="color:var(--on-ink);">
-        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M9 30V17C9 10.4 13.5 6 19 6C24.5 6 28 10 28 15C28 19 25.3 21.5 21.7 21.5C18.6 21.5 17 19.6 17 17.2C17 15.2 18.2 13.8 20 13.8" stroke="#E3BE7A" stroke-width="1.4" stroke-linecap="round"/>
-          <circle cx="20" cy="13.8" r="1.6" fill="#E3BE7A"/>
-        </svg>
+        <span class="brand-mark-wrap">
+          <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" onerror="this.classList.add('hidden');this.closest('.brand').classList.add('logo-fail')">
+          <span class="brand-mark-fallback">GAS</span>
+        </span>
         <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2026 · Dubai</span></span>
       </a>
       <p>The Gulf's largest dedicated congress on aortic aneurysm disease — three days of live cases, masterclasses and faculty debate in Dubai.</p>
