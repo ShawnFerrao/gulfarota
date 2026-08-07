@@ -182,7 +182,15 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding-block:.9rem;}
   .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
-  .brand-mark{width:34px;height:34px;flex:none;}
+  .brand-mark-wrap{position:relative;height:32px;display:flex;align-items:center;flex:none;}
+  .brand-logo{height:32px;width:auto;max-width:180px;object-fit:contain;}
+  .brand-logo.hidden{display:none;}
+  .brand-mark-fallback{
+    width:32px;height:32px;border:1px solid var(--brass-dim);border-radius:4px;
+    display:none;align-items:center;justify-content:center;
+    font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.03em;color:var(--brass-soft);
+  }
+  .brand-mark-fallback.show{display:flex;}
   .brand-word{display:flex;flex-direction:column;line-height:1.05;}
   .brand-word b{font-family:"Newsreader";font-style:italic;font-weight:500;font-size:1.05rem;letter-spacing:.01em;}
   .brand-word span{font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.18em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;}
@@ -223,11 +231,6 @@
     padding-block:clamp(4rem,9vw,6.5rem) clamp(3rem,6vw,4.5rem);
   }
   .hero .wrap{position:relative;z-index:2;}
-  .hero-art{
-    position:absolute;top:0;right:0;height:100%;width:min(64vw,900px);
-    opacity:.9;pointer-events:none;
-  }
-  .hero-art svg{width:100%;height:100%;}
   .hero-eyebrow{margin-bottom:1.6rem;}
   .hero h1{
     font-size:var(--fs-display-1);
@@ -275,16 +278,16 @@
     padding:1.75rem;position:sticky;top:6rem;
   }
   .chair-ring{
-    width:88px;height:88px;border-radius:50%;
+    width:152px;height:152px;border-radius:50%;
     border:1px solid var(--brass-dim);
     display:grid;place-items:center;margin-bottom:1.2rem;
-    font-family:"Newsreader";font-style:italic;font-size:1.6rem;color:var(--brass-ink);
+    font-family:"Newsreader";font-style:italic;font-size:2.4rem;color:var(--brass-ink);
     background:var(--linen);
     position:relative;overflow:hidden;
   }
-  .chair-ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .chair-ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
   .chair-ring img.hidden{display:none;}
-  .chair-ring .fallback{position:relative;}
+  .chair-ring .fallback{position:static;z-index:0;}
   .chair-card h4{font-size:1.15rem;font-style:italic;font-weight:500;}
   .chair-card .role{color:var(--mist);font-size:.86rem;margin-top:.3rem;}
   .chair-card .sig{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--hairline);font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.06em;color:var(--mist);text-transform:uppercase;}
@@ -314,14 +317,14 @@
   }
   .person:hover{background:var(--linen-raised);}
   .avatar{
-    width:48px;height:48px;border-radius:50%;border:1px solid var(--brass-dim);
-    display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:.78rem;color:var(--brass-ink);
+    width:104px;height:104px;border-radius:50%;border:1px solid var(--brass-dim);
+    display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.1rem;color:var(--brass-ink);
     background:var(--linen-raised);
     position:relative;overflow:hidden;
   }
-  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
   .avatar img.hidden{display:none;}
-  .avatar .fallback{position:relative;}
+  .avatar .fallback{position:static;z-index:0;}
   .person h4{font-size:1rem;font-weight:600;font-family:"IBM Plex Sans";}
   .person .role{font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mist);line-height:1.5;}
 
@@ -343,8 +346,10 @@
   .feature-copy .eyebrow{margin-bottom:1rem;}
   .feature-copy h3{font-size:var(--fs-display-3);max-width:20ch;}
   .feature-copy p{margin-top:1rem;color:var(--mist);max-width:42ch;}
-  .feature-art{background:var(--ink);position:relative;min-height:220px;}
-  .feature-art svg{position:absolute;inset:0;width:100%;height:100%;}
+  .feature-art{background:var(--ink);position:relative;min-height:220px;display:grid;place-items:center;padding:2rem;}
+  .feature-stat{display:flex;flex-direction:column;align-items:center;gap:.6rem;text-align:center;}
+  .feature-stat-num{font-family:"Newsreader";font-style:italic;font-weight:500;font-size:2.75rem;color:var(--brass-soft);}
+  .feature-stat-label{font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--on-ink-mist);}
 
   /* ============ ACCREDITATION ============ */
   .accred-row{display:flex;flex-wrap:wrap;gap:2.5rem;align-items:center;justify-content:space-between;}
@@ -473,10 +478,10 @@
 <header class="site">
   <div class="wrap nav">
     <a class="brand" href="#top">
-      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M9 30V17C9 10.4 13.5 6 19 6C24.5 6 28 10 28 15C28 19 25.3 21.5 21.7 21.5C18.6 21.5 17 19.6 17 17.2C17 15.2 18.2 13.8 20 13.8" stroke="#E3BE7A" stroke-width="1.4" stroke-linecap="round"/>
-        <circle cx="20" cy="13.8" r="1.6" fill="#E3BE7A"/>
-      </svg>
+      <span class="brand-mark-wrap">
+        <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.add('show')">
+        <span class="brand-mark-fallback">GAS</span>
+      </span>
       <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2026 · Dubai</span></span>
     </a>
     <nav class="links" aria-label="Primary">
@@ -511,19 +516,6 @@
 <!-- ============================================================ -->
 <main id="top">
 <section class="hero">
-  <div class="hero-art" aria-hidden="true">
-    <svg viewBox="0 0 620 640" fill="none">
-      <path id="arch" pathLength="100" d="M140 600 C140 460 148 260 232 190 C296 136 392 136 452 196 C500 244 512 320 468 366 C432 404 372 400 348 358 C330 326 344 292 376 280"
-        stroke="#E3BE7A" stroke-width="1.3" stroke-linecap="round" opacity="0.55"/>
-      <path id="archFlow" pathLength="100" d="M140 600 C140 460 148 260 232 190 C296 136 392 136 452 196 C500 244 512 320 468 366 C432 404 372 400 348 358 C330 326 344 292 376 280"
-        stroke="#F2DBA8" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="4 14" opacity="0.9"/>
-      <path d="M232 190 C210 150 208 110 226 74" stroke="#E3BE7A" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
-      <path d="M280 156 C268 116 274 78 300 48" stroke="#E3BE7A" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
-      <path d="M336 146 C336 104 350 68 382 44" stroke="#E3BE7A" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
-      <circle cx="140" cy="600" r="3" fill="#E3BE7A" opacity="0.6"/>
-      <circle cx="468" cy="366" r="3" fill="#E3BE7A" opacity="0.6"/>
-    </svg>
-  </div>
   <div class="wrap">
     <p class="eyebrow hero-eyebrow" data-reveal>Third International Edition · GAS 2026</p>
     <h1 data-reveal>The Gulf's largest gathering on <em>aortic aneurysm</em> disease.</h1>
@@ -656,11 +648,11 @@
         <h3>Watch the case <em style="font-style:italic;color:var(--brass-ink);">and</em> the room.</h3>
         <p>A live, two-way video link connects the hybrid angio-operating room to the conference hall — delegates follow the procedure and the panel discussion as they happen, side by side.</p>
       </div>
-      <div class="feature-art" aria-hidden="true">
-        <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-          <line x1="0" y1="110" x2="400" y2="110" stroke="#E3BE7A" stroke-width="0.5" opacity="0.25"/>
-          <path pathLength="100" d="M0 130 L40 130 L52 90 L64 160 L76 60 L88 150 L100 110 L400 110" stroke="#F2DBA8" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round" id="ecg"/>
-        </svg>
+      <div class="feature-art">
+        <div class="feature-stat">
+          <span class="feature-stat-num">2‑way</span>
+          <span class="feature-stat-label">Live transmission</span>
+        </div>
       </div>
     </div>
   </div>
@@ -835,31 +827,6 @@
     track.innerHTML=html;
   }
 
-  // hero arch draw-in
-  var arch=document.getElementById('arch');
-  if(arch && !reduced){
-    arch.style.strokeDasharray='100';
-    arch.style.strokeDashoffset='100';
-    arch.animate([{strokeDashoffset:100},{strokeDashoffset:0}],{duration:1800,delay:200,easing:'cubic-bezier(.16,.8,.24,1)',fill:'forwards'});
-  }
-  var flow=document.getElementById('archFlow');
-  if(flow && !reduced){
-    flow.animate([{strokeDashoffset:0},{strokeDashoffset:-180}],{duration:6000,iterations:Infinity,easing:'linear'});
-  }
-  var ecg=document.getElementById('ecg');
-  if(ecg && !reduced){
-    ecg.style.strokeDasharray='100';
-    ecg.style.strokeDashoffset='100';
-    var ecgObs=new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if(entry.isIntersecting){
-          ecg.animate([{strokeDashoffset:100},{strokeDashoffset:0}],{duration:1400,easing:'ease-out',fill:'forwards'});
-          ecgObs.unobserve(entry.target);
-        }
-      });
-    },{threshold:.4});
-    ecgObs.observe(ecg);
-  }
 })();
 </script>
 </body>
