@@ -181,17 +181,19 @@
     color:var(--on-ink);
   }
   .nav{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding-block:.9rem;}
-  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;}
+  .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;flex:none;}
   .brand-mark-wrap{position:relative;height:32px;display:flex;align-items:center;flex:none;}
-  .brand-logo{height:32px;width:auto;max-width:180px;object-fit:contain;}
+  .brand-logo{height:32px;width:auto;max-width:170px;object-fit:contain;}
   .brand-logo.hidden{display:none;}
   .brand-mark-fallback{
     width:32px;height:32px;border:1px solid var(--brass-dim);border-radius:4px;
     display:none;align-items:center;justify-content:center;
     font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.03em;color:var(--brass-soft);
   }
-  .brand-mark-fallback.show{display:flex;}
-  .brand-word{display:flex;flex-direction:column;line-height:1.05;}
+  /* wordmark + small square mark are a fallback pair — hidden unless the real logo image 404s */
+  .brand-word{display:none;flex-direction:column;line-height:1.05;}
+  .brand.logo-fail .brand-word{display:flex;}
+  .brand.logo-fail .brand-mark-fallback{display:flex;}
   .brand-word b{font-family:"Newsreader";font-style:italic;font-weight:500;font-size:1.05rem;letter-spacing:.01em;}
   .brand-word span{font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.18em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;}
   nav.links{display:flex;align-items:center;gap:clamp(1rem,2vw,2rem);}
@@ -278,16 +280,18 @@
     padding:1.75rem;position:sticky;top:6rem;
   }
   .chair-ring{
-    width:152px;height:152px;border-radius:50%;
-    border:1px solid var(--brass-dim);
+    width:152px;height:152px;
     display:grid;place-items:center;margin-bottom:1.2rem;
-    font-family:"Newsreader";font-style:italic;font-size:2.4rem;color:var(--brass-ink);
-    background:var(--linen);
-    position:relative;overflow:hidden;
+    position:relative;
   }
-  .chair-ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .chair-ring img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .chair-ring img.hidden{display:none;}
-  .chair-ring .fallback{position:static;z-index:0;}
+  .chair-ring .fallback{
+    position:static;z-index:0;width:100%;height:100%;border-radius:50%;
+    border:1px solid var(--brass-dim);background:var(--linen);
+    display:grid;place-items:center;
+    font-family:"Newsreader";font-style:italic;font-size:2.4rem;color:var(--brass-ink);
+  }
   .chair-card h4{font-size:1.15rem;font-style:italic;font-weight:500;}
   .chair-card .role{color:var(--mist);font-size:.86rem;margin-top:.3rem;}
   .chair-card .sig{margin-top:1.4rem;padding-top:1.2rem;border-top:1px solid var(--hairline);font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.06em;color:var(--mist);text-transform:uppercase;}
@@ -317,14 +321,18 @@
   }
   .person:hover{background:var(--linen-raised);}
   .avatar{
-    width:104px;height:104px;border-radius:50%;border:1px solid var(--brass-dim);
-    display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.1rem;color:var(--brass-ink);
-    background:var(--linen-raised);
-    position:relative;overflow:hidden;
+    width:104px;height:104px;
+    display:grid;place-items:center;
+    position:relative;
   }
-  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .avatar img.hidden{display:none;}
-  .avatar .fallback{position:static;z-index:0;}
+  .avatar .fallback{
+    position:static;z-index:0;width:100%;height:100%;border-radius:50%;
+    border:1px solid var(--brass-dim);background:var(--linen-raised);
+    display:grid;place-items:center;
+    font-family:"IBM Plex Mono";font-size:1.1rem;color:var(--brass-ink);
+  }
   .person h4{font-size:1rem;font-weight:600;font-family:"IBM Plex Sans";}
   .person .role{font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--mist);line-height:1.5;}
 
@@ -479,7 +487,7 @@
   <div class="wrap nav">
     <a class="brand" href="#top">
       <span class="brand-mark-wrap">
-        <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" onerror="this.classList.add('hidden');this.nextElementSibling.classList.add('show')">
+        <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" onerror="this.classList.add('hidden');this.closest('.brand').classList.add('logo-fail')">
         <span class="brand-mark-fallback">GAS</span>
       </span>
       <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2026 · Dubai</span></span>
