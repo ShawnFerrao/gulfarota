@@ -155,7 +155,7 @@
   <div class="wrap">
     <a class="brand" href="/">
       <span class="brand-mark-wrap">
-        <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" onerror="this.classList.add('hidden');this.closest('.brand').classList.add('logo-fail')">
+        <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" data-fallback="brand">
         <span class="brand-mark-fallback">GAS</span>
       </span>
       <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2026 · Dubai</span></span>
@@ -195,6 +195,20 @@
 
 <script>
 (function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+    if (img.dataset.fallback === 'brand') {
+      var brand = img.closest('.brand');
+      if (brand) brand.classList.add('logo-fail');
+    } else if (img.dataset.fallback === 'marquee') {
+      if (img.parentElement) img.parentElement.classList.add('img-fail');
+    }
+  }, true);
+
   var burger=document.getElementById('gasBurgerBtn');
   var panel=document.getElementById('gasMobilePanel');
   var closeBtn=document.getElementById('gasCloseBtn');
