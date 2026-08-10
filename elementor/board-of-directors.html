@@ -65,11 +65,14 @@
   .gas-directors .chair-card{
     display:flex;gap:2.25rem;align-items:center;
   }
-  .gas-directors .chair-avatar{width:256px;height:256px;position:relative;flex:none;}
+  .gas-directors .chair-avatar{
+    width:256px;height:256px;position:relative;flex:none;border-radius:20px;overflow:hidden;
+    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 14px 30px -18px rgba(0,26,63,.22);
+  }
   .gas-directors .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .gas-directors .chair-avatar img.hidden{display:none;}
   .gas-directors .chair-avatar .fallback{
-    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:var(--linen-raised);
+    width:100%;height:100%;background:var(--linen-raised);
     display:grid;place-items:center;font-family:"Newsreader";font-style:italic;font-size:3.6rem;color:var(--brass-ink);
   }
   .gas-directors .chair-card h3{font-size:1.5rem;font-style:italic;font-weight:500;}
@@ -85,11 +88,14 @@
   }
   .gas-directors .person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;transition:transform .3s var(--ease);}
   .gas-directors .person:hover{transform:translateY(-4px);}
-  .gas-directors .avatar{width:160px;height:160px;position:relative;}
+  .gas-directors .avatar{
+    width:160px;height:160px;position:relative;border-radius:14px;overflow:hidden;
+    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.18);
+  }
   .gas-directors .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .gas-directors .avatar img.hidden{display:none;}
   .gas-directors .avatar .fallback{
-    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:var(--linen-raised);
+    width:100%;height:100%;background:var(--linen-raised);
     display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.45rem;color:var(--brass-ink);
   }
   .gas-directors .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;max-width:22ch;}
