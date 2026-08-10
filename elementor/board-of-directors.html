@@ -1,0 +1,203 @@
+<!--
+  GULF AORTA SUMMIT — "BOARD OF DIRECTORS" PAGE (Elementor "HTML" widget)
+  ───────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /boardofdirectors, matching the original site's nav item — distinct
+  from "Board of Organizers" at /boardoforganizers). No header/footer
+  markup — those come from your global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-directors.
+-->
+<div class="gas-directors">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-directors{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-directors,.gas-directors *,.gas-directors *::before,.gas-directors *::after{box-sizing:border-box;}
+  .gas-directors p{margin:0;}
+  .gas-directors a{color:inherit;text-decoration:none;}
+  .gas-directors h1,.gas-directors h2,.gas-directors h3,.gas-directors h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-directors .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-directors img{max-width:100%;display:block;}
+
+  .gas-directors .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-directors .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-directors .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-directors .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-directors .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-directors .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-directors .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-directors .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-directors .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+
+  /* ---- chairman spotlight ---- */
+  .gas-directors .chair-card{
+    display:flex;gap:2rem;align-items:center;padding:clamp(1.75rem,3.5vw,2.5rem);
+    border:1px solid var(--hairline);border-radius:var(--radius);background:transparent;
+  }
+  .gas-directors .chair-avatar{width:256px;height:256px;position:relative;flex:none;}
+  .gas-directors .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;background:transparent;}
+  .gas-directors .chair-avatar img.hidden{display:none;}
+  .gas-directors .chair-avatar .fallback{
+    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:transparent;
+    display:grid;place-items:center;font-family:"Newsreader";font-style:italic;font-size:3.6rem;color:var(--brass-ink);
+  }
+  .gas-directors .chair-card h3{font-size:1.5rem;font-style:italic;font-weight:500;}
+  .gas-directors .chair-badge{
+    display:inline-flex;margin-top:.7rem;font-family:"IBM Plex Sans";font-weight:600;font-size:.86rem;letter-spacing:.01em;
+    color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
+    padding:.5rem 1.1rem;line-height:1.4;
+  }
+
+  /* ---- directors grid ---- */
+  .gas-directors .directors-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);
+  }
+  .gas-directors .person{background:var(--linen);padding:1.6rem 1.3rem;display:flex;flex-direction:column;align-items:flex-start;gap:.9rem;transition:background .3s;}
+  .gas-directors .person:hover{background:var(--linen-raised);}
+  .gas-directors .avatar{width:160px;height:160px;position:relative;}
+  .gas-directors .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;background:transparent;}
+  .gas-directors .avatar img.hidden{display:none;}
+  .gas-directors .avatar .fallback{
+    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:transparent;
+    display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.45rem;color:var(--brass-ink);
+  }
+  .gas-directors .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;}
+  .gas-directors .person .role{font-family:"IBM Plex Sans";font-size:.82rem;color:var(--mist);line-height:1.45;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-directors .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-directors .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-directors .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-directors .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-directors .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-directors .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-directors .btn-gold{background:var(--brass);color:var(--ink);}
+  .gas-directors .btn-gold:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .gas-directors .btn-line{border:1px solid rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-directors .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+
+  @media (max-width:980px){
+    .gas-directors .directors-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .gas-directors .directors-grid{grid-template-columns:1fr;}
+    .gas-directors .chair-card{flex-direction:column;align-items:flex-start;text-align:left;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-directors *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Governance</p>
+    <h1>Board of Directors</h1>
+    <p class="intro">The leadership guiding the Gulf Aorta Summit's scientific programme, partnerships and educational strategy — chaired by Prof. Arif Alnooryani, and drawn from senior clinicians and directors across the Gulf and internationally.</p>
+  </div>
+</section>
+
+<!-- ============ CHAIRMAN ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Chairman</p>
+      <h2>Leading the Gulf Aorta Summit.</h2>
+    </div>
+    <div class="chair-card">
+      <div class="chair-avatar">
+        <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d799621f6e95d1f968.png" alt="Prof. Arif Alnooryani" loading="lazy" data-fallback="self">
+        <span class="fallback">AA</span>
+      </div>
+      <div>
+        <h3>Prof. Arif Alnooryani</h3>
+        <span class="chair-badge">Chairman</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIRECTORS ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">The board</p>
+      <h2>Members of the Board of Directors.</h2>
+    </div>
+    <div class="directors-grid">
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61e30563407133f7fd4a.png" alt="Dr. Zaki Khalifa Almuzakki Alshamsi" loading="lazy" data-fallback="self"><span class="fallback">ZA</span></div><h4>Dr. Zaki Khalifa Almuzakki Alshamsi</h4><p class="role">GAS Chief Director</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d717e96546059d8d2d.png" alt="Prof. Bander Aldhafery" loading="lazy" data-fallback="self"><span class="fallback">BA</span></div><h4>Prof. Bander Aldhafery</h4><p class="role">Chair of Summit Platform, Professional Advisors</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69803c1466e7cae7c3d4415e.png" alt="Prof. Adel Aswad" loading="lazy" data-fallback="self"><span class="fallback">AA</span></div><h4>Prof. Adel Aswad</h4><p class="role">Chair, Board of Organizers</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61e399621f5dacd1f9c4.png" alt="Dr. Sharif Khashaba" loading="lazy" data-fallback="self"><span class="fallback">SK</span></div><h4>Dr. Sharif Khashaba</h4><p class="role">Director of Partnership and Collaboration for Lead Organizers</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d717e9650a3f9d8d2e.png" alt="Dr. Hussein Ahmed Lateef" loading="lazy" data-fallback="self"><span class="fallback">HL</span></div><h4>Dr. Hussein Ahmed Lateef</h4><p class="role">Chair of Scientific Advisory Board</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690e12974357008539a13caf.png" alt="Dr. Adel Al-Ali" loading="lazy" data-fallback="self"><span class="fallback">AA</span></div><h4>Dr. Adel Al-Ali</h4><p class="role">Director of Global Educational Strategies and Illustration of GAS</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d7ee40407c82b76187.png" alt="Dr. Faisal Alam" loading="lazy" data-fallback="self"><span class="fallback">FA</span></div><h4>Dr. Faisal Alam</h4><p class="role">Director of Summit Platform Development</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d705634033c4f7fcdf.png" alt="Dr. Ayman Al Sibaie" loading="lazy" data-fallback="self"><span class="fallback">AS</span></div><h4>Dr. Ayman Al Sibaie</h4><p class="role">Director of GAS Training Program and Masterclasses</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61c6056340fef2f7f990.png" alt="Dr. Ali Mohammed Jawaz" loading="lazy" data-fallback="self"><span class="fallback">AJ</span></div><h4>Dr. Ali Mohammed Jawaz</h4><p class="role">Director of Professional Standards Committee</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d799621fbf02d1f967.png" alt="Prof. Payman Majd" loading="lazy" data-fallback="self"><span class="fallback">PM</span></div><h4>Prof. Payman Majd</h4><p class="role">Chair of Professional Advisory Board</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce61d7ee4040945ab76186.png" alt="Dr. Bassel Safi" loading="lazy" data-fallback="self"><span class="fallback">BS</span></div><h4>Dr. Bassel Safi</h4><p class="role">Director of Global Development and Researches Committee</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Meet the full summit faculty.</h2>
+      <p>The Board of Directors works alongside the Board of Organizers, Scientific Advisory Board and Speaker Faculty to shape GAS 2026.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="/faculty">View Summit Faculty</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
