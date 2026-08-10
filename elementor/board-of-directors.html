@@ -63,14 +63,16 @@
 
   /* ---- chairman spotlight ---- */
   .gas-directors .chair-card{
-    display:flex;gap:2rem;align-items:center;padding:clamp(1.75rem,3.5vw,2.5rem);
-    border:1px solid var(--hairline);border-radius:var(--radius);background:transparent;
+    display:flex;gap:2.25rem;align-items:center;
   }
-  .gas-directors .chair-avatar{width:256px;height:256px;position:relative;flex:none;}
-  .gas-directors .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;background:transparent;}
+  .gas-directors .chair-avatar{
+    width:256px;height:256px;position:relative;flex:none;border-radius:50%;overflow:hidden;
+    box-shadow:0 0 0 1px var(--hairline),0 12px 28px -16px rgba(0,26,63,.25);
+  }
+  .gas-directors .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1;}
   .gas-directors .chair-avatar img.hidden{display:none;}
   .gas-directors .chair-avatar .fallback{
-    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:transparent;
+    width:100%;height:100%;background:var(--linen-raised);
     display:grid;place-items:center;font-family:"Newsreader";font-style:italic;font-size:3.6rem;color:var(--brass-ink);
   }
   .gas-directors .chair-card h3{font-size:1.5rem;font-style:italic;font-weight:500;}
@@ -82,19 +84,22 @@
 
   /* ---- directors grid ---- */
   .gas-directors .directors-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2.25rem,4vw,3rem) clamp(1.5rem,3vw,2rem);
   }
-  .gas-directors .person{background:var(--linen);padding:1.6rem 1.3rem;display:flex;flex-direction:column;align-items:flex-start;gap:.9rem;transition:background .3s;}
-  .gas-directors .person:hover{background:var(--linen-raised);}
-  .gas-directors .avatar{width:160px;height:160px;position:relative;}
-  .gas-directors .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;background:transparent;}
+  .gas-directors .person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;transition:transform .3s var(--ease);}
+  .gas-directors .person:hover{transform:translateY(-4px);}
+  .gas-directors .avatar{
+    width:160px;height:160px;position:relative;border-radius:50%;overflow:hidden;
+    box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.22);
+  }
+  .gas-directors .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:1;}
   .gas-directors .avatar img.hidden{display:none;}
   .gas-directors .avatar .fallback{
-    width:100%;height:100%;border-radius:50%;border:1px solid var(--brass-dim);background:transparent;
+    width:100%;height:100%;background:var(--linen-raised);
     display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.45rem;color:var(--brass-ink);
   }
-  .gas-directors .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;}
-  .gas-directors .person .role{font-family:"IBM Plex Sans";font-size:.82rem;color:var(--mist);line-height:1.45;}
+  .gas-directors .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;max-width:22ch;}
+  .gas-directors .person .role{font-family:"IBM Plex Sans";font-size:.82rem;color:var(--mist);line-height:1.45;max-width:24ch;}
 
   /* ---- closing / CTA band ---- */
   .gas-directors .cta-band{background:var(--ink);color:var(--on-ink);}
@@ -116,7 +121,7 @@
   }
   @media (max-width:560px){
     .gas-directors .directors-grid{grid-template-columns:1fr;}
-    .gas-directors .chair-card{flex-direction:column;align-items:flex-start;text-align:left;}
+    .gas-directors .chair-card{flex-direction:column;text-align:center;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-directors *{transition-duration:.001ms !important;}
