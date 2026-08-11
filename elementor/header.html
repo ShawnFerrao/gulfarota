@@ -99,6 +99,9 @@
 
   /* ---- About dropdown ---- */
   .gas-header-bar .nav-item{position:relative;}
+  .gas-header-bar .nav-item::after{
+    content:"";position:absolute;top:100%;left:0;right:0;height:.9rem;
+  }
   .gas-header-bar .nav-item .caret{transition:transform .25s var(--ease);flex:none;}
   .gas-header-bar .nav-item:hover .caret,
   .gas-header-bar .nav-item:focus-within .caret{transform:rotate(180deg);}

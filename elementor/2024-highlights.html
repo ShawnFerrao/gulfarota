@@ -1,0 +1,313 @@
+<!--
+  GULF AORTA SUMMIT — 2024 HIGHLIGHTS PAGE (Elementor "HTML" widget)
+  ────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /2024-highlights, matching the original site's nav item
+  "Previous Events → 2024 Highlights"). No header/footer markup —
+  those come from your global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-2024.
+
+  Note on the "Countries Participated" world map: the source graphic
+  bakes ~15 national flags into a single flattened image with no
+  accompanying text list, so the exact country names can't be
+  reliably transcribed — that one panel is kept as the real source
+  image rather than guessed at. Everything else (wave stats,
+  specialty breakdown) had crisp legible numbers in the source and
+  has been rebuilt as native, accessible components instead of a
+  flat infographic image.
+-->
+<div class="gas-2024">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-2024{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-2024,.gas-2024 *,.gas-2024 *::before,.gas-2024 *::after{box-sizing:border-box;}
+  .gas-2024 p{margin:0;}
+  .gas-2024 a{color:inherit;text-decoration:none;}
+  .gas-2024 h1,.gas-2024 h2,.gas-2024 h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-2024 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-2024 img{max-width:100%;display:block;}
+
+  .gas-2024 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-2024 .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-2024 .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-2024 .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-2024 .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-2024 .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-2024 .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-2024 .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-2024 .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+
+  /* ---- buttons ---- */
+  .gas-2024 .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-2024 .btn-gold{background:var(--brass);color:var(--ink);}
+  .gas-2024 .btn-gold:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .gas-2024 .btn-line{border:1px solid var(--hairline);color:var(--ink-text);}
+  .gas-2024 .btn-line:hover{border-color:var(--brass-ink);color:var(--brass-ink);}
+  .gas-2024 .cta-band .btn-line{border-color:rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-2024 .cta-band .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+
+  /* ---- hero photo ---- */
+  .gas-2024 .hero-photo{
+    position:relative;aspect-ratio:16/7;border-radius:14px;overflow:hidden;
+    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline);
+  }
+  .gas-2024 .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .gas-2024 .hero-photo img.hidden{display:none;}
+  .gas-2024 .hero-photo .fallback{
+    width:100%;height:100%;display:grid;place-items:center;
+    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  }
+
+  /* ---- video ---- */
+  .gas-2024 .video-embed{
+    position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--hairline);
+    background:var(--linen-raised);
+  }
+  .gas-2024 .video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+
+  /* ---- wave stat groups ---- */
+  .gas-2024 .wave-groups{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem);}
+  .gas-2024 .wave-group{border:1px solid var(--hairline);border-radius:14px;padding:clamp(1.5rem,3vw,2rem);}
+  .gas-2024 .wave-group h3{font-size:1.15rem;font-style:italic;margin-bottom:1.4rem;color:var(--brass-ink);}
+  .gas-2024 .wave-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .gas-2024 .wave-stat{text-align:center;}
+  .gas-2024 .wave-stat .icon{font-size:1.4rem;display:block;margin-bottom:.5rem;}
+  .gas-2024 .wave-stat .num{display:block;font-size:clamp(1.6rem,3vw,2.1rem);font-weight:600;color:var(--ink-text);}
+  .gas-2024 .wave-stat .lbl{display:block;margin-top:.3rem;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mist);}
+
+  /* ---- specialty breakdown ---- */
+  .gas-2024 .spec-list{display:flex;flex-direction:column;gap:.9rem;max-width:74ch;}
+  .gas-2024 .spec-item{display:grid;grid-template-columns:15ch 1fr 6ch;align-items:center;gap:1rem;font-size:.92rem;}
+  .gas-2024 .spec-item .spec-label{color:var(--ink-text);}
+  .gas-2024 .spec-track{height:8px;border-radius:4px;background:var(--linen-raised);overflow:hidden;}
+  .gas-2024 .spec-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--brass-ink),var(--brass));}
+  .gas-2024 .spec-val{text-align:right;color:var(--mist);}
+  .gas-2024 .spec-val b{color:var(--ink-text);}
+
+  /* ---- countries map ---- */
+  .gas-2024 .map-photo{
+    position:relative;border-radius:14px;overflow:hidden;background:var(--linen-raised);
+    box-shadow:0 0 0 1px var(--hairline);
+  }
+  .gas-2024 .map-photo img{width:100%;height:auto;display:block;}
+  .gas-2024 .map-photo img.hidden{display:none;}
+  .gas-2024 .map-photo .fallback{
+    padding:3rem;text-align:center;
+    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  }
+  .gas-2024 .map-caption{margin-top:.9rem;font-size:.86rem;color:var(--mist);}
+
+  /* ---- gallery ---- */
+  .gas-2024 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+  .gas-2024 .gallery-card{
+    aspect-ratio:4/3;position:relative;border-radius:12px;overflow:hidden;
+    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline);
+  }
+  .gas-2024 .gallery-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .gas-2024 .gallery-card img.hidden{display:none;}
+  .gas-2024 .gallery-card .fallback{
+    width:100%;height:100%;display:grid;place-items:center;
+    font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  }
+
+  /* ---- closing CTA ---- */
+  .gas-2024 .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-2024 .cta-band .wrap{padding-block:clamp(2.5rem,5vw,3.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;}
+  .gas-2024 .cta-band h2{font-size:1.4rem;font-style:italic;color:var(--on-ink);max-width:24ch;}
+  .gas-2024 .cta-band .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  @media (max-width:760px){
+    .gas-2024 .wave-groups{grid-template-columns:1fr;}
+    .gas-2024 .spec-item{grid-template-columns:12ch 1fr 5ch;font-size:.86rem;}
+    .gas-2024 .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .gas-2024 .hero-photo{aspect-ratio:4/3;}
+  }
+  @media (max-width:480px){
+    .gas-2024 .gallery-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-2024 *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Previous Events</p>
+    <h1>GAS 2024 Highlights</h1>
+    <p class="intro">A look back at the Gulf Aorta Summit's two 2024 waves — the speakers, delegates and disciplines that came together, and the moments captured along the way.</p>
+  </div>
+</section>
+
+<!-- ============ HERO PHOTO ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="hero-photo">
+      <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/691daca8300f06cb0b7691ab.png" alt="GAS 2024 highlight" loading="lazy" data-fallback="self">
+      <span class="fallback">GAS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RECAP VIDEO ============ -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/O_cYYgploqA" title="GAS 2024 Highlights recap" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENT ANALYTICS ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Event analytics</p>
+      <h2>GAS 2024, in numbers.</h2>
+    </div>
+
+    <div class="wave-groups">
+      <div class="wave-group">
+        <h3>1st Wave of Gulf Aorta Summit</h3>
+        <div class="wave-stats">
+          <div class="wave-stat"><span class="icon">🎤</span><span class="num mono">16</span><span class="lbl">Total Speakers</span></div>
+          <div class="wave-stat"><span class="icon">👥</span><span class="num mono">210</span><span class="lbl">Total Delegates</span></div>
+          <div class="wave-stat"><span class="icon">📊</span><span class="num mono">15</span><span class="lbl">Oral &amp; Poster Presentations</span></div>
+        </div>
+      </div>
+      <div class="wave-group">
+        <h3>2nd Wave of Gulf Aorta Summit</h3>
+        <div class="wave-stats">
+          <div class="wave-stat"><span class="icon">🎤</span><span class="num mono">42</span><span class="lbl">Total Speakers</span></div>
+          <div class="wave-stat"><span class="icon">👥</span><span class="num mono">1170</span><span class="lbl">Total Delegates</span></div>
+          <div class="wave-stat"><span class="icon">📊</span><span class="num mono">36</span><span class="lbl">Oral &amp; Poster Presentations</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELEGATES BY SPECIALTY ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Delegate profile</p>
+      <h2>Delegates by speciality.</h2>
+    </div>
+    <div class="spec-list">
+      <div class="spec-item"><span class="spec-label">Vascular Surgeon</span><div class="spec-track"><div class="spec-fill" style="width:35%;"></div></div><span class="spec-val"><b>128</b> · 35%</span></div>
+      <div class="spec-item"><span class="spec-label">Interventional Cardiology</span><div class="spec-track"><div class="spec-fill" style="width:24%;"></div></div><span class="spec-val"><b>89</b> · 24%</span></div>
+      <div class="spec-item"><span class="spec-label">Anesthesiology</span><div class="spec-track"><div class="spec-fill" style="width:10%;"></div></div><span class="spec-val"><b>36</b> · 10%</span></div>
+      <div class="spec-item"><span class="spec-label">Interventional Radiology</span><div class="spec-track"><div class="spec-fill" style="width:8%;"></div></div><span class="spec-val"><b>28</b> · 8%</span></div>
+      <div class="spec-item"><span class="spec-label">Cardiovascular Surgery</span><div class="spec-track"><div class="spec-fill" style="width:7%;"></div></div><span class="spec-val"><b>25</b> · 7%</span></div>
+      <div class="spec-item"><span class="spec-label">Other Medical Speciality</span><div class="spec-track"><div class="spec-fill" style="width:6%;"></div></div><span class="spec-val"><b>24</b> · 6%</span></div>
+      <div class="spec-item"><span class="spec-label">Emergency Medicine</span><div class="spec-track"><div class="spec-fill" style="width:3%;"></div></div><span class="spec-val"><b>10</b> · 3%</span></div>
+      <div class="spec-item"><span class="spec-label">General Practice</span><div class="spec-track"><div class="spec-fill" style="width:3%;"></div></div><span class="spec-val"><b>10</b> · 3%</span></div>
+      <div class="spec-item"><span class="spec-label">Thoracic Surgery</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>9</b> · 2%</span></div>
+      <div class="spec-item"><span class="spec-label">Cathlab</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>6</b> · 2%</span></div>
+      <div class="spec-item"><span class="spec-label">Endovascular Surgery</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>6</b> · 2%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COUNTRIES PARTICIPATED ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Global reach</p>
+      <h2>Countries participated.</h2>
+    </div>
+    <div class="map-photo">
+      <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45c0610295ee19f77f951.png" alt="Countries participated at GAS 2024" loading="lazy" data-fallback="self">
+      <span class="fallback">GAS</span>
+    </div>
+    <p class="map-caption">Delegates travelled from across the Gulf, wider Middle East, Europe and beyond to take part in GAS 2024.</p>
+  </div>
+</section>
+
+<!-- ============ PHOTO GALLERY ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">2024 Event Highlights</p>
+      <h2>Moments from the summit floor.</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf520387917b7de3bf.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2c411b3760bc58d7.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dd010295e15bc799734.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2b5a2bdbcaaf0afa.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2c411b6df3bc58bd.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcfa1dad7ca365beaf3.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2c411bdb00bc58bf.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf5203876ad67de3b2.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf52038726517de3b3.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf0f22029d4052fe29.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2c411b71debc58cf.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcffc3ef8258b6b75ba.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcf2b5a2b1c6eaf0af9.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dd02b5a2bb634af0b07.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45dcfa1dad720045beaf2.jpeg" alt="GAS 2024 highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Join us for the next chapter at GAS 2026.</h2>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <a class="btn btn-line" href="/gas-2026/">About GAS 2026</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
