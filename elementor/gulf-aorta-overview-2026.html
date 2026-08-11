@@ -76,14 +76,15 @@
 
   /* ---- why attend cards ---- */
   .gas-2026 .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.5rem;}
-  .gas-2026 .why-card{background:var(--ink);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;}
-  .gas-2026 .why-tab{
-    align-self:flex-start;max-width:100%;background:var(--brass);color:var(--ink);
-    font-family:"IBM Plex Sans";font-weight:700;font-size:.8rem;letter-spacing:.02em;text-transform:uppercase;
-    white-space:normal;word-break:break-word;line-height:1.3;
-    padding:.65em 1.1em;border-radius:0 0 14px 0;
+  .gas-2026 .why-card{border-radius:14px;overflow:hidden;background:var(--ink);}
+  .gas-2026 .why-card img{display:block;width:100%;height:auto;}
+  .gas-2026 .why-card img.hidden{display:none;}
+  .gas-2026 .why-card .fallback{
+    display:none;min-height:150px;align-items:center;justify-content:center;padding:1.4rem;
+    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+    text-align:center;color:var(--on-ink-mist);
   }
-  .gas-2026 .why-card p{padding:1.4rem 1.4rem 1.6rem;margin:0;color:var(--on-ink-mist);font-size:.92rem;line-height:1.6;}
+  .gas-2026 .why-card img.hidden + .fallback{display:flex;}
 
   /* ---- audience checklist ---- */
   .gas-2026 .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,4vw,3.5rem);}
@@ -306,12 +307,12 @@
       <h2>Why attend GAS 2026.</h2>
     </div>
     <div class="why-grid">
-      <div class="why-card"><span class="why-tab">Connect</span><p>Connect with top vascular and cardiac experts, surgeons, and innovators from across the globe.</p></div>
-      <div class="why-card"><span class="why-tab">Gain Insights</span><p>Gain insights into the latest advancements in aortic disease diagnosis, treatment, and technology.</p></div>
-      <div class="why-card"><span class="why-tab">Stay Ahead</span><p>Stay ahead of clinical trends and innovations to enhance your daily practice and improve patient outcomes.</p></div>
-      <div class="why-card"><span class="why-tab">Expand Your Network</span><p>Expand your network among peers, mentors, and collaborators from across the region and beyond.</p></div>
-      <div class="why-card"><span class="why-tab">Engage</span><p>Engage in multidisciplinary discussions with professionals from top hospitals and research institutions.</p></div>
-      <div class="why-card"><span class="why-tab">Earn CME Credits</span><p>Earn CME credits and strengthen your professional development through accredited educational sessions.</p></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Connect.png" alt="Connect with top vascular and cardiac experts, surgeons, and innovators from across the globe" loading="lazy" data-fallback="self"><span class="fallback">Connect</span></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Insights.png" alt="Gain insights into the latest advancements in aortic disease diagnosis, treatment, and technology" loading="lazy" data-fallback="self"><span class="fallback">Gain Insights</span></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Stay-Ahead.png" alt="Stay ahead of clinical trends and innovations to enhance your daily practice and improve patient outcomes" loading="lazy" data-fallback="self"><span class="fallback">Stay Ahead</span></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Expand-your-network.png" alt="Expand your network among peers, mentors, and collaborators from across the region and beyond" loading="lazy" data-fallback="self"><span class="fallback">Expand Your Network</span></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Engage.png" alt="Engage in multidisciplinary discussions with professionals from top hospitals and research institutions" loading="lazy" data-fallback="self"><span class="fallback">Engage</span></div>
+      <div class="why-card"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Earn-CME.png" alt="Earn CME credits and strengthen your professional development through accredited educational sessions" loading="lazy" data-fallback="self"><span class="fallback">Earn CME Credits</span></div>
     </div>
   </div>
 </section>
