@@ -111,14 +111,69 @@
   .gas-2024 .wave-stat .num{display:block;font-size:clamp(1.6rem,3vw,2.1rem);font-weight:600;color:var(--ink-text);}
   .gas-2024 .wave-stat .lbl{display:block;margin-top:.3rem;font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mist);}
 
-  /* ---- specialty breakdown ---- */
-  .gas-2024 .spec-list{display:flex;flex-direction:column;gap:.9rem;max-width:74ch;}
-  .gas-2024 .spec-item{display:grid;grid-template-columns:15ch 1fr 6ch;align-items:center;gap:1rem;font-size:.92rem;}
-  .gas-2024 .spec-item .spec-label{color:var(--ink-text);}
-  .gas-2024 .spec-track{height:8px;border-radius:4px;background:var(--linen-raised);overflow:hidden;}
-  .gas-2024 .spec-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--brass-ink),var(--brass));}
-  .gas-2024 .spec-val{text-align:right;color:var(--mist);}
-  .gas-2024 .spec-val b{color:var(--ink-text);}
+  /* ---- specialty breakdown (interactive donut) ---- */
+  .gas-2024 .spec-card{
+    background:linear-gradient(160deg,var(--ink) 0%,#000E24 100%);
+    border-radius:8px;color:var(--on-ink);
+    padding:clamp(1.6rem,3.5vw,2.8rem);
+    box-shadow:0 20px 50px -25px rgba(0,10,30,.5);
+  }
+  .gas-2024 .spec-card-head{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+    border-bottom:1px solid rgba(244,246,248,.14);padding-bottom:1.1rem;margin-bottom:1.6rem;
+  }
+  .gas-2024 .spec-card-head h3{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--on-ink-mist);font-weight:500;
+  }
+  .gas-2024 .spec-card-head .spec-total{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;color:var(--brass-soft);
+    font-variant-numeric:tabular-nums;
+  }
+  .gas-2024 .spec-layout{
+    display:grid;grid-template-columns:minmax(220px,280px) 1fr;
+    gap:clamp(1.6rem,4vw,3rem);align-items:center;
+  }
+  .gas-2024 .spec-donut-wrap{position:relative;width:100%;max-width:280px;}
+  .gas-2024 .spec-donut-wrap svg{width:100%;height:auto;display:block;overflow:visible;}
+  .gas-2024 .spec-seg{
+    cursor:pointer;pointer-events:stroke;
+    transition:stroke-width .25s var(--ease),opacity .25s var(--ease);
+  }
+  .gas-2024 .spec-seg:focus-visible{outline:2px solid var(--brass-soft);outline-offset:3px;}
+  .gas-2024 .spec-center{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    pointer-events:none;padding:0 2.2rem;
+  }
+  .gas-2024 .spec-center .num{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:clamp(1.7rem,4.5vw,2.35rem);
+    font-weight:600;color:var(--on-ink);font-variant-numeric:tabular-nums;line-height:1;
+  }
+  .gas-2024 .spec-center .sub{margin-top:.5rem;font-size:.74rem;letter-spacing:.04em;color:var(--on-ink-mist);line-height:1.35;}
+  .gas-2024 .spec-legend{display:flex;flex-direction:column;gap:2px;width:100%;}
+  .gas-2024 .spec-row{
+    display:grid;grid-template-columns:14px 1fr auto auto;align-items:center;gap:.7rem;width:100%;
+    background:none;border:none;border-radius:var(--radius);padding:.5rem .6rem;margin:0;
+    text-align:left;cursor:pointer;font-family:inherit;color:var(--on-ink);
+    transition:background .2s var(--ease),opacity .2s var(--ease);
+  }
+  .gas-2024 .spec-row:hover,.gas-2024 .spec-row:focus-visible{background:rgba(244,246,248,.06);}
+  .gas-2024 .spec-row:focus-visible{outline:1px solid var(--brass-soft);outline-offset:-1px;}
+  .gas-2024 .spec-row .swatch{width:11px;height:11px;border-radius:2px;flex:none;}
+  .gas-2024 .spec-row .name{font-size:.87rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .gas-2024 .spec-row .count{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.82rem;color:var(--brass-soft);font-variant-numeric:tabular-nums;}
+  .gas-2024 .spec-row .pct{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;color:var(--on-ink-mist);font-variant-numeric:tabular-nums;min-width:3.2ch;text-align:right;}
+  .gas-2024 .spec-row[data-dim="true"]{opacity:.4;}
+  .gas-2024 .spec-row[data-active="true"]{background:rgba(227,190,122,.1);}
+  .gas-2024 .spec-row[data-active="true"] .name{color:var(--brass-soft);}
+  .gas-2024 .spec-hint{
+    margin-top:1.4rem;padding-top:1rem;border-top:1px solid rgba(244,246,248,.14);
+    font-size:.74rem;color:var(--on-ink-mist);
+  }
+  @media (max-width:640px){
+    .gas-2024 .spec-layout{grid-template-columns:1fr;justify-items:center;}
+  }
 
   /* ---- countries map ---- */
   .gas-2024 .map-photo{
@@ -154,7 +209,6 @@
 
   @media (max-width:760px){
     .gas-2024 .wave-groups{grid-template-columns:1fr;}
-    .gas-2024 .spec-item{grid-template-columns:12ch 1fr 5ch;font-size:.86rem;}
     .gas-2024 .gallery-grid{grid-template-columns:repeat(2,1fr);}
     .gas-2024 .hero-photo{aspect-ratio:4/3;}
   }
@@ -230,21 +284,146 @@
       <p class="eyebrow" style="color:var(--brass-ink);">Delegate profile</p>
       <h2>Delegates by speciality.</h2>
     </div>
-    <div class="spec-list">
-      <div class="spec-item"><span class="spec-label">Vascular Surgeon</span><div class="spec-track"><div class="spec-fill" style="width:35%;"></div></div><span class="spec-val"><b>128</b> · 35%</span></div>
-      <div class="spec-item"><span class="spec-label">Interventional Cardiology</span><div class="spec-track"><div class="spec-fill" style="width:24%;"></div></div><span class="spec-val"><b>89</b> · 24%</span></div>
-      <div class="spec-item"><span class="spec-label">Anesthesiology</span><div class="spec-track"><div class="spec-fill" style="width:10%;"></div></div><span class="spec-val"><b>36</b> · 10%</span></div>
-      <div class="spec-item"><span class="spec-label">Interventional Radiology</span><div class="spec-track"><div class="spec-fill" style="width:8%;"></div></div><span class="spec-val"><b>28</b> · 8%</span></div>
-      <div class="spec-item"><span class="spec-label">Cardiovascular Surgery</span><div class="spec-track"><div class="spec-fill" style="width:7%;"></div></div><span class="spec-val"><b>25</b> · 7%</span></div>
-      <div class="spec-item"><span class="spec-label">Other Medical Speciality</span><div class="spec-track"><div class="spec-fill" style="width:6%;"></div></div><span class="spec-val"><b>24</b> · 6%</span></div>
-      <div class="spec-item"><span class="spec-label">Emergency Medicine</span><div class="spec-track"><div class="spec-fill" style="width:3%;"></div></div><span class="spec-val"><b>10</b> · 3%</span></div>
-      <div class="spec-item"><span class="spec-label">General Practice</span><div class="spec-track"><div class="spec-fill" style="width:3%;"></div></div><span class="spec-val"><b>10</b> · 3%</span></div>
-      <div class="spec-item"><span class="spec-label">Thoracic Surgery</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>9</b> · 2%</span></div>
-      <div class="spec-item"><span class="spec-label">Cathlab</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>6</b> · 2%</span></div>
-      <div class="spec-item"><span class="spec-label">Endovascular Surgery</span><div class="spec-track"><div class="spec-fill" style="width:2%;"></div></div><span class="spec-val"><b>6</b> · 2%</span></div>
+
+    <div class="spec-card">
+      <div class="spec-card-head">
+        <h3>Delegate specialty mix</h3>
+        <span class="spec-total mono">371 delegates</span>
+      </div>
+      <div class="spec-layout">
+        <div class="spec-donut-wrap">
+          <svg id="specDonut" viewBox="0 0 300 300" role="img" aria-label="Donut chart of delegates by speciality">
+            <g id="specSegGroup" transform="rotate(-90 150 150)"></g>
+          </svg>
+          <div class="spec-center">
+            <span class="num mono" id="specCenterNum">371</span>
+            <span class="sub" id="specCenterSub">Total delegates</span>
+          </div>
+        </div>
+        <div class="spec-legend" id="specLegend" role="list"></div>
+      </div>
+      <p class="spec-hint" id="specHint">Vascular Surgeon leads at 128 delegates (35%), followed by Interventional Cardiology at 89 (24%).</p>
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  var data = [
+    {name:"Vascular Surgeon", count:128},
+    {name:"Interventional Cardiology", count:89},
+    {name:"Anesthesiology", count:36},
+    {name:"Interventional Radiology", count:28},
+    {name:"Cardiovascular Surgery", count:25},
+    {name:"Other Medical Speciality", count:24},
+    {name:"Emergency Medicine", count:10},
+    {name:"General Practice", count:10},
+    {name:"Thoracic Surgery", count:9},
+    {name:"Cathlab", count:6},
+    {name:"Endovascular Surgery", count:6}
+  ];
+  var ramp = ["#F2DBA8","#E1D0A6","#D0C5A4","#C0BAA2","#AFAFA0","#9EA49E","#8D989B","#7C8D99","#6C8297","#5B7795","#4A6C93"];
+
+  var total = data.reduce(function(s,d){return s+d.count;},0);
+  data.forEach(function(d,i){
+    d.pct = d.count/total*100;
+    d.pctLabel = Math.round(d.pct) + "%";
+    d.color = ramp[i];
+  });
+
+  var r = 110, cx = 150, cy = 150, strokeW = 34;
+  var circumference = 2*Math.PI*r;
+  var svgNS = "http://www.w3.org/2000/svg";
+  var group = document.getElementById("specSegGroup");
+  var legend = document.getElementById("specLegend");
+  var centerNum = document.getElementById("specCenterNum");
+  var centerSub = document.getElementById("specCenterSub");
+  var hint = document.getElementById("specHint");
+
+  var cumulative = 0;
+  data.forEach(function(d){
+    var segLen = (d.pct/100) * circumference;
+    var circle = document.createElementNS(svgNS,"circle");
+    circle.setAttribute("cx",cx);
+    circle.setAttribute("cy",cy);
+    circle.setAttribute("r",r);
+    circle.setAttribute("fill","none");
+    circle.setAttribute("stroke",d.color);
+    circle.setAttribute("stroke-width",strokeW);
+    circle.setAttribute("stroke-dasharray", segLen.toFixed(3) + " " + (circumference-segLen).toFixed(3));
+    circle.setAttribute("stroke-dashoffset", (-cumulative).toFixed(3));
+    circle.setAttribute("tabindex","0");
+    circle.setAttribute("role","button");
+    circle.setAttribute("aria-label", d.name + ", " + d.count + " delegates, " + d.pctLabel);
+    circle.classList.add("spec-seg");
+    group.appendChild(circle);
+    d.el = circle;
+    cumulative += segLen;
+  });
+
+  data.forEach(function(d){
+    var row = document.createElement("button");
+    row.className = "spec-row";
+    row.type = "button";
+    row.setAttribute("role","listitem");
+    row.setAttribute("aria-pressed","false");
+    row.innerHTML =
+      '<span class="swatch" style="background:'+d.color+'"></span>' +
+      '<span class="name">'+d.name+'</span>' +
+      '<span class="count mono">'+d.count+'</span>' +
+      '<span class="pct mono">'+d.pctLabel+'</span>';
+    legend.appendChild(row);
+    d.row = row;
+  });
+
+  var selected = null;
+
+  function applyState(activeIndex){
+    data.forEach(function(d,i){
+      var isActive = activeIndex === null ? true : i === activeIndex;
+      d.el.style.opacity = isActive ? "1" : ".32";
+      d.el.setAttribute("stroke-width", isActive && activeIndex !== null ? strokeW+6 : strokeW);
+      d.row.dataset.dim = (!isActive).toString();
+      d.row.dataset.active = (activeIndex === i).toString();
+      d.row.setAttribute("aria-pressed", (selected === i).toString());
+    });
+    if(activeIndex === null){
+      centerNum.textContent = total;
+      centerSub.textContent = "Total delegates";
+      hint.textContent = "Vascular Surgeon leads at 128 delegates (35%), followed by Interventional Cardiology at 89 (24%).";
+    } else {
+      var d = data[activeIndex];
+      centerNum.textContent = d.count;
+      centerSub.textContent = d.name;
+      hint.textContent = d.name + " — " + d.count + " of 371 delegates (" + d.pctLabel + ").";
+    }
+  }
+
+  function setHover(i){ applyState(i === null ? selected : i); }
+
+  data.forEach(function(d,i){
+    [d.el,d.row].forEach(function(node){
+      node.addEventListener("mouseenter", function(){ setHover(i); });
+      node.addEventListener("mouseleave", function(){ setHover(null); });
+      node.addEventListener("focus", function(){ setHover(i); });
+      node.addEventListener("blur", function(){ setHover(null); });
+      node.addEventListener("click", function(){
+        selected = (selected === i) ? null : i;
+        applyState(selected);
+      });
+      node.addEventListener("keydown", function(e){
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          selected = (selected === i) ? null : i;
+          applyState(selected);
+        }
+      });
+    });
+  });
+
+  applyState(null);
+})();
+</script>
 
 <!-- ============ COUNTRIES PARTICIPATED ============ -->
 <section class="section" style="background:var(--linen-raised);">
