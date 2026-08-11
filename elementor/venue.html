@@ -1,0 +1,224 @@
+<!--
+  GULF AORTA SUMMIT — VENUE PAGE (Elementor "HTML" widget)
+  ─────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /venue, matching the original site's nav item "Venue"). No
+  header/footer markup — those come from your global Elementor
+  templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-venue.
+-->
+<div class="gas-venue">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-venue{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-venue,.gas-venue *,.gas-venue *::before,.gas-venue *::after{box-sizing:border-box;}
+  .gas-venue p{margin:0;}
+  .gas-venue a{color:inherit;text-decoration:none;}
+  .gas-venue h1,.gas-venue h2,.gas-venue h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-venue .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-venue img{max-width:100%;display:block;}
+
+  .gas-venue .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-venue .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-venue .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-venue .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-venue .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-venue .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+  .gas-venue .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+
+  .gas-venue .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-venue .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-venue .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+
+  /* ---- buttons ---- */
+  .gas-venue .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-venue .btn-gold{background:var(--brass);color:var(--ink);}
+  .gas-venue .btn-gold:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .gas-venue .btn-line{border:1px solid var(--hairline);color:var(--ink-text);}
+  .gas-venue .btn-line:hover{border-color:var(--brass-ink);color:var(--brass-ink);}
+  .gas-venue .page-header .btn-line{border-color:rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-venue .page-header .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+
+  /* ---- hero venue photo ---- */
+  .gas-venue .venue-photo{
+    position:relative;aspect-ratio:16/8;border-radius:14px;overflow:hidden;
+    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline);
+  }
+  .gas-venue .venue-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .gas-venue .venue-photo img.hidden{display:none;}
+  .gas-venue .venue-photo .fallback{
+    width:100%;height:100%;display:grid;place-items:center;
+    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  }
+
+  /* ---- landmarks intro ---- */
+  .gas-venue .landmarks{max-width:74ch;color:var(--mist);font-size:1.02rem;}
+  .gas-venue .landmarks strong{color:var(--ink-text);}
+
+  /* ---- getting there cards ---- */
+  .gas-venue .transport-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.5rem,3vw,2rem);margin-top:clamp(2rem,4vw,2.75rem);}
+  .gas-venue .transport-card{border:1px solid var(--hairline);border-radius:12px;padding:clamp(1.5rem,3vw,2rem);}
+  .gas-venue .transport-card .icon{font-size:1.6rem;line-height:1;display:block;margin-bottom:.85rem;}
+  .gas-venue .transport-card h3{font-size:1.1rem;margin-bottom:.6rem;}
+  .gas-venue .transport-card p{color:var(--mist);font-size:.92rem;}
+  .gas-venue .transport-card b{color:var(--ink-text);}
+
+  /* ---- map ---- */
+  .gas-venue .map-embed{
+    position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--hairline);
+    aspect-ratio:16/9;background:var(--linen-raised);
+  }
+  .gas-venue .map-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .gas-venue .map-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.5rem;}
+  .gas-venue .map-address{color:var(--mist);font-size:.94rem;}
+  .gas-venue .map-address b{color:var(--ink-text);}
+
+  /* ---- closing CTA ---- */
+  .gas-venue .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-venue .cta-band .wrap{padding-block:clamp(2.5rem,5vw,3.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;}
+  .gas-venue .cta-band h2{font-size:1.4rem;font-style:italic;color:var(--on-ink);max-width:22ch;}
+  .gas-venue .cta-band .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-venue .cta-band .btn-line{border-color:rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-venue .cta-band .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+
+  @media (max-width:760px){
+    .gas-venue .transport-grid{grid-template-columns:1fr;}
+    .gas-venue .venue-photo{aspect-ratio:4/3;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-venue *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Join us at the prestigious</p>
+    <h1>Jumeirah Emirates Towers, Dubai, UAE</h1>
+    <p class="intro">GAS 2026 convenes at one of Dubai's most recognisable landmarks on Sheikh Zayed Road — minutes from the city's financial and cultural heart.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maps.app.goo.gl/PiRzHneiZYBzadp69" target="_blank" rel="noreferrer noopener">Get Directions</a>
+      <a class="btn btn-line" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VENUE PHOTO ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="venue-photo">
+      <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/691daca888e1e6399b82180f.png" alt="Jumeirah Emirates Towers, Dubai" loading="lazy" data-fallback="self">
+      <span class="fallback">GAS</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GETTING THERE ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Getting there</p>
+      <h2>Find your way to the towers.</h2>
+    </div>
+    <p class="landmarks">Guests will find themselves minutes away from iconic landmarks including the <strong>Museum of the Future</strong>, <strong>Dubai International Financial Centre (DIFC)</strong>, and <strong>Dubai Mall</strong>, while being just a 15–20 minute drive from Dubai International Airport.</p>
+
+    <div class="transport-grid">
+      <div class="transport-card">
+        <span class="icon">🚖</span>
+        <h3>By Taxi / Ride-Hailing (Uber, Careem)</h3>
+        <p>Simply input <b>"Jumeirah Emirates Towers"</b> as your destination. The hotel is a well-known Dubai landmark — drivers will recognise it instantly.</p>
+      </div>
+      <div class="transport-card">
+        <span class="icon">🚇</span>
+        <h3>By Metro</h3>
+        <p>Take the <b>Red Line</b> and stop at <b>Emirates Towers Metro Station</b>. The hotel is a <b>5-minute walk</b> from the station via the air-conditioned walkway.</p>
+      </div>
+      <div class="transport-card">
+        <span class="icon">🚘</span>
+        <h3>By Car (Self-Drive)</h3>
+        <p>Set your GPS to: <b>Jumeirah Emirates Towers, Sheikh Zayed Road, Dubai</b>. Valet and paid parking are available at the hotel.</p>
+      </div>
+      <div class="transport-card">
+        <span class="icon">✈️</span>
+        <h3>From Dubai International Airport (DXB)</h3>
+        <p><b>By Taxi:</b> Approx. 15–20 minutes.<br><b>By Metro:</b> Take the Red Line from Terminal 1 or 3 to Emirates Towers Station (approx. 25 minutes).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Location</p>
+      <h2>Jumeirah Emirates Towers on the map.</h2>
+    </div>
+    <div class="map-embed">
+      <iframe src="https://www.google.com/maps?q=Jumeirah+Emirates+Towers,+Sheikh+Zayed+Road,+Dubai,+UAE&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen title="Jumeirah Emirates Towers on Google Maps"></iframe>
+    </div>
+    <div class="map-cta">
+      <p class="map-address"><b>Jumeirah Emirates Towers</b> — Sheikh Zayed Road, Dubai, UAE</p>
+      <a class="btn btn-line" href="https://maps.app.goo.gl/PiRzHneiZYBzadp69" target="_blank" rel="noreferrer noopener">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>See you at GAS 2026 in Dubai.</h2>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <a class="btn btn-line" href="/gas-2026/">About GAS 2026</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>

@@ -1,0 +1,229 @@
+<!--
+  GULF AORTA SUMMIT — EVENTS CALENDAR PAGE (Elementor "HTML" widget)
+  ──────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /eventscalendar, matching the original site's nav item
+  "Events Calendar"). No header/footer markup — those come from your
+  global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-events.
+-->
+<div class="gas-events">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-events{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-events,.gas-events *,.gas-events *::before,.gas-events *::after{box-sizing:border-box;}
+  .gas-events p{margin:0;}
+  .gas-events a{color:inherit;text-decoration:none;}
+  .gas-events h1,.gas-events h2,.gas-events h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-events .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-events img{max-width:100%;display:block;}
+
+  .gas-events .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-events .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-events .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-events .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-events .page-header h1{font-size:var(--fs-display-1);max-width:16ch;color:var(--on-ink);}
+  .gas-events .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-events .section{padding-block:clamp(3rem,7vw,5.5rem);}
+
+  /* ---- buttons ---- */
+  .gas-events .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.85em 1.35em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-events .btn-gold{background:var(--brass);color:var(--ink);}
+  .gas-events .btn-gold:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .gas-events .btn-line{border:1px solid var(--hairline);color:var(--ink-text);}
+  .gas-events .btn-line:hover{border-color:var(--brass-ink);color:var(--brass-ink);}
+  .gas-events .btn svg{transition:transform .3s var(--ease);}
+  .gas-events .btn:hover svg{transform:translateX(3px);}
+
+  /* ---- events grid ---- */
+  .gas-events .events-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(2rem,4vw,2.75rem);}
+  .gas-events .event-card{display:flex;flex-direction:column;}
+  .gas-events .event-media{
+    position:relative;aspect-ratio:16/10;border-radius:14px;overflow:hidden;
+    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline);margin-bottom:1.25rem;
+  }
+  .gas-events .event-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .gas-events .event-media img.hidden{display:none;}
+  .gas-events .event-media .fallback{
+    width:100%;height:100%;display:grid;place-items:center;
+    font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  }
+  .gas-events .event-card h3{font-size:1.3rem;line-height:1.3;max-width:32ch;}
+  .gas-events .event-desc{margin-top:.85rem;color:var(--mist);font-size:.94rem;max-width:52ch;}
+  .gas-events .event-meta{
+    display:flex;flex-wrap:wrap;gap:.4em 1em;margin-top:1.1rem;font-size:.86rem;
+  }
+  .gas-events .event-meta .mono{color:var(--brass-ink);}
+  .gas-events .event-meta .loc{color:var(--ink-text);}
+  .gas-events .event-card .btn{margin-top:1.25rem;align-self:flex-start;}
+
+  /* ---- association strip ---- */
+  .gas-events .assoc-row{display:flex;justify-content:center;}
+  .gas-events .assoc-link{display:inline-flex;min-height:56px;align-items:center;opacity:.85;transition:opacity .25s;}
+  .gas-events .assoc-link:hover{opacity:1;}
+  .gas-events .assoc-link img{height:56px;width:auto;max-width:280px;object-fit:contain;}
+  .gas-events .assoc-link img.hidden{display:none;}
+
+  /* ---- closing CTA ---- */
+  .gas-events .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-events .cta-band .wrap{padding-block:clamp(2.5rem,5vw,3.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;}
+  .gas-events .cta-band h2{font-size:1.4rem;font-style:italic;color:var(--on-ink);max-width:20ch;}
+  .gas-events .cta-band .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-events .cta-band .btn-line{border-color:rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-events .cta-band .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+
+  @media (max-width:760px){
+    .gas-events .events-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-events *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Gulf Aorta Summit</p>
+    <h1>Events Calendar</h1>
+    <p class="intro">A running calendar of aortic, vascular and endovascular meetings from around the world — mark your calendar alongside GAS 2026, 6–8 Feb 2026 in Dubai.</p>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="events-grid">
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68eb9e000d699e59984ffede.jpeg" alt="GIS Conference 2025" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>GIS Conference 2025</h3>
+        <p class="event-desc">The GIS Annual Conference is where innovation meets geospatial excellence! Our latest edition brought together global experts, cutting-edge technology, and game-changing discussions that are shaping the future of GIS.</p>
+        <div class="event-meta"><span class="mono">27–29 Nov 2025</span><span class="loc">Intercontinental, Dubai Festival City, UAE</span></div>
+        <a class="btn btn-line" href="https://gisonline.org/gis-annual-conference/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6901a2d8c452480fe9683a81.png" alt="17. Hamburger Gefässtag" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>17. Hamburger Gefässtag</h3>
+        <p class="event-desc">The 17th Hamburger Vascular Day 2025 will focus on vascular occlusion procedures in small arteries and veins. The event covers a wide spectrum of vascular medicine, including bleeding, aneurysms, endoleaks, arterial and venous malformations, and various interventional and surgical vascular therapies. Expect lively discussions and a collegial exchange at the Panoramadeck in the Emporio Tower.</p>
+        <div class="event-meta"><span class="mono">06 Dec 2025</span><span class="loc">Nord Event Panoramadeck im Emporio Tower, Hamburg, Germany</span></div>
+        <a class="btn btn-line" href="https://gefaesstage-hh.de/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/691d4b0a4b75356e1a479fb1.jpg" alt="26th International Symposium Endovascular Therapeutics" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>26th International Symposium Endovascular Therapeutics — Santiago de Compostela</h3>
+        <p class="event-desc">The SITE (International Symposium on Endovascular Therapeutics) is a renowned global forum that brings together both rising and seasoned endovascular experts. Attendees collaborate to explore the status update on key points in endovascular treatments, tackle unmet needs, and envision future therapeutic solutions.</p>
+        <div class="event-meta"><span class="mono">14–16 Oct 2026</span><span class="loc">San Francisco Monumento Hotel, A Coruña, Spain</span></div>
+        <a class="btn btn-line" href="https://www.sitesymposium.com/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6916baf2ac7fadbfcf29be72.png" alt="The CIRSE Annual Congress" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>The CIRSE Annual Congress</h3>
+        <p class="event-desc">For 40 years, the CIRSE annual congress has provided the world's premier platform for specialists in minimally invasive image-guided procedures to meet, share and connect.</p>
+        <div class="event-meta"><span class="mono">05–09 Sep 2026</span><span class="loc">Copenhagen, Denmark</span></div>
+        <a class="btn btn-line" href="https://cirsecongress.cirse.org/about/theannualcongress/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690ae1edaa138d673ecec5d8.jpeg" alt="Vascular Societies' Annual Scientific Meeting 2025" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>Vascular Societies' Annual Scientific Meeting 2025</h3>
+        <p class="event-desc">The Vascular Societies' Annual Scientific Meeting 2025, taking place from 26th to 28th November at Connexin Live in Hull, will bring together vascular professionals from across the UK and Ireland. Organised by the Vascular Society of Great Britain and Ireland, the event will feature a comprehensive scientific programme with a strong focus on aortic pathology.</p>
+        <div class="event-meta"><span class="mono">26–28 Nov 2025</span><span class="loc">Connexin Live, Hull, United Kingdom</span></div>
+        <a class="btn btn-line" href="https://vascularsociety.org.uk/annual-meeting/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+      <article class="event-card">
+        <div class="event-media"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/693012191d466e02af64a05e.png" alt="PAVSS Forth Annual Meeting" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+        <h3>PAVSS Forth Annual Meeting</h3>
+        <div class="event-meta"><span class="mono">03–07 Dec 2025</span><span class="loc">Amman, Jordan</span></div>
+        <a class="btn btn-line" href="https://pavss.org/annual-meeting/" target="_blank" rel="noreferrer noopener">Find Out More
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASSOCIATION ============ -->
+<section class="section" style="background:var(--linen-raised);padding-block:clamp(2.5rem,5vw,3.5rem);">
+  <div class="wrap">
+    <div class="assoc-row">
+      <a class="assoc-link" href="https://www.aorticassociation.com" target="_blank" rel="noreferrer noopener" aria-label="Aortic Association">
+        <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6948cf2d59a0a63a1259019b.png" alt="Aortic Association" loading="lazy" data-fallback="self">
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Add GAS 2026 to your calendar too.</h2>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <a class="btn btn-line" href="/gas-2026/">About GAS 2026</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
