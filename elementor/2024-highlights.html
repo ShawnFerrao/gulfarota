@@ -8,14 +8,9 @@
 
   Self-contained: fonts, tokens and styles scoped under .gas-2024.
 
-  Note on the "Countries Participated" world map: the source graphic
-  bakes ~15 national flags into a single flattened image with no
-  accompanying text list, so the exact country names can't be
-  reliably transcribed — that one panel is kept as the real source
-  image rather than guessed at. Everything else (wave stats,
-  specialty breakdown) had crisp legible numbers in the source and
-  has been rebuilt as native, accessible components instead of a
-  flat infographic image.
+  All infographic panels (wave stats, specialty breakdown, countries
+  participated) are rebuilt as native, interactive components rather
+  than flat images.
 -->
 <div class="gas-2024">
 <style>
@@ -175,18 +170,29 @@
     .gas-2024 .spec-layout{grid-template-columns:1fr;justify-items:center;}
   }
 
-  /* ---- countries map ---- */
-  .gas-2024 .map-photo{
-    position:relative;border-radius:14px;overflow:hidden;background:var(--linen-raised);
-    box-shadow:0 0 0 1px var(--hairline);
+  /* ---- countries participated (interactive) ---- */
+  .gas-2024 .region-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem;}
+  .gas-2024 .region-chip{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:.55em 1.1em;border-radius:999px;border:1px solid rgba(244,246,248,.18);
+    background:transparent;color:var(--on-ink-mist);cursor:pointer;
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease);
   }
-  .gas-2024 .map-photo img{width:100%;height:auto;display:block;}
-  .gas-2024 .map-photo img.hidden{display:none;}
-  .gas-2024 .map-photo .fallback{
-    padding:3rem;text-align:center;
-    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
+  .gas-2024 .region-chip:hover{border-color:var(--brass-soft);color:var(--on-ink);}
+  .gas-2024 .region-chip:focus-visible{outline:2px solid var(--brass-soft);outline-offset:2px;}
+  .gas-2024 .region-chip[aria-pressed="true"]{background:var(--brass);border-color:var(--brass);color:var(--ink);}
+  .gas-2024 .country-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:.6rem;}
+  .gas-2024 .country-chip{
+    display:flex;align-items:center;gap:.65em;
+    padding:.7em .9em;border-radius:var(--radius);
+    background:rgba(244,246,248,.05);border:1px solid rgba(244,246,248,.1);
+    color:var(--on-ink);font-size:.86rem;
+    transition:opacity .2s var(--ease),transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
   }
-  .gas-2024 .map-caption{margin-top:.9rem;font-size:.86rem;color:var(--mist);}
+  .gas-2024 .country-chip .flag{font-size:1.2em;line-height:1;}
+  .gas-2024 .country-chip:hover{background:rgba(227,190,122,.08);border-color:rgba(227,190,122,.32);transform:translateY(-1px);}
+  .gas-2024 .country-chip[hidden]{display:none;}
+  .gas-2024 .map-caption{margin-top:1.4rem;font-size:.86rem;color:var(--mist);}
 
   /* ---- gallery ---- */
   .gas-2024 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
@@ -432,13 +438,86 @@
       <p class="eyebrow" style="color:var(--brass-ink);">Global reach</p>
       <h2>Countries participated.</h2>
     </div>
-    <div class="map-photo">
-      <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d45c0610295ee19f77f951.png" alt="Countries participated at GAS 2024" loading="lazy" data-fallback="self">
-      <span class="fallback">GAS</span>
+
+    <div class="spec-card">
+      <div class="spec-card-head">
+        <h3>Delegate countries</h3>
+        <span class="spec-total mono">17 countries</span>
+      </div>
+      <div class="region-filters" id="regionFilters" role="tablist" aria-label="Filter countries by region"></div>
+      <div class="country-grid" id="countryGrid"></div>
     </div>
-    <p class="map-caption">Delegates travelled from across the Gulf, wider Middle East, Europe and beyond to take part in GAS 2024.</p>
+
+    <p class="map-caption">Delegates travelled from 17 countries — across the Gulf, the wider Middle East, Europe, Asia and the Americas — to take part in GAS 2024.</p>
   </div>
 </section>
+
+<script>
+(function(){
+  var countries = [
+    {name:"Saudi Arabia", flag:"🇸🇦", region:"Middle East"},
+    {name:"United Arab Emirates", flag:"🇦🇪", region:"Middle East"},
+    {name:"Bahrain", flag:"🇧🇭", region:"Middle East"},
+    {name:"Turkey", flag:"🇹🇷", region:"Middle East"},
+    {name:"Iran", flag:"🇮🇷", region:"Middle East"},
+    {name:"Egypt", flag:"🇪🇬", region:"Middle East"},
+    {name:"Sudan", flag:"🇸🇩", region:"Middle East"},
+    {name:"United Kingdom", flag:"🇬🇧", region:"Europe"},
+    {name:"Ireland", flag:"🇮🇪", region:"Europe"},
+    {name:"Spain", flag:"🇪🇸", region:"Europe"},
+    {name:"Italy", flag:"🇮🇹", region:"Europe"},
+    {name:"Germany", flag:"🇩🇪", region:"Europe"},
+    {name:"Serbia", flag:"🇷🇸", region:"Europe"},
+    {name:"Ukraine", flag:"🇺🇦", region:"Europe"},
+    {name:"Russia", flag:"🇷🇺", region:"Europe"},
+    {name:"Kazakhstan", flag:"🇰🇿", region:"Asia"},
+    {name:"United States", flag:"🇺🇸", region:"Americas"}
+  ];
+
+  var regionOrder = ["Middle East","Europe","Asia","Americas"];
+  var counts = {};
+  countries.forEach(function(c){ counts[c.region] = (counts[c.region]||0) + 1; });
+
+  var filterBar = document.getElementById("regionFilters");
+  var grid = document.getElementById("countryGrid");
+  var activeRegion = "all";
+
+  function makeChip(label, region){
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "region-chip";
+    btn.setAttribute("role","tab");
+    btn.setAttribute("aria-pressed", region === "all" ? "true" : "false");
+    btn.dataset.region = region;
+    btn.textContent = label;
+    filterBar.appendChild(btn);
+    return btn;
+  }
+  makeChip("All (17)", "all");
+  regionOrder.forEach(function(r){ makeChip(r + " (" + counts[r] + ")", r); });
+
+  countries.forEach(function(c){
+    var chip = document.createElement("span");
+    chip.className = "country-chip";
+    chip.dataset.region = c.region;
+    chip.innerHTML = '<span class="flag">'+c.flag+'</span><span>'+c.name+'</span>';
+    grid.appendChild(chip);
+  });
+
+  filterBar.addEventListener("click", function(e){
+    var btn = e.target.closest(".region-chip");
+    if(!btn) return;
+    activeRegion = btn.dataset.region;
+    Array.prototype.forEach.call(filterBar.querySelectorAll(".region-chip"), function(b){
+      b.setAttribute("aria-pressed", (b.dataset.region === activeRegion).toString());
+    });
+    Array.prototype.forEach.call(grid.querySelectorAll(".country-chip"), function(chip){
+      var show = activeRegion === "all" || chip.dataset.region === activeRegion;
+      chip.hidden = !show;
+    });
+  });
+})();
+</script>
 
 <!-- ============ PHOTO GALLERY ============ -->
 <section class="section">
