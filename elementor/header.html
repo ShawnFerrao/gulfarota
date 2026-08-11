@@ -81,16 +81,45 @@
   .gas-header-bar .brand-word span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.18em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;display:block;}
 
   .gas-header-bar nav.links{display:flex;align-items:center;gap:clamp(1rem,2vw,2rem);}
-  .gas-header-bar nav.links a{
+  .gas-header-bar nav.links > a,
+  .gas-header-bar nav.links > .nav-item > a{
     font-size:.86rem;color:var(--on-ink-mist);position:relative;padding-block:.3rem;
+    display:inline-flex;align-items:center;gap:.4em;
     transition:color .25s;
   }
-  .gas-header-bar nav.links a::after{
+  .gas-header-bar nav.links > a::after,
+  .gas-header-bar nav.links > .nav-item > a::after{
     content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--brass);
     transition:width .3s var(--ease);
   }
-  .gas-header-bar nav.links a:hover{color:var(--on-ink);}
-  .gas-header-bar nav.links a:hover::after{width:100%;}
+  .gas-header-bar nav.links > a:hover,
+  .gas-header-bar nav.links > .nav-item > a:hover{color:var(--on-ink);}
+  .gas-header-bar nav.links > a:hover::after,
+  .gas-header-bar nav.links > .nav-item > a:hover::after{width:100%;}
+
+  /* ---- About dropdown ---- */
+  .gas-header-bar .nav-item{position:relative;}
+  .gas-header-bar .nav-item .caret{transition:transform .25s var(--ease);flex:none;}
+  .gas-header-bar .nav-item:hover .caret,
+  .gas-header-bar .nav-item:focus-within .caret{transform:rotate(180deg);}
+  .gas-header-bar .dropdown{
+    position:absolute;top:calc(100% + .9rem);left:50%;
+    transform:translateX(-50%) translateY(-6px);
+    min-width:180px;background:rgba(14,23,32,.98);
+    backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+    border:1px solid rgba(227,190,122,.18);border-radius:var(--radius);padding:.4rem;
+    opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;
+  }
+  .gas-header-bar .nav-item:hover .dropdown,
+  .gas-header-bar .nav-item:focus-within .dropdown{
+    opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
+  }
+  .gas-header-bar .dropdown a{
+    display:block;padding:.6em .85em;border-radius:2px;font-size:.85rem;
+    color:var(--on-ink-mist);transition:background .2s,color .2s;
+  }
+  .gas-header-bar .dropdown a:hover{background:rgba(227,190,122,.1);color:var(--on-ink);}
 
   .gas-header-bar .nav-right{display:flex;align-items:center;gap:1.4rem;}
   .gas-header-bar .btn-gold{
@@ -124,6 +153,12 @@
   }
   .gas-header-mobile a{font-family:"Newsreader";font-style:italic;font-size:clamp(1.4rem,7vw,2rem);color:var(--on-ink);}
   .gas-header-mobile .close{position:absolute;top:1.5rem;right:1.5rem;color:var(--on-ink);}
+
+  .gas-header-mobile .mobile-about-group{display:flex;flex-direction:column;gap:.9rem;}
+  .gas-header-mobile .mobile-group-label{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--brass-soft);
+  }
 
   .gas-header-mobile .panel-cta{
     display:inline-flex;align-items:center;margin-top:.5rem;
@@ -162,7 +197,15 @@
     </a>
 
     <nav class="links" aria-label="Primary">
-      <a href="/">Home</a>
+      <div class="nav-item">
+        <a href="/gulf-aorta/">About
+          <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="/gulf-aorta/">Gulf Aorta</a>
+          <a href="/gulf-aorta-overview-2026/">GAS 2026</a>
+        </div>
+      </div>
       <a href="/board-of-directors/">Board of Directors</a>
       <a href="/board-of-organizers/">Board of Organizers</a>
     </nav>
@@ -181,7 +224,11 @@
     <button class="close" id="gasCloseBtn" aria-label="Close menu">
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 5L19 19M19 5L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     </button>
-    <a href="/">Home</a>
+    <div class="mobile-about-group">
+      <span class="mobile-group-label">About</span>
+      <a href="/gulf-aorta/">Gulf Aorta</a>
+      <a href="/gulf-aorta-overview-2026/">GAS 2026</a>
+    </div>
     <a href="/board-of-directors/">Board of Directors</a>
     <a href="/board-of-organizers/">Board of Organizers</a>
     <a class="panel-cta" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
