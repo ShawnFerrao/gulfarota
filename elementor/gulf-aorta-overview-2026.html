@@ -75,13 +75,13 @@
   .gas-2026 .page-header .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
 
   /* ---- why attend cards ---- */
-  .gas-2026 .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.5rem;}
-  .gas-2026 .why-card{border-radius:14px;overflow:hidden;background:var(--ink);}
+  .gas-2026 .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .gas-2026 .why-card{border-radius:14px;overflow:hidden;}
   .gas-2026 .why-card img{display:block;width:100%;height:auto;}
   .gas-2026 .why-card img.hidden{display:none;}
   .gas-2026 .why-card .fallback{
     display:none;min-height:150px;align-items:center;justify-content:center;padding:1.4rem;
-    font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--ink);font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
     text-align:center;color:var(--on-ink-mist);
   }
   .gas-2026 .why-card img.hidden + .fallback{display:flex;}
@@ -155,9 +155,11 @@
 
   @media (max-width:900px){
     .gas-2026 .mission-grid{grid-template-columns:1fr;}
+    .gas-2026 .why-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:700px){
     .gas-2026 .audience-grid{grid-template-columns:1fr;}
+    .gas-2026 .why-grid{grid-template-columns:1fr;}
     .gas-2026 .gallery-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:480px){
