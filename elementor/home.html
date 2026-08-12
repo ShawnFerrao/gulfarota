@@ -144,18 +144,22 @@
   }
 
   /* ---- programme teaser ---- */
-  .gas-home .outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:clamp(2rem,4vw,3rem);}
-  .gas-home .outcome{border-top:2px solid var(--brass-ink);padding-top:1rem;}
-  .gas-home .outcome .idx{font-family:"IBM Plex Mono";font-size:.68rem;color:var(--mist);}
-  .gas-home .outcome h4{font-family:"IBM Plex Sans";font-weight:600;font-size:.98rem;margin-top:.55rem;}
+  .gas-home .outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-bottom:clamp(2.5rem,5vw,3.5rem);}
+  .gas-home .outcome{background:var(--linen);border-radius:12px;padding:1.4rem 1.3rem;}
+  .gas-home .outcome:nth-child(1){background:var(--linen-raised);}
+  .gas-home .outcome:nth-child(2){background:rgba(227,190,122,.14);}
+  .gas-home .outcome:nth-child(3){background:var(--linen-raised);}
+  .gas-home .outcome:nth-child(4){background:rgba(0,26,63,.05);}
+  .gas-home .outcome .idx{font-family:"IBM Plex Mono";font-size:.68rem;color:var(--brass-ink);}
+  .gas-home .outcome h4{font-family:"IBM Plex Sans";font-weight:600;font-size:.98rem;margin-top:.6rem;}
   .gas-home .outcome p{color:var(--mist);font-size:.88rem;margin-top:.5rem;}
   .gas-home .feature-block{
-    display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--hairline);border-radius:var(--radius);overflow:hidden;
+    display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem);align-items:stretch;
   }
-  .gas-home .feature-copy{padding:clamp(1.6rem,3vw,2.5rem);background:var(--linen-raised);}
+  .gas-home .feature-copy{padding:0;display:flex;flex-direction:column;justify-content:center;}
   .gas-home .feature-copy h3{font-size:var(--fs-display-3);max-width:20ch;}
   .gas-home .feature-copy p{margin-top:.9rem;color:var(--mist);max-width:40ch;}
-  .gas-home .feature-art{background:var(--ink);display:flex;flex-direction:column;justify-content:center;padding:clamp(1.75rem,3vw,2.5rem);min-height:200px;}
+  .gas-home .feature-art{background:var(--ink);border-radius:14px;display:flex;flex-direction:column;justify-content:center;padding:clamp(1.75rem,3vw,2.5rem);min-height:200px;}
   .gas-home .feature-stat{border-top:1px solid rgba(227,190,122,.3);padding-top:1.1rem;}
   .gas-home .feature-stat + .feature-stat{margin-top:1.5rem;}
   .gas-home .feature-stat-num{font-family:"Newsreader";font-style:italic;font-weight:500;font-size:2.1rem;color:var(--brass-soft);display:block;}
@@ -163,12 +167,12 @@
 
   /* ---- faculty teaser ---- */
   .gas-home .committee-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hairline);border:1px solid var(--hairline);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;
     margin-bottom:clamp(1.75rem,3vw,2.5rem);
   }
-  .gas-home .person{background:var(--linen);padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.85rem;transition:background .3s;}
-  .gas-home .person:hover{background:var(--linen-raised);}
-  .gas-home .avatar{width:88px;height:88px;position:relative;border-radius:6px;background:var(--linen-raised);border:1px solid var(--hairline);overflow:hidden;}
+  .gas-home .person{background:var(--linen-raised);border-radius:12px;padding:1.5rem 1.3rem;display:flex;flex-direction:column;gap:.85rem;transition:background .3s;}
+  .gas-home .person:hover{background:rgba(227,190,122,.14);}
+  .gas-home .avatar{width:88px;height:88px;position:relative;border-radius:10px;background:var(--linen);border:1px solid var(--hairline);overflow:hidden;}
   .gas-home .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
   .gas-home .avatar img.hidden{display:none;}
   .gas-home .person h4{font-size:.96rem;font-weight:600;}
