@@ -30,7 +30,7 @@
   .gas-footer-root ul{margin:0;padding:0;list-style:none;}
   .gas-footer-root a{color:inherit;text-decoration:none;}
   .gas-footer-root p{margin:0;}
-  .gas-footer-root button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;margin:0;padding:0;text-align:left;}
+  .gas-footer-root button{font:inherit;color:inherit !important;background:none !important;border:0 !important;cursor:pointer;margin:0;padding:0;text-align:left;border-radius:0 !important;}
   .gas-footer-root img{max-width:100%;display:block;}
   .gas-footer-root :focus-visible{outline:2px solid var(--brass);outline-offset:2px;}
   .gas-footer-root .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
@@ -81,14 +81,15 @@
   /* ---- nav groups within a footer column (mirrors header dropdown groups) ---- */
   .gas-footer .foot-col .nav-group{margin-bottom:1.1rem;position:relative;}
   .gas-footer .foot-col .nav-group:last-child{margin-bottom:0;}
+  .gas-footer .foot-col .nav-group.has-flyout{width:fit-content;}
   .gas-footer .foot-col .nav-group-label{
-    display:flex;align-items:center;gap:.4em;
+    display:flex;align-items:center;gap:.4em;width:fit-content;white-space:nowrap;
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.66rem;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--on-ink-mist);opacity:.7;margin-bottom:.6rem;
+    text-transform:uppercase;color:var(--on-ink-mist) !important;opacity:.7;margin-bottom:.6rem;
     transition:opacity .2s,color .2s;
   }
   .gas-footer .foot-col .nav-group.has-flyout:hover .nav-group-label,
-  .gas-footer .foot-col .nav-group.has-flyout:focus-within .nav-group-label{opacity:1;color:var(--brass-soft);}
+  .gas-footer .foot-col .nav-group.has-flyout:focus-within .nav-group-label{opacity:1;color:var(--brass-soft) !important;}
   .gas-footer .foot-col .nav-group-label .chevron{width:9px;height:9px;flex:none;transition:transform .25s var(--ease);}
   .gas-footer .foot-col .nav-group.has-flyout:hover .chevron,
   .gas-footer .foot-col .nav-group.has-flyout:focus-within .chevron{transform:translateX(3px);}
