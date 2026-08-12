@@ -1,0 +1,310 @@
+<!--
+  GULF AORTA SUMMIT — SPONSORS PAGE (Elementor "HTML" widget)
+  ─────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /sponsors, matching the existing nav item "Sponsors"). No
+  header/footer markup — those come from your global Elementor
+  templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-sponsors.
+
+  Rebuilt from the live GHL "Sponsors - GAS 2026" page: same tier
+  structure (Diamond, Platinum, Silver, Exhibitors) and the same
+  sponsor list/links, as a native responsive grid instead of fixed
+  per-breakpoint image rows.
+
+  Logo tiles are text placeholders for now — swap the <span class=
+  "logo-mark"> inside a .sponsor-tile for an <img src="..." alt="...">
+  once real logo files are available; the tile/hover/link styling
+  carries over unchanged.
+
+  Left out from the source page (flag if these should come back):
+  - Two nav-adjacent utility buttons ("Get Your Conference Photos",
+    "Get Your Certificate") — not sponsorship content.
+  - Platinum tier's sponsor logo pointed at the same URL as the
+    Diamond sponsor (ammtuae.com) with no name/description anywhere
+    in the source — kept as a placeholder slot pending the real name.
+  - Three Exhibitor logos with no link and no accessible name in the
+    source markup — can't be identified without the image itself.
+-->
+<div class="gas-sponsors">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-sponsors{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-sponsors,.gas-sponsors *,.gas-sponsors *::before,.gas-sponsors *::after{box-sizing:border-box;}
+  .gas-sponsors p{margin:0;}
+  .gas-sponsors a{color:inherit;text-decoration:none;}
+  .gas-sponsors h1,.gas-sponsors h2,.gas-sponsors h3,.gas-sponsors h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-sponsors .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-sponsors img{max-width:100%;display:block;}
+
+  .gas-sponsors .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-sponsors .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-sponsors .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-sponsors .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-sponsors .page-header h1{font-size:var(--fs-display-1);max-width:22ch;color:var(--on-ink);}
+  .gas-sponsors .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+  .gas-sponsors .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+
+  .gas-sponsors .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-sponsors .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-sponsors .section-head h2{font-size:var(--fs-display-2);max-width:34ch;}
+  .gas-sponsors .section-head .tier-count{
+    margin-top:.5rem;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;color:var(--mist);
+  }
+
+  /* ---- buttons ---- */
+  .gas-sponsors .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-sponsors .btn-gold{background:var(--brass);color:var(--ink);}
+  .gas-sponsors .btn-gold:hover{background:var(--brass-soft);transform:translateY(-2px);}
+  .gas-sponsors .btn-line{border:1px solid rgba(244,246,248,.3);color:var(--on-ink);}
+  .gas-sponsors .btn-line:hover{border-color:var(--brass);color:var(--brass-soft);}
+  .gas-sponsors .section .btn-line{border-color:var(--hairline);color:var(--ink-text);}
+  .gas-sponsors .section .btn-line:hover{border-color:var(--brass-ink);color:var(--brass-ink);}
+
+  /* ---- sponsor tile (shared building block) ---- */
+  .gas-sponsors .sponsor-tile{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    border-radius:12px;background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -16px rgba(0,26,63,.16);
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    padding:1.4rem 1.2rem;
+  }
+  .gas-sponsors a.sponsor-tile:hover{
+    transform:translateY(-4px);box-shadow:0 0 0 1px var(--brass-dim),0 16px 30px -16px rgba(0,26,63,.24);
+  }
+  .gas-sponsors .sponsor-tile .logo-mark{
+    font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;color:var(--ink-text);
+    line-height:1.25;
+  }
+  .gas-sponsors .sponsor-tile.placeholder{
+    background:var(--linen-raised);box-shadow:inset 0 0 0 1px var(--hairline);
+  }
+  .gas-sponsors .sponsor-tile.placeholder .logo-mark{color:var(--mist);font-style:normal;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;}
+
+  /* ---- diamond / platinum spotlight ---- */
+  .gas-sponsors .spotlight{display:flex;gap:clamp(1.75rem,4vw,3rem);align-items:center;}
+  .gas-sponsors .spotlight .sponsor-tile{width:260px;height:180px;flex:none;}
+  .gas-sponsors .spotlight .sponsor-tile .logo-mark{font-size:1.5rem;}
+  .gas-sponsors .spotlight-body h3{font-size:1.3rem;font-style:italic;margin-bottom:.7rem;}
+  .gas-sponsors .spotlight-body p{color:var(--mist);max-width:56ch;font-size:.94rem;}
+  .gas-sponsors .spotlight-body a.website-link{
+    display:inline-flex;align-items:center;gap:.4em;margin-top:.9rem;font-family:"IBM Plex Sans";
+    font-weight:600;font-size:.84rem;color:var(--brass-ink);
+  }
+  .gas-sponsors .spotlight-body a.website-link:hover{color:var(--ink-text);}
+
+  /* ---- silver grid ---- */
+  .gas-sponsors .silver-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.1rem,2.2vw,1.6rem);
+  }
+  .gas-sponsors .silver-grid .sponsor-tile{height:120px;}
+  .gas-sponsors .silver-grid .sponsor-tile .logo-mark{font-size:1.05rem;}
+  .gas-sponsors .silver-notes{
+    margin-top:clamp(2rem,4vw,2.75rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,3vw,2.5rem);
+  }
+  .gas-sponsors .silver-notes .note h4{font-size:1rem;font-style:italic;font-weight:500;margin-bottom:.5rem;}
+  .gas-sponsors .silver-notes .note p{color:var(--mist);font-size:.9rem;}
+
+  /* ---- exhibitors grid ---- */
+  .gas-sponsors .exhibitors-grid{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(.85rem,1.8vw,1.2rem);
+  }
+  .gas-sponsors .exhibitors-grid .sponsor-tile{height:96px;}
+  .gas-sponsors .exhibitors-grid .sponsor-tile .logo-mark{font-size:.86rem;}
+
+  /* ---- closing CTA ---- */
+  .gas-sponsors .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-sponsors .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-sponsors .cta-band h2{font-size:var(--fs-display-2);max-width:20ch;color:var(--on-ink);}
+  .gas-sponsors .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:46ch;}
+  .gas-sponsors .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  @media (max-width:980px){
+    .gas-sponsors .silver-grid{grid-template-columns:repeat(3,1fr);}
+    .gas-sponsors .exhibitors-grid{grid-template-columns:repeat(4,1fr);}
+    .gas-sponsors .silver-notes{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .gas-sponsors .spotlight{flex-direction:column;align-items:flex-start;}
+    .gas-sponsors .spotlight .sponsor-tile{width:100%;}
+  }
+  @media (max-width:560px){
+    .gas-sponsors .silver-grid{grid-template-columns:repeat(2,1fr);}
+    .gas-sponsors .exhibitors-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-sponsors *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Partnership</p>
+    <h1>Sponsors &amp; exhibitors.</h1>
+    <p class="intro">The medical device distributors, pharmaceutical companies and healthcare partners who make the Gulf Aorta Summit possible — from our Diamond sponsor to the exhibitors on the summit floor.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="mailto:info@gulfaorta.com">Become a Sponsor</a>
+      <a class="btn btn-line" href="/venue">View the Venue</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAMOND SPONSOR ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Diamond sponsor</p>
+      <h2>Our lead partner for GAS 2026.</h2>
+    </div>
+    <div class="spotlight">
+      <a class="sponsor-tile" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">
+        <span class="logo-mark">Al Naghi<br>Medical</span>
+      </a>
+      <div class="spotlight-body">
+        <h3>Al Naghi Medical Company</h3>
+        <p>A leading provider of medical devices in the UAE, bringing state-of-the-art medical technology and solutions to the market. With offices in Abu Dhabi and Dubai, Al Naghi Medical supplies hospitals, universities and medical facilities across the UAE. Operating under the umbrella of Gulf Medical, founded in 1983, Al Naghi Medical builds long-term partnerships across the region's medical field.</p>
+        <a class="website-link" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">ammtuae.com &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATINUM SPONSOR ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Platinum sponsor</p>
+      <h2>Supporting the summit floor.</h2>
+    </div>
+    <div class="spotlight">
+      <div class="sponsor-tile placeholder">
+        <span class="logo-mark">Logo pending</span>
+      </div>
+      <div class="spotlight-body">
+        <h3>Platinum Sponsor</h3>
+        <p>Company name and description to confirm — the source page's Platinum tier logo links to the same site as the Diamond sponsor above with no distinct name or write-up. Send the correct company details along with the logo file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SILVER SPONSORS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Silver sponsors</p>
+      <h2>Backing this year's programme.</h2>
+      <p class="tier-count">11 sponsors</p>
+    </div>
+    <div class="silver-grid">
+      <a class="sponsor-tile" href="https://advamed-me.com/homepage-uae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">AdvaMed</span></a>
+      <a class="sponsor-tile" href="https://www.advanced-hc.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Advanced<br>Healthcare</span></a>
+      <a class="sponsor-tile" href="https://asdinternationaluae.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">ASD<br>International</span></a>
+      <a class="sponsor-tile" href="https://www.dupharm.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Dupharm</span></a>
+      <a class="sponsor-tile" href="https://www.majesticmedical.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Majestic<br>Medical</span></a>
+      <a class="sponsor-tile" href="https://www.omxmedical.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">OMX<br>Medical</span></a>
+      <a class="sponsor-tile" href="https://www.rx-medical.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">RX<br>Medical</span></a>
+      <a class="sponsor-tile" href="https://safepharma.ae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">SafePharma</span></a>
+      <a class="sponsor-tile" href="http://unimed.co.ae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Unimed</span></a>
+      <a class="sponsor-tile" href="https://www.thexengroup.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Thexen<br>Group</span></a>
+      <a class="sponsor-tile" href="https://www.adi.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">ADI</span></a>
+    </div>
+    <div class="silver-notes">
+      <div class="note">
+        <h4>ASD International Medical Requisites LLC</h4>
+        <p>A leading medical company based in the UAE, with plans to expand across the GCC and wider Middle East — built on an unwavering commitment to quality patient care.</p>
+      </div>
+      <div class="note">
+        <h4>Dupharm</h4>
+        <p>A trusted healthcare provider established in 1994, distributing pharmaceuticals, medical equipment and laboratory supplies across the UAE and the wider region.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXHIBITORS ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">On the summit floor</p>
+      <h2>Exhibitors.</h2>
+      <p class="tier-count">12 exhibitors</p>
+    </div>
+    <div class="exhibitors-grid">
+      <a class="sponsor-tile" href="https://www.alhayatuae.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Al Hayat</span></a>
+      <a class="sponsor-tile" href="https://al-umnia.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Al Umnia</span></a>
+      <a class="sponsor-tile" href="https://astuteimaging.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Astute<br>Imaging</span></a>
+      <a class="sponsor-tile" href="https://www.auroradrug.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Aurora<br>Drug</span></a>
+      <a class="sponsor-tile" href="https://www.baxter.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Baxter</span></a>
+      <a class="sponsor-tile" href="https://www.bmt-uae.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">BMT</span></a>
+      <a class="sponsor-tile" href="https://www.gulfdrug.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Gulf Drug</span></a>
+      <a class="sponsor-tile" href="https://www.japanlifeline.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Japan<br>Life Line</span></a>
+      <a class="sponsor-tile" href="https://www.medisure.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Medisure</span></a>
+      <a class="sponsor-tile" href="https://transimed.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Transimed</span></a>
+      <a class="sponsor-tile" href="https://www.pharmalink.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">PharmaLink</span></a>
+      <a class="sponsor-tile" href="http://pulsecaremed.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Pulse Care<br>Medical</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Sponsor GAS 2026.</h2>
+      <p>Join the Gulf's largest dedicated congress on aortic aneurysm disease as a sponsor or exhibitor — three days of live cases, masterclasses and faculty debate in Dubai.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="mailto:info@gulfaorta.com">Become a Sponsor</a>
+      <a class="btn btn-line" href="/gulf-aorta-overview-2026">About GAS 2026</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
