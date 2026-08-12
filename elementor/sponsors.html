@@ -13,17 +13,14 @@
   sponsor list/links, as a native responsive grid instead of fixed
   per-breakpoint image rows.
 
-  Logo tiles are text placeholders for now — swap the <span class=
-  "logo-mark"> inside a .sponsor-tile for an <img src="..." alt="...">
-  once real logo files are available; the tile/hover/link styling
-  carries over unchanged.
+  Logo tiles without a real <img> yet still show a text .logo-mark
+  fallback (hidden automatically once an image is added — see the
+  sponsor-tile CSS). Diamond and Platinum now use real logo files;
+  Silver and Exhibitors are still text placeholders pending logos.
 
   Left out from the source page (flag if these should come back):
   - Two nav-adjacent utility buttons ("Get Your Conference Photos",
     "Get Your Certificate") — not sponsorship content.
-  - Platinum tier's sponsor logo pointed at the same URL as the
-    Diamond sponsor (ammtuae.com) with no name/description anywhere
-    in the source — kept as a placeholder slot pending the real name.
   - Three Exhibitor logos with no link and no accessible name in the
     source markup — can't be identified without the image itself.
 -->
@@ -106,13 +103,19 @@
   .gas-sponsors a.sponsor-tile:hover{
     transform:translateY(-4px);box-shadow:0 0 0 1px var(--brass-dim),0 16px 30px -16px rgba(0,26,63,.24);
   }
+  .gas-sponsors .sponsor-tile img{max-width:100%;max-height:100%;object-fit:contain;}
+  .gas-sponsors .sponsor-tile img.hidden{display:none;}
   .gas-sponsors .sponsor-tile .logo-mark{
+    display:none;
     font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;color:var(--ink-text);
     line-height:1.25;
   }
+  .gas-sponsors .sponsor-tile img.hidden ~ .logo-mark,
+  .gas-sponsors .sponsor-tile:not(:has(img)) .logo-mark{display:block;}
   .gas-sponsors .sponsor-tile.placeholder{
     background:var(--linen-raised);box-shadow:inset 0 0 0 1px var(--hairline);
   }
+  .gas-sponsors .sponsor-tile.placeholder .logo-mark{display:block;}
   .gas-sponsors .sponsor-tile.placeholder .logo-mark{color:var(--mist);font-style:normal;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;}
 
   /* ---- diamond / platinum spotlight ---- */
@@ -126,6 +129,13 @@
     font-weight:600;font-size:.84rem;color:var(--brass-ink);
   }
   .gas-sponsors .spotlight-body a.website-link:hover{color:var(--ink-text);}
+
+  /* ---- platinum grid ---- */
+  .gas-sponsors .platinum-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.25rem);
+  }
+  .gas-sponsors .platinum-grid .sponsor-tile{height:150px;padding:1.8rem 1.6rem;}
+  .gas-sponsors .platinum-grid .sponsor-tile .logo-mark{font-size:1.15rem;}
 
   /* ---- silver grid ---- */
   .gas-sponsors .silver-grid{
@@ -165,6 +175,7 @@
   @media (max-width:560px){
     .gas-sponsors .silver-grid{grid-template-columns:repeat(2,1fr);}
     .gas-sponsors .exhibitors-grid{grid-template-columns:repeat(2,1fr);}
+    .gas-sponsors .platinum-grid{grid-template-columns:1fr;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-sponsors *{transition-duration:.001ms !important;}
@@ -193,6 +204,7 @@
     </div>
     <div class="spotlight">
       <a class="sponsor-tile" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Al-Naghi-Medical-Company.webp" alt="Al Naghi Medical Company" loading="lazy" data-fallback="self">
         <span class="logo-mark">Al Naghi<br>Medical</span>
       </a>
       <div class="spotlight-body">
@@ -204,21 +216,27 @@
   </div>
 </section>
 
-<!-- ============ PLATINUM SPONSOR ============ -->
+<!-- ============ PLATINUM SPONSORS ============ -->
 <section class="section" style="background:var(--linen-raised);">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow" style="color:var(--brass-ink);">Platinum sponsor</p>
+      <p class="eyebrow" style="color:var(--brass-ink);">Platinum sponsors</p>
       <h2>Supporting the summit floor.</h2>
+      <p class="tier-count">3 sponsors</p>
     </div>
-    <div class="spotlight">
-      <div class="sponsor-tile placeholder">
-        <span class="logo-mark">Logo pending</span>
-      </div>
-      <div class="spotlight-body">
-        <h3>Platinum Sponsor</h3>
-        <p>Company name and description to confirm — the source page's Platinum tier logo links to the same site as the Diamond sponsor above with no distinct name or write-up. Send the correct company details along with the logo file.</p>
-      </div>
+    <div class="platinum-grid">
+      <a class="sponsor-tile" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/AMMT.avif" alt="AMMT" loading="lazy" data-fallback="self">
+        <span class="logo-mark">AMMT</span>
+      </a>
+      <a class="sponsor-tile" href="https://www.goremedical.com/" target="_blank" rel="noreferrer noopener">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/GORE.png" alt="Gore Medical" loading="lazy" data-fallback="self">
+        <span class="logo-mark">Gore Medical</span>
+      </a>
+      <a class="sponsor-tile" href="https://www.merit.com/" target="_blank" rel="noreferrer noopener">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Merit_Logo_RGB_Red_2018_with_Tagline-002-qny8c9dpbupsuh9mwznmv6n0qyix0xqg79e4sk5zxu.webp" alt="Merit Medical" loading="lazy" data-fallback="self">
+        <span class="logo-mark">Merit Medical</span>
+      </a>
     </div>
   </div>
 </section>
