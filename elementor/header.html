@@ -63,7 +63,7 @@
   .gas-header-bar .brand{display:flex;align-items:center;gap:.7rem;flex:none;}
   .gas-header-bar .brand-mark-wrap{
     position:relative;height:44px;max-height:44px;width:auto;max-width:220px;
-    display:flex;align-items:center;flex:none;overflow:hidden;
+    display:flex;align-items:center;flex:none;overflow:visible;
   }
   .gas-header-bar .brand-logo{
     display:block;height:44px;max-height:44px;width:auto;max-width:220px;
@@ -71,9 +71,14 @@
   }
   .gas-header-bar .brand-logo.hidden{display:none;}
   .gas-header-bar .brand-mark-fallback{
-    width:44px;height:44px;border:1px solid var(--brass-dim);border-radius:4px;
-    display:none;align-items:center;justify-content:center;
-    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.03em;color:var(--brass-soft);
+    position:relative;width:44px;height:44px;border:1px solid var(--brass-dim);border-radius:8px;
+    display:none;align-items:center;justify-content:center;color:var(--brass);
+  }
+  .gas-header-bar .brand-mark-fallback svg{width:25px;height:25px;flex:none;}
+  .gas-header-bar .brand-mark-fallback em{
+    position:absolute;right:-6px;bottom:-6px;font-style:normal;background:var(--ink);
+    border:1px solid var(--brass);color:var(--brass-soft);font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:.56rem;font-weight:600;letter-spacing:.02em;padding:1px 4px;border-radius:3px;line-height:1.3;
   }
   .gas-header-bar .brand-word{display:none;flex-direction:column;line-height:1.05;}
   .gas-header-bar .brand.logo-fail .brand-word{display:flex;}
@@ -188,7 +193,13 @@
     <a class="brand" href="/">
       <span class="brand-mark-wrap">
         <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" data-fallback="brand">
-        <span class="brand-mark-fallback">GAS</span>
+        <span class="brand-mark-fallback">
+          <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
+            <path d="M9 33C9 19 15 9 22 9C29 9 35 19 35 33" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.5 9V4M22 9V3M28.5 9V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <em>27</em>
+        </span>
       </span>
       <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
     </a>
