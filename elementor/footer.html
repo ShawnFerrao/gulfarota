@@ -45,24 +45,17 @@
 
   .gas-footer .brand{display:flex;align-items:center;gap:.7rem;margin-bottom:1.2rem;}
   .gas-footer .brand-mark-wrap{
-    position:relative;height:40px;max-height:40px;width:auto;max-width:200px;
-    display:flex;align-items:center;flex:none;overflow:visible;
+    position:relative;width:40px;height:40px;flex:none;overflow:visible;
+    border:1px solid var(--brass-dim);border-radius:8px;
+    display:flex;align-items:center;justify-content:center;color:var(--brass);
   }
-  .gas-footer .brand-logo{display:block;height:40px;max-height:40px;width:auto;max-width:200px;object-fit:contain;object-position:left center;}
-  .gas-footer .brand-logo.hidden{display:none;}
-  .gas-footer .brand-mark-fallback{
-    position:relative;width:40px;height:40px;border:1px solid var(--brass-dim);border-radius:8px;
-    display:none;align-items:center;justify-content:center;color:var(--brass);
-  }
-  .gas-footer .brand-mark-fallback svg{width:23px;height:23px;flex:none;}
-  .gas-footer .brand-mark-fallback em{
+  .gas-footer .brand-mark-wrap svg{width:23px;height:23px;flex:none;}
+  .gas-footer .brand-mark-wrap em{
     position:absolute;right:-6px;bottom:-6px;font-style:normal;background:var(--ink);
     border:1px solid var(--brass);color:var(--brass-soft);font-family:"IBM Plex Mono",ui-monospace,monospace;
     font-size:.54rem;font-weight:600;letter-spacing:.02em;padding:1px 4px;border-radius:3px;line-height:1.3;
   }
-  .gas-footer .brand-word{display:none;flex-direction:column;line-height:1.05;}
-  .gas-footer .brand.logo-fail .brand-word{display:flex;}
-  .gas-footer .brand.logo-fail .brand-mark-fallback{display:flex;}
+  .gas-footer .brand-word{display:flex;flex-direction:column;line-height:1.05;}
   .gas-footer .brand-word b{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;font-size:1.05rem;}
   .gas-footer .brand-word span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.6rem;letter-spacing:.16em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;display:block;}
 
@@ -147,14 +140,11 @@
       <div class="foot-brand">
         <a class="brand" href="/">
           <span class="brand-mark-wrap">
-            <img class="brand-logo" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6909ae566b7a570d9aa4a93c.png" alt="Gulf Aorta Summit" loading="lazy" data-fallback="brand">
-            <span class="brand-mark-fallback">
-              <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
-                <path d="M9 33C9 19 15 9 22 9C29 9 35 19 35 33" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15.5 9V4M22 9V3M28.5 9V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <em>27</em>
-            </span>
+            <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <path d="M9 33C9 19 15 9 22 9C29 9 35 19 35 33" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.5 9V4M22 9V3M28.5 9V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <em>27</em>
           </span>
           <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
         </a>
@@ -219,20 +209,3 @@
   </div>
 </footer>
 </div>
-<script>
-(function(){
-  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
-  // — some hosts' security plugins flag inline event-handler attributes as XSS)
-  document.addEventListener('error', function(e){
-    var img = e.target;
-    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
-    img.classList.add('hidden');
-    if (img.dataset.fallback === 'brand') {
-      var brand = img.closest('.brand');
-      if (brand) brand.classList.add('logo-fail');
-    } else if (img.dataset.fallback === 'marquee') {
-      if (img.parentElement) img.parentElement.classList.add('img-fail');
-    }
-  }, true);
-})();
-</script>
