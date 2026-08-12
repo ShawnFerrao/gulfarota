@@ -64,13 +64,15 @@
 
   /* ---- buttons ---- */
   .gas-2026 .btn{
-    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
-    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+    display:inline-flex !important;align-items:center;gap:.55em;font-weight:600 !important;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em !important;border-radius:var(--radius) !important;margin:0 !important;
+    text-decoration:none !important;box-shadow:none !important;
+    transition:transform .35s var(--ease),background .25s,border-color .25s;
   }
-  .gas-2026 .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
-  .gas-2026 .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
-  .gas-2026 .btn-line{border:1px solid var(--hairline) !important;color:var(--ink-text) !important;}
-  .gas-2026 .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
+  .gas-2026 .btn-gold{background:var(--brass) !important;background-color:var(--brass) !important;color:var(--ink) !important;border:1px solid var(--brass) !important;}
+  .gas-2026 .btn-gold:hover{background:var(--brass-soft) !important;background-color:var(--brass-soft) !important;border-color:var(--brass-soft) !important;color:var(--ink) !important;transform:translateY(-2px);}
+  .gas-2026 .btn-line{background:transparent !important;border:1px solid var(--hairline) !important;color:var(--ink-text) !important;}
+  .gas-2026 .btn-line:hover{background:transparent !important;border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
   .gas-2026 .page-header .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
   .gas-2026 .page-header .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
 
@@ -141,17 +143,24 @@
   .gas-2026 .marquee-item.img-fail .dot,.gas-2026 .marquee-item.img-fail .fallback-label{display:inline-block;}
 
   /* ---- highlights gallery ---- */
-  .gas-2026 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+  .gas-2026 .gallery-grid{display:grid !important;grid-template-columns:repeat(3,1fr) !important;gap:1.25rem !important;}
   .gas-2026 .gallery-card{
-    aspect-ratio:4/3;position:relative;border-radius:14px;overflow:hidden;
+    aspect-ratio:4/3 !important;position:relative !important;border-radius:14px !important;overflow:hidden !important;
     background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.18);
+    margin:0 !important;padding:0 !important;
   }
-  .gas-2026 .gallery-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
-  .gas-2026 .gallery-card img.hidden{display:none;}
+  .gas-2026 .gallery-card img{
+    position:absolute !important;inset:0 !important;top:0 !important;left:0 !important;
+    width:100% !important;height:100% !important;max-width:100% !important;
+    object-fit:cover !important;object-position:center !important;z-index:1;margin:0 !important;
+  }
+  .gas-2026 .gallery-card img.hidden{display:none !important;}
   .gas-2026 .gallery-card .fallback{
-    width:100%;height:100%;display:grid;place-items:center;
+    display:none;width:100%;height:100%;place-items:center;position:relative;z-index:0;
     font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
   }
+  .gas-2026 .gallery-card img.hidden ~ .fallback,
+  .gas-2026 .gallery-card:not(:has(img)) .fallback{display:grid;}
 
   @media (max-width:900px){
     .gas-2026 .mission-grid{grid-template-columns:1fr;}
@@ -332,12 +341,12 @@
   </div>
   <div class="wrap">
     <div class="gallery-grid">
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690affa273f16265597a54bd.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b0034188ff93f4e81b7e5.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f135639e69f40e057f.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f173f1623a1c7a72f9.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff9039781cb07.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
-      <div class="gallery-card"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff94f4281cb08.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690affa273f16265597a54bd.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b0034188ff93f4e81b7e5.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f135639e69f40e057f.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f173f1623a1c7a72f9.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff9039781cb07.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
+      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff94f4281cb08.png" alt="GAS highlight" loading="lazy" data-fallback="self"><span class="fallback">GAS</span></div>
     </div>
   </div>
 </section>
