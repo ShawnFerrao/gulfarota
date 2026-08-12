@@ -102,6 +102,12 @@
     opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-8px);
     transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;
   }
+  /* invisible bridge over the gap between the label and the flyout, so the
+     cursor never leaves a hoverable box while crossing to it */
+  .gas-footer .foot-col .nav-group.has-flyout::after{
+    content:"";position:absolute;left:100%;top:-.6rem;width:1.1rem;
+    height:calc(100% + 1.2rem);
+  }
   .gas-footer .foot-col .nav-group.has-flyout:hover .flyout,
   .gas-footer .foot-col .nav-group.has-flyout:focus-within .flyout{
     opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0);
