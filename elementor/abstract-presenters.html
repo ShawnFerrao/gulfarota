@@ -1,0 +1,386 @@
+<!--
+  GULF AORTA SUMMIT — ABSTRACT PRESENTERS PAGE (Elementor "HTML" widget)
+  ───────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /abstract-presenters, matching the original site's nav item "Summit
+  Faculty → Poster Abstract Presenters"). No header/footer markup —
+  those come from your global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-presenters.
+-->
+<div class="gas-presenters">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-presenters{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-presenters,.gas-presenters *,.gas-presenters *::before,.gas-presenters *::after{box-sizing:border-box;}
+  .gas-presenters p{margin:0;}
+  .gas-presenters a{color:inherit;text-decoration:none;}
+  .gas-presenters h1,.gas-presenters h2,.gas-presenters h3,.gas-presenters h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-presenters .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-presenters img{max-width:100%;display:block;}
+
+  .gas-presenters .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-presenters .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-ink);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-presenters .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header ---- */
+  .gas-presenters .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-presenters .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-presenters .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-presenters .section{padding-block:clamp(3rem,7vw,5.5rem);}
+
+  /* ---- presenter grid ---- */
+  .gas-presenters .presenter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .gas-presenters .presenter-card{
+    background:var(--linen-raised);border-radius:12px;padding:1.6rem 1.5rem;
+    display:flex;flex-direction:column;gap:.9rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .gas-presenters .presenter-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.24);}
+  .gas-presenters .presenter-head{display:flex;align-items:center;gap:1rem;}
+  .gas-presenters .avatar{
+    width:64px;height:64px;flex:none;position:relative;border-radius:10px;
+    background:var(--linen);border:1px solid var(--hairline);overflow:hidden;
+  }
+  .gas-presenters .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .gas-presenters .presenter-name{font-size:1.05rem;line-height:1.3;}
+  .gas-presenters .presenter-role{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.7rem;letter-spacing:.03em;
+    color:var(--mist);line-height:1.5;margin-top:.3rem;
+  }
+  .gas-presenters .abstract-label{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.64rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--brass-ink);
+  }
+  .gas-presenters .abstract-list{display:flex;flex-direction:column;gap:.55rem;}
+  .gas-presenters .abstract-list p{
+    font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:.94rem;line-height:1.45;color:var(--ink-text);
+  }
+
+  @media (max-width:980px){
+    .gas-presenters .presenter-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:640px){
+    .gas-presenters .presenter-grid{grid-template-columns:1fr;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-presenters *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Summit Faculty</p>
+    <h1>Meet our abstract presenters.</h1>
+    <p class="intro">This year's Gulf Aorta Summit proudly welcomes a diverse cohort of researchers, clinicians, and innovators selected through our abstract submission program. These presenters represent the cutting edge of vascular science, sharing original work that spans clinical studies, interventional techniques, device innovations, and case-based insights.</p>
+  </div>
+</section>
+
+<!-- ============ PRESENTERS ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="presenter-grid">
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90ceae6bb326abad204.png" alt="Rossella Catona" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Rossella Catona</h3>
+            <p class="presenter-role">Radiology Resident, Università Degli Studi di Milano, Italy</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Treatment of Penetrating Atherosclerotic Ulcer (PAU)"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d7331a4180320.png" alt="Sonia Triggiani" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Sonia Triggiani</h3>
+            <p class="presenter-role">MD, Fondazione IRCCS Ospedale Maggiore Policlinico of Milan, Italy</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"From Diagnosis to Debulking: Multidisciplinary Endovascular Treatment of Catheter-Related Right Atrial Thrombosis"</p>
+          <p>"The Pulmonary Embolism Response Team Model: Integrating Interventional Radiology in Acute Pulmonary Embolism Management"</p>
+          <p>"Endoleak management in complex aortic repair"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d733b2218031f.png" alt="Dr. Velio Ascenti" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Velio Ascenti</h3>
+            <p class="presenter-role">Consultant Interventional Radiologist, Policlinic of Milan, Italy</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Pulmonary Vein Stenosis Following Lung Transplantation Managed with Transseptal Stenting: A Case Report and Literature Review"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d73ce66180307.png" alt="Maria Giovanna Riga" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Maria Giovanna Riga</h3>
+            <p class="presenter-role">Doctor, Fondazione (IRCCS) Ca' Granda Ospedale Maggiore Policlinico, Italy</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Recurrent Embolic Stroke after Incomplete Surgical Left Atrial Appendage Closure Managed with Percutaneous Vascular Plug and Coil Embolization"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d733dd018030a.png" alt="Dr. Mohammed Sholah" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Mohammed Sholah</h3>
+            <p class="presenter-role">Vascular Surgery Consultant, GOTHI, Egypt</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Aortic Aneurysm: Shall We Treat the Patient or the Aorta?" A Case Report</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d73df69180321.png" alt="Dr. Rodaina Fadlelseed" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Rodaina Fadlelseed</h3>
+            <p class="presenter-role">General Surgery, Abeer Medical Group, South Africa</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Patient awareness and quality of life in women with lower limb lymphodema"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90be1783c04cf40d405.png" alt="Nimrah Ali" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Nimrah Ali</h3>
+            <p class="presenter-role">Clinical Trainee Interventional Radiology, Dubai Hospital, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"From Silent Disease to Catastrophe: Practical Challenges in AAA Detection, Repair, and Follow-Up"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90be1783caaf340d407.png" alt="Prof. Nagi Amer" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Prof. Nagi Amer</h3>
+            <p class="presenter-role">Professor, Faculty of Medicine, Cairo University, Egypt</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Ultrasound Guided Motor Sparing Sensory Blocks for Hip and Knee Surgeries — Systematic Review and Recent Update"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90beae6bbb22dbad1f8.png" alt="Mohammed Nagi AlAbsi" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Mohammed Nagi AlAbsi</h3>
+            <p class="presenter-role">Medical Intern, SKMC, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"The Gut Feeling That Was Wrong: An Aortic Dissection Presenting as Cholecystitis"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c1fd827efc3845852.png" alt="Shahad Al Mashjari" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Shahad Al Mashjari</h3>
+            <p class="presenter-role">Physician Intern, EHS, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Necrotizing Fasciitis of the Lower Limb Secondary to Invasive Rectal Mucinous Adenocarcinoma: A Rare Case Report"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c1fd8273a61845853.png" alt="Nour Mustafa" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Nour Mustafa</h3>
+            <p class="presenter-role">Medical Student, University of Sharjah, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"The Association Between Smartphone Overuse and Cognitive Impairment Among Adults in the UAE"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b1fd8270d1384583d.png" alt="Dr. Ahila Abu-Nayla" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Ahila Abu-Nayla</h3>
+            <p class="presenter-role">Anesthesia and Critical Care Resident, American Hospital Dubai, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Comparative Outcomes of Early vs Delayed Intubation in Emergency Department with Respiratory Failure"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90bf215dac2766af3d7.png" alt="Musa'ab Omair" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Musa'ab Omair</h3>
+            <p class="presenter-role">Intern Physician, Al Qassimi Hospital, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Gastric Perforation Due to Fungal Infection in a Diabetic Patient: A Case Report and Review of the Literature"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90be1783cd54640d406.png" alt="Dr. Hayssam Gibbaoui" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Hayssam Gibbaoui</h3>
+            <p class="presenter-role">Consultant Vascular Surgeon, NMC Royal Hospital Abu Dhabi, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Current Place of Open Surgery in Abdominal Aortic Trauma"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d7301de18031e.png" alt="Rogayah Ahmad RS Abdulhameed" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Rogayah Ahmad RS Abdulhameed</h3>
+            <p class="presenter-role">Medical Student, University of Sharjah, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"The Level of Knowledge About Antenatal Care Among Women in the Child-Bearing Age in UAE"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d732ac7180309.png" alt="Hasan Al-Humairi" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Hasan Al-Humairi</h3>
+            <p class="presenter-role">Medical Student, University of Sharjah, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Knowledge, Attitudes and Practices Towards Urinary Tract Infection (UTIs) Among Female University Students in UAE"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d734ee5180308.png" alt="Menna Marouf" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Menna Marouf</h3>
+            <p class="presenter-role">Medical Student, University of Sharjah, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"Correlations Between Nomophobia, FoMO, and Psychological Distress: Depression, Anxiety, and Stress"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ebe57a20d04c0b7baf79.png" alt="Dr. Alya Zaidan" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Dr. Alya Zaidan</h3>
+            <p class="presenter-role">B.S, M.P.H, MD, American University of Antigua College of Medicine, Antigua and Barbuda — USA</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"A Silent Destroyer: An Undifferentiated Iliac Mass Presenting After a Fall"</p>
+          <p>"A Tight Squeeze: Superior Vena Cava Syndrome and Upper Extremity Deep Vein Thrombosis in Small Cell Lung Cancer"</p>
+        </div>
+      </article>
+
+      <article class="presenter-card">
+        <div class="presenter-head">
+          <div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6982055f0708e4ad72571aa4.png" alt="Rawan Alfaraji" loading="lazy"></div>
+          <div>
+            <h3 class="presenter-name">Rawan Alfaraji</h3>
+            <p class="presenter-role">Postgraduate, University of Sharjah, UAE</p>
+          </div>
+        </div>
+        <p class="abstract-label">Abstract Presenter</p>
+        <div class="abstract-list">
+          <p>"The Impact of the Media Infodemic on Health Behaviors and Choices Among Adults in the UAE"</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+</div>
