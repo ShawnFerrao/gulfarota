@@ -56,30 +56,24 @@
   }
   .gas-2024 .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
 
-  /* ---- photo hero (image + overlaid title) ---- */
-  .gas-2024 .photo-hero{
-    position:relative;aspect-ratio:21/9;border-radius:14px;overflow:hidden;
-    background:var(--ink);box-shadow:0 0 0 1px var(--hairline);
+  /* ---- page header (ink band) ---- */
+  .gas-2024 .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-2024 .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-2024 .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  /* ---- hero photo ---- */
+  .gas-2024 .hero-photo{
+    position:relative;aspect-ratio:16/7;border-radius:14px;overflow:hidden;
+    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline);
   }
-  .gas-2024 .photo-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
-  .gas-2024 .photo-hero img.hidden{display:none;}
-  .gas-2024 .photo-hero .fallback{
-    position:absolute;inset:0;display:grid;place-items:center;background:var(--ink);
+  .gas-2024 .hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  .gas-2024 .hero-photo img.hidden{display:none;}
+  .gas-2024 .hero-photo .fallback{
+    width:100%;height:100%;display:grid;place-items:center;
     font-family:"IBM Plex Mono";font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);
   }
-  .gas-2024 .photo-hero::after{
-    content:"";position:absolute;inset:0;z-index:2;
-    background:linear-gradient(0deg,rgba(0,10,26,.92) 0%,rgba(0,10,26,.6) 38%,rgba(0,10,26,0) 72%);
-  }
-  .gas-2024 .photo-hero .hero-content{
-    position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:flex-end;
-    padding:clamp(1.5rem,4vw,3.25rem);
-  }
-  .gas-2024 .photo-hero .eyebrow{color:var(--brass-soft);}
-  .gas-2024 .photo-hero h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
-  .gas-2024 .photo-hero .intro{margin-top:1rem;max-width:60ch;color:var(--on-ink-mist);font-size:1.02rem;}
   @media (max-width:760px){
-    .gas-2024 .photo-hero{aspect-ratio:4/5;}
+    .gas-2024 .hero-photo{aspect-ratio:4/3;}
   }
 
   .gas-2024 .section{padding-block:clamp(3rem,7vw,5.5rem);}
@@ -275,16 +269,20 @@
 </style>
 
 <!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Previous Events</p>
+    <h1>GAS 2024 Highlights</h1>
+    <p class="intro">A look back at the Gulf Aorta Summit's two 2024 waves — the speakers, delegates and disciplines that came together, and the moments captured along the way.</p>
+  </div>
+</section>
+
+<!-- ============ HERO PHOTO ============ -->
 <section class="section">
   <div class="wrap">
-    <div class="photo-hero">
-      <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Highlights-hero-image-scaled.jpg" alt="GAS 2024 Highlights" loading="eager" data-fallback="self">
+    <div class="hero-photo">
+      <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Highlights-hero-image-scaled.jpg" alt="GAS 2024 Highlights" loading="lazy" data-fallback="self">
       <span class="fallback">GAS</span>
-      <div class="hero-content">
-        <p class="eyebrow">Previous Events</p>
-        <h1>GAS 2024 Highlights</h1>
-        <p class="intro">A look back at the Gulf Aorta Summit's two 2024 waves — the speakers, delegates and disciplines that came together, and the moments captured along the way.</p>
-      </div>
     </div>
   </div>
 </section>
