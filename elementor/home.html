@@ -475,7 +475,16 @@
         }
       });
     }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-    revealEls.forEach(function(el){ io.observe(el); });
+    // wait for two paints before observing so the browser actually
+    // renders the hidden (opacity:0) state first — otherwise elements
+    // already in the viewport (like the hero) get marked in-view on
+    // the very first frame and the transition never has anything to
+    // animate from, so it looks like it "doesn't work"
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        revealEls.forEach(function(el){ io.observe(el); });
+      });
+    });
   }
 
   var partnerLogos=[
