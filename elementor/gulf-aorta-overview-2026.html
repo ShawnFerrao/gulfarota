@@ -124,26 +124,6 @@
   }
   .gas-2026 .needs-item p{color:var(--mist);}
 
-  /* ---- partner marquee ---- */
-  .gas-2026 .marquee{overflow:hidden;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding-block:1.5rem;margin-bottom:clamp(2.5rem,5vw,3.5rem);}
-  .gas-2026 .marquee-track{display:flex;gap:3.25rem;width:max-content;animation:gas2026Scroll 34s linear infinite;align-items:center;}
-  @keyframes gas2026Scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .gas-2026 .marquee-item{display:flex;align-items:center;gap:.6rem;white-space:nowrap;height:34px;}
-  .gas-2026 .marquee-item img{height:28px;width:auto;max-width:130px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:opacity .25s,filter .25s;}
-  .gas-2026 .marquee-item img:hover{opacity:1;filter:grayscale(0);}
-  .gas-2026 .marquee-item img.hidden{display:none;}
-  .gas-2026 .marquee-item .dot{display:none;width:5px;height:5px;border-radius:50%;background:var(--brass-ink);}
-  .gas-2026 .marquee-item .fallback-label{display:none;font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mist);}
-  .gas-2026 .marquee-item.img-fail .dot,.gas-2026 .marquee-item.img-fail .fallback-label{display:inline-block;}
-
-  /* ---- highlights gallery ---- */
-  .gas-2026 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
-  .gas-2026 .gallery-card{
-    aspect-ratio:4/3;position:relative;border-radius:14px;overflow:hidden;
-    background:var(--linen-raised);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.18);
-  }
-  .gas-2026 .gallery-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-
   @media (max-width:900px){
     .gas-2026 .mission-grid{grid-template-columns:1fr;}
     .gas-2026 .why-grid{grid-template-columns:repeat(2,1fr);}
@@ -151,10 +131,6 @@
   @media (max-width:700px){
     .gas-2026 .audience-grid{grid-template-columns:1fr;}
     .gas-2026 .why-grid{grid-template-columns:1fr;}
-    .gas-2026 .gallery-grid{grid-template-columns:repeat(2,1fr);}
-  }
-  @media (max-width:480px){
-    .gas-2026 .gallery-grid{grid-template-columns:1fr;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-2026 *{transition-duration:.001ms !important;animation-duration:.001ms !important;}
@@ -310,29 +286,6 @@
   </div>
 </section>
 
-<!-- ============ PHOTO GALLERY ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow" style="color:var(--brass-ink);">Highlights</p>
-      <h2>Faculty, partners and moments from GAS.</h2>
-    </div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track" id="gas2026Marquee"></div>
-  </div>
-  <div class="wrap">
-    <div class="gallery-grid">
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690affa273f16265597a54bd.png" alt="GAS highlight" loading="lazy"></div>
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b0034188ff93f4e81b7e5.png" alt="GAS highlight" loading="lazy"></div>
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f135639e69f40e057f.png" alt="GAS highlight" loading="lazy"></div>
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f173f1623a1c7a72f9.png" alt="GAS highlight" loading="lazy"></div>
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff9039781cb07.png" alt="GAS highlight" loading="lazy"></div>
-      <div class="gallery-card"><img decoding="async" src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690b00f1188ff94f4281cb08.png" alt="GAS highlight" loading="lazy"></div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ CLOSING CTA ============ -->
 <section class="cta-band">
   <div class="wrap">
@@ -345,40 +298,3 @@
 </section>
 </div>
 
-<script>
-(function(){
-  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
-  // — some hosts' security plugins flag inline event-handler attributes as XSS)
-  document.addEventListener('error', function(e){
-    var img = e.target;
-    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
-    img.classList.add('hidden');
-    if (img.dataset.fallback === 'marquee') {
-      if (img.parentElement) img.parentElement.classList.add('img-fail');
-    }
-  }, true);
-
-  var partnerLogos = [
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81faa138dd579d106b9.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d35639ebac90cf894.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d4701357c07912704.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81faa138d3ffad106af.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d20c69165c99b931b.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d35639ebc8f0cf893.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81faa138d4ef6d106a8.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81dccc9d8247fb5bd23.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d20c691ffc59b931a.png",
-    "https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/690af81d35639ee59e0cf895.png"
-  ];
-  var track = document.getElementById('gas2026Marquee');
-  if (track) {
-    var html = '';
-    var loop = partnerLogos.concat(partnerLogos);
-    for (var i = 0; i < loop.length; i++) {
-      var src = loop[i];
-      html += '<span class="marquee-item"><img src="' + src + '" alt="Partner logo" loading="lazy" data-fallback="marquee"><span class="dot"></span><span class="fallback-label">Partner</span></span>';
-    }
-    track.innerHTML = html;
-  }
-})();
-</script>
