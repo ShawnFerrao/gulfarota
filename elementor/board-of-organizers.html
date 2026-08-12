@@ -73,10 +73,6 @@
   }
   .gas-board .lead-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .gas-board .lead-avatar img.hidden{display:none;}
-  .gas-board .lead-avatar .fallback{
-    width:100%;height:100%;background:var(--linen-raised);
-    display:grid;place-items:center;font-family:"Newsreader";font-style:italic;font-size:3.2rem;color:var(--brass-ink);
-  }
   .gas-board .lead-card h3{font-size:1.2rem;font-style:italic;font-weight:500;}
   .gas-board .lead-badge{
     display:inline-flex;margin-top:.6rem;font-family:"IBM Plex Sans";font-weight:600;font-size:.82rem;letter-spacing:.01em;
@@ -96,10 +92,6 @@
   }
   .gas-board .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .gas-board .avatar img.hidden{display:none;}
-  .gas-board .avatar .fallback{
-    width:100%;height:100%;background:var(--linen-raised);
-    display:grid;place-items:center;font-family:"IBM Plex Mono";font-size:1.45rem;color:var(--brass-ink);
-  }
   .gas-board .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;max-width:20ch;}
 
   /* ---- closing / CTA band ---- */
@@ -150,7 +142,7 @@
       <div class="lead-card">
         <div class="lead-avatar">
           <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69803b8c1311f683f195a0aa.png" alt="Prof. Adel Aswad" loading="lazy" data-fallback="self">
-          <span class="fallback">AA</span>
+          
         </div>
         <div>
           <h3>Prof. Adel Aswad</h3>
@@ -160,7 +152,7 @@
       <div class="lead-card">
         <div class="lead-avatar">
           <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69144cedfbef362fb9baebec.png" alt="Prof. Tamer Fouad Sayed" loading="lazy" data-fallback="self">
-          <span class="fallback">TS</span>
+          
         </div>
         <div>
           <h3>Prof. Tamer Fouad Sayed</h3>
@@ -179,18 +171,18 @@
       <h2>Members of the Board of Organizers.</h2>
     </div>
     <div class="board-grid">
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce707999621f86aed301ba.png" alt="Dr. Bassel Elsafi" loading="lazy" data-fallback="self"><span class="fallback">BE</span></div><h4>Dr. Bassel Elsafi</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4dee404071a9b8add3.png" alt="Dr. Ali Mohammed Jawaz" loading="lazy" data-fallback="self"><span class="fallback">AJ</span></div><h4>Dr. Ali Mohammed Jawaz</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f7f9ed2ecbb.png" alt="Prof. Payman Majd" loading="lazy" data-fallback="self"><span class="fallback">PM</span></div><h4>Prof. Payman Majd</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4dee40405ffbb8add1.png" alt="Dr. Houssam Younes" loading="lazy" data-fallback="self"><span class="fallback">HY</span></div><h4>Dr. Houssam Younes</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce71290563406b7bf9983b.png" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"><span class="fallback">SK</span></div><h4>Prof. Samer Koussayer</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d17e965847c9ec674.png" alt="Dr. Yasir Asaad Rasmi" loading="lazy" data-fallback="self"><span class="fallback">YR</span></div><h4>Dr. Yasir Asaad Rasmi</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce714999621fca45d323e8.jpeg" alt="Dr. Olena Tymshychyn" loading="lazy" data-fallback="self"><span class="fallback">OT</span></div><h4>Dr. Olena Tymshychyn</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f1aa7d2ecba.png" alt="Prof. Bander Aldhafery" loading="lazy" data-fallback="self"><span class="fallback">BA</span></div><h4>Prof. Bander Aldhafery</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ef9699f1bfacaf5e1c43.png" alt="Dr. Alya Zaidan" loading="lazy" data-fallback="self"><span class="fallback">AZ</span></div><h4>Dr. Alya Zaidan</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f19c9d2ecb9.png" alt="Prof. Mohamed Abdel Aziz" loading="lazy" data-fallback="self"><span class="fallback">MA</span></div><h4>Prof. Mohamed Abdel Aziz</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d05634036d6f9683f.png" alt="Dr. Loai Abudaqa" loading="lazy" data-fallback="self"><span class="fallback">LA</span></div><h4>Dr. Loai Abudaqa</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d73520387008d75dd37.png" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self"><span class="fallback">GC</span></div><h4>Prof. Gianpaolo Carrafiello</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce707999621f86aed301ba.png" alt="Dr. Bassel Elsafi" loading="lazy" data-fallback="self"></div><h4>Dr. Bassel Elsafi</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4dee404071a9b8add3.png" alt="Dr. Ali Mohammed Jawaz" loading="lazy" data-fallback="self"></div><h4>Dr. Ali Mohammed Jawaz</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f7f9ed2ecbb.png" alt="Prof. Payman Majd" loading="lazy" data-fallback="self"></div><h4>Prof. Payman Majd</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4dee40405ffbb8add1.png" alt="Dr. Houssam Younes" loading="lazy" data-fallback="self"></div><h4>Dr. Houssam Younes</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce71290563406b7bf9983b.png" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"></div><h4>Prof. Samer Koussayer</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d17e965847c9ec674.png" alt="Dr. Yasir Asaad Rasmi" loading="lazy" data-fallback="self"></div><h4>Dr. Yasir Asaad Rasmi</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce714999621fca45d323e8.jpeg" alt="Dr. Olena Tymshychyn" loading="lazy" data-fallback="self"></div><h4>Dr. Olena Tymshychyn</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f1aa7d2ecba.png" alt="Prof. Bander Aldhafery" loading="lazy" data-fallback="self"></div><h4>Prof. Bander Aldhafery</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ef9699f1bfacaf5e1c43.png" alt="Dr. Alya Zaidan" loading="lazy" data-fallback="self"></div><h4>Dr. Alya Zaidan</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f19c9d2ecb9.png" alt="Prof. Mohamed Abdel Aziz" loading="lazy" data-fallback="self"></div><h4>Prof. Mohamed Abdel Aziz</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d05634036d6f9683f.png" alt="Dr. Loai Abudaqa" loading="lazy" data-fallback="self"></div><h4>Dr. Loai Abudaqa</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d73520387008d75dd37.png" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self"></div><h4>Prof. Gianpaolo Carrafiello</h4></div>
     </div>
   </div>
 </section>
