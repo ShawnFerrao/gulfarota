@@ -1,0 +1,231 @@
+<!--
+  GULF AORTA SUMMIT — "SPEAKER FACULTY" PAGE (Elementor "HTML" widget)
+  ────────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (live slug: /speakerfaculty).
+  No header/footer markup — those come from your global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-speakers.
+-->
+<div class="gas-speakers">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-speakers{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1320px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-speakers,.gas-speakers *,.gas-speakers *::before,.gas-speakers *::after{box-sizing:border-box;}
+  .gas-speakers p{margin:0;}
+  .gas-speakers a{color:inherit;text-decoration:none;}
+  .gas-speakers h1,.gas-speakers h2,.gas-speakers h3,.gas-speakers h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-speakers .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-speakers img{max-width:100%;display:block;}
+
+  .gas-speakers .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-speakers .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-speakers .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-speakers .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-speakers .page-header h1{font-size:var(--fs-display-1);max-width:22ch;color:var(--on-ink);}
+  .gas-speakers .page-header .intro{margin-top:1.5rem;max-width:66ch;color:var(--on-ink-mist);font-size:1.05rem;font-style:italic;font-family:"Newsreader",Georgia,serif;}
+
+  .gas-speakers .section{padding-block:clamp(3rem,7vw,5rem);}
+  .gas-speakers .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);
+    display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem;}
+  .gas-speakers .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+  .gas-speakers .section-head .count{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.78rem;color:var(--mist);letter-spacing:.04em;}
+
+  /* ---- sleek speaker grid ---- */
+  .gas-speakers .speaker-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(1.4rem,2.4vw,2rem) clamp(1.1rem,2vw,1.5rem);
+  }
+  .gas-speakers .person{
+    display:flex;flex-direction:column;gap:.7rem;
+    background:var(--linen);border-radius:14px;box-shadow:0 0 0 1px var(--hairline);
+    padding-bottom:1.1rem;overflow:hidden;
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  }
+  .gas-speakers .person:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 0 1px var(--hairline),0 16px 30px -18px rgba(0,26,63,.28);
+  }
+  .gas-speakers .avatar{width:100%;aspect-ratio:1/1;position:relative;background:var(--linen-raised);}
+  .gas-speakers .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
+  .gas-speakers .avatar img.hidden{display:none;}
+  .gas-speakers .person h4{font-size:.94rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.35;padding-inline:1rem;}
+  .gas-speakers .person .role{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.64rem;letter-spacing:.01em;color:var(--mist);
+    line-height:1.55;padding-inline:1rem;
+    display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+  }
+
+  /* ---- closing / CTA band ---- */
+  .gas-speakers .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-speakers .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-speakers .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-speakers .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-speakers .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-speakers .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-speakers .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-speakers .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
+  .gas-speakers .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-speakers .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  @media (max-width:1180px){
+    .gas-speakers .speaker-grid{grid-template-columns:repeat(4,1fr);}
+  }
+  @media (max-width:860px){
+    .gas-speakers .speaker-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:640px){
+    .gas-speakers .speaker-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-speakers *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Faculty</p>
+    <h1>Meet our esteemed speaker faculty.</h1>
+    <p class="intro">Meet the distinguished minds shaping the future of aortic care. GAS 2027 hosts an exceptional lineup of speaker faculty from leading institutions around the world — uniting surgeons, interventionists, and imaging specialists at the forefront of vascular innovation.</p>
+  </div>
+</section>
+
+<!-- ============ SPEAKER GRID ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Speaker Faculty.</h2>
+      <span class="count mono">68 speakers</span>
+    </div>
+    <div class="speaker-grid">
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Payman-Majd-Speaker.webp" alt="Prof. Payman Majd" loading="lazy" data-fallback="self"></div><h4>Prof. Payman Majd</h4><p class="role">Consultant Vascular and Endovascular Surgery, EVK/ Bergisch, Gladbach, Germany</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Jan-Brunkwall-Speaker.webp" alt="Prof. Jan Brunkwall" loading="lazy" data-fallback="self"></div><h4>Prof. Jan Brunkwall</h4><p class="role">Professor, Former Head Vascular and Endovascular Surgery, University of Cologne, Cologne, Germany</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Yasir-Suliman-Speaker.webp" alt="Dr. Yasir Suliman" loading="lazy" data-fallback="self"></div><h4>Dr. Yasir Suliman</h4><p class="role">Consultant Vascular Surgery Sheikh Tahnoun Medical City, Al Ain, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Gianpaolo-Carrafiello-Speaker.webp" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self"></div><h4>Prof. Gianpaolo Carrafiello</h4><p class="role">Professor of Radiology, Director, Postgraduate School in Radio Diagnostics, University of Milano, Italy, Chief Unit of Radiology, and Interventional Radiology, Fondazione IRCCS Ca&#39; Granda Ospedale Policlinico Milano</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Bander-Aldhafery-Speaker.webp" alt="Prof. Bander Aldhafery" loading="lazy" data-fallback="self"></div><h4>Prof. Bander Aldhafery</h4><p class="role">Consultant Endovascular and interventional radiologist, Associate Professor College of Medicine Imam Abdulrahman Bin Faisal University, Dammam Saudi Arabia, King Fahad Hospital of the University, Alkhobar, Saudi Arabia</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Samer-Koussayer-Speaker.webp" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"></div><h4>Prof. Samer Koussayer</h4><p class="role">Associate Professor, Al Faisal University Consultant Vascular and Endovascular Surgeon, Rashid Hospital, Dubai Health Dubai, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Jamal-Aldeen-Alkoteesh-Speaker.webp" alt="Dr. Jamal Aldeen Alkoteesh" loading="lazy" data-fallback="self"></div><h4>Dr. Jamal Aldeen Alkoteesh</h4><p class="role">Consultant Interventional Radiologist MD, Medical Director of SEHA Radiology, MSC CCST FRCR EBIR EBNI FPAIRS</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Wissam-Al-Jundi-Speaker.webp" alt="Dr. Wissam Al Jundi" loading="lazy" data-fallback="self"></div><h4>Dr. Wissam Al Jundi</h4><p class="role">MSc MEd MBA FRCS, Consultant Vascular and Endovascular Surgeon, Norfolk and Norwich University Hospital</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Akihiro-Yoshitake-Speaker.webp" alt="Prof. Akihiro Yoshitake" loading="lazy" data-fallback="self"></div><h4>Prof. Akihiro Yoshitake</h4><p class="role">Cardiovascular Surgeon, Saitama Medical University International Medical Center, Hidaka, Japan</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Sammy-Weis-Speaker.webp" alt="Dr. Sammy Weis" loading="lazy" data-fallback="self"></div><h4>Dr. Sammy Weis</h4><p class="role">Consultant Radiologist at UHS University Hospital Sharjah, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Orwa-Falah-Speaker.webp" alt="Dr. Orwa Falah" loading="lazy" data-fallback="self"></div><h4>Dr. Orwa Falah</h4><p class="role">MBBS JBVS MRCS(Ed) FACS FRCS (Ed)(Gen.Surg) | Lead Clinician Of the Scottish National Service for Aortic Arch, Thoracic, Thoracoabdominal and Suprarenal Aneurysm | Consultant Vascular &amp; Endovascular Surgeon, Edinburgh Royal Infirmary | Honorary Clinical Senior lecturer, University of Edinburgh, UK</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Wassim-Shatila-Speaker.webp" alt="Dr. Wassim Shatila" loading="lazy" data-fallback="self"></div><h4>Dr. Wassim Shatila</h4><p class="role">Consultant Interventional Cardiologist, Clemenceau Medical Center Hospital, Dubai, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Mehmet-Karahan-Speaker.webp" alt="Prof. Mehmet Karahan" loading="lazy" data-fallback="self"></div><h4>Prof. Mehmet Karahan</h4><p class="role">Head of Cardiovascular Surgery Department, Gaziantep University, Turkey</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Husam-Noor-Speaker.webp" alt="Prof. Husam Noor" loading="lazy" data-fallback="self"></div><h4>Prof. Husam Noor</h4><p class="role">Chief of Medical Staff Clinical Services Consultant Interventional Cardiologist, Royal Medical Services – Mohammed bin Khalifa bin Salman Al Khalifa Specialist Cardiac Center, Bahrain</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Yuliia-Nahaliuk-Speaker.webp" alt="Dr. Yuliia Nahaliuk" loading="lazy" data-fallback="self"></div><h4>Dr. Yuliia Nahaliuk</h4><p class="role">Vascular surgeon, National Military Medical Clinical Centre, MC &quot;Dobrobut&quot;, Kiev, Ukraine</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Varinder-Singh-Bedi-Speaker.webp" alt="Dr. Varinder Singh Bedi" loading="lazy" data-fallback="self"></div><h4>Dr. Varinder Singh Bedi</h4><p class="role">Chairman &amp; Senior Consultant, Institute of Vascular &amp; Endovascular Sciences, Sir Ganga Ram Hospital, New Delhi, India</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Abdullah-Alfawaz-Speaker.webp" alt="Dr. Abdullah Alfawaz" loading="lazy" data-fallback="self"></div><h4>Dr. Abdullah Alfawaz</h4><p class="role">Asst. Professor of Surgery, Faculty of Medicine, Kuwait University, Vascular and Endovascular Surgeon, Mubarak Al-Kabeer Hospital, Kuwait</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Adel-Alali-Speaker.webp" alt="Dr. Adel Alali" loading="lazy" data-fallback="self"></div><h4>Dr. Adel Alali</h4><p class="role">Head, Vascular &amp; Interventional Radiology Unit, Mubarak Alkabeer Hospital, Ministry of Health, Kuwait</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Houssam-Younes-Speaker.webp" alt="Dr. Houssam Younes" loading="lazy" data-fallback="self"></div><h4>Dr. Houssam Younes</h4><p class="role">Chairman of Vascular Surgery, Cleveland Clinic Abu Dhabi, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Prof.-Sherif-Omar-Elkerdawi-Speaker.webp" alt="Prof. Sherif Omar Elkerdawi" loading="lazy" data-fallback="self"></div><h4>Prof. Sherif Omar Elkerdawi</h4><p class="role">Prof. Vascular &amp; Endovascular Surgery, Consultant Vascular &amp; Endovascular Surgery, Head of Vascular &amp; Endovascular Surgery, Capital University, Wadi-El Neel Hospital, Egypt</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Hazem-Habboub-Speaker.webp" alt="Dr. Hazem Habboub" loading="lazy" data-fallback="self"></div><h4>Dr. Hazem Habboub</h4><p class="role">Senior Consultant Vascular Interventional Radiologist and Neuroradiologist, King Hussein Cancer Center, Jordan</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Venkatesh-Ramaiah-Speaker.webp" alt="Dr. Venkatesh Ramaiah" loading="lazy" data-fallback="self"></div><h4>Dr. Venkatesh Ramaiah</h4><p class="role">Chief and Co-Founder, Vascular Surgery, Pulse Cardiovascular Institute, Consultant Vascular Surgeon, Arizona Heart Hospital, Osborn Medical Center, Chairman, TED Congress</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Firas-Mussa-Speaker.webp" alt="Dr. Firas Mussa" loading="lazy" data-fallback="self"></div><h4>Dr. Firas Mussa</h4><p class="role">Professor, Department of Cardiothoracic and Vascular Surgery, McGovern Medical School at UT Health, Houston Memorial Hermann Heart and Vascular Institute Imperial College, London</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Noura-Salim-Speaker.webp" alt="Dr. Noura Salim" loading="lazy" data-fallback="self"></div><h4>Dr. Noura Salim</h4><p class="role">Plastic surgery, Aesthetic, Wound Specialist, EHS (Al Qassimi and SHJ, Kuwaiti Hospital)</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Shadi-Ahmed-Speaker.webp" alt="Dr. Shadi Ahmed" loading="lazy" data-fallback="self"></div><h4>Dr. Shadi Ahmed</h4><p class="role">Cardiology Specialist, Head of Cardiology Department, Ibrahim Obaidallah Hospital, RAK - EHS, Heart Failure certified, HFA, ESC Adult Transthoracic ECHO Certified, EACVI, ESC</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d156e0a623acf3015.png" alt="Dr. Kim A. Eagle" loading="lazy" data-fallback="self"></div><h4>Dr. Kim A. Eagle</h4><p class="role">Chair, Genetic Aortic Network, The Marfan Foundation, Albion Walter Hewlett Professor of Internal Medicine and Director of the Frankel Cardiovascular Center at University of Michigan Health</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d156e0a3be6cf300b.png" alt="Dr. Tania S. Guzman" loading="lazy" data-fallback="self"></div><h4>Dr. Tania S. Guzman</h4><p class="role">MD, MPhil, FEBVS Consultant Vascular and Endovascular Surgeon, SSMC, Abu Dhabi, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d9b21f0d05330d68e.png" alt="Prof. Erhan T. Ilgit" loading="lazy" data-fallback="self"></div><h4>Prof. Erhan T. Ilgit</h4><p class="role">Professor of Radiology Gazi Univ. Sch. of Medicine, Ankara, Türkiye</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d156e0a0946cf3016.png" alt="Dr. Laszlo Göbölös" loading="lazy" data-fallback="self"></div><h4>Dr. Laszlo Göbölös</h4><p class="role">Clinical Professor of Surgery | Cardiac Surgeon, Cleveland Clinic Lerner College of Medicine | Case Western Reserve University School of Medicine, Heart and Vascular Institute | Cleveland Clinic, Abu Dhabi</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161dc7f17f64bcb2a7a4.png" alt="Prof. Martin Maresch" loading="lazy" data-fallback="self"></div><h4>Prof. Martin Maresch</h4><p class="role">MD, PhD, FEBVS, Vascular &amp; Endovascular Surgeon, BDF Hospital- Royal Medical Services, Kingdom of Bahrain Ass. Prof of Surgery - RCSI</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d156e0a3c6bcf3017.png" alt="Dr. Mohamed Nassef" loading="lazy" data-fallback="self"></div><h4>Dr. Mohamed Nassef</h4><p class="role">Program Director EHS Critical Care Medicine Fellowship, Consultant Critical Care Medicine, Al Qassimi Hospital and Cardiac Centre, Emirates Health Services- UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d9b21f0271c30d691.png" alt="Prof. Murat Aksoy" loading="lazy" data-fallback="self"></div><h4>Prof. Murat Aksoy</h4><p class="role">Professor of General Surgery, Department of Cardiovascular Surgery, American Hospital and KOC University Medical Faculty Hospital, Istanbul Turkey</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d9b21f05a6e30d68d.png" alt="Dr. Salvatore Alessio Angileri" loading="lazy" data-fallback="self"></div><h4>Dr. Salvatore Alessio Angileri</h4><p class="role">Diagnostic and interventional Radiologist, Policlinico di Milano Ospedale Maggiore | Fondazione IRCCS Ca&#39;Granda, Milan Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161dc7f17f6538b2a7ae.png" alt="Dr. Hayssam Ahmad Gibbaoui" loading="lazy" data-fallback="self"></div><h4>Dr. Hayssam Ahmad Gibbaoui</h4><p class="role">Consultant Vascular Surgeon, NMC Royal Hospital, Khalifa City, Abu Dhabi</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/696e161d9b21f0d33330d690.png" alt="Dr. Arash Tofigh" loading="lazy" data-fallback="self"></div><h4>Dr. Arash Tofigh</h4><p class="role">Vascular and Endovascular Surgeon, American Hospital Dubai</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b229dcf59f6044c6ee.png" alt="Dr. Saher Arour" loading="lazy" data-fallback="self"></div><h4>Dr. Saher Arour</h4><p class="role">Chief Vascular Surgeon Medcare Hospitals &amp; Sharjah University Hospital, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2a87beb04e6c6020f.png" alt="Dr. Irphan Yonis" loading="lazy" data-fallback="self"></div><h4>Dr. Irphan Yonis</h4><p class="role">Emergency Medicine Consultant, St. George&#39;s, Epsom and St Helier University Hospitals and Health Group, Epsom UK | Member of the Trust Teaching Faculty, Educational and Clinical Supervisor in the Trust, Member of Teaching Faculty of ATLS and PERT in RCS, England</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2c1fa0c4451850e3c.png" alt="Dr. Omar Hallak" loading="lazy" data-fallback="self"></div><h4>Dr. Omar Hallak</h4><p class="role">Consultant Interventional Cardiologist | Founder &amp; Chairman, 4TS international American Board-Certified Interventional Cardiologist, American Board - Certified Vascular &amp; Endovascular Intervention, Clinical Professor, MBRU, Dubai, UAE, President, (Gulf Chapter) ISEVS</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2a87beb6910c60210.png" alt="Prof. Mohamed Hosni Eldessoki" loading="lazy" data-fallback="self"></div><h4>Prof. Mohamed Hosni Eldessoki</h4><p class="role">Professor of Vascular and Endovascular Surgery, Cairo University Hospitals, Cairo Egypt</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69770726d4fb907efdf5ecd3.png" alt="Dr. Shahzad Sarosh" loading="lazy" data-fallback="self"></div><h4>Dr. Shahzad Sarosh</h4><p class="role">Vascular and Endovascular Surgeon, NMC Healthcare, Dubai</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2eb392bb9bc45a773.png" alt="Dr. Ayman Alserr" loading="lazy" data-fallback="self"></div><h4>Dr. Ayman Alserr</h4><p class="role">Consultant Vascular Surgeon Head of Vascular Surgery Unit, Sultan Qaboos Hospital Salalah</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2c1fa0c33b4850e3d.png" alt="Dr. Ghadeer Alassar" loading="lazy" data-fallback="self"></div><h4>Dr. Ghadeer Alassar</h4><p class="role">Senior Interventional Radiology Technologist (IRT), Dubai Hospital - Cathlab, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697707cda87beb3c66f15f91.png" alt="Prof. Martin Czerny" loading="lazy" data-fallback="self"></div><h4>Prof. Martin Czerny</h4><p class="role">MD, MBA, FESC, FEBCTS, FEBVS, Professor and Chairman - Clinic for Cardiovascular Surgery Department, University Heart Center Freiburg - Bad Krozingen, University Clinic Freiburg, Freiburg, Germany</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2d4fb90f465cb5b2a.png" alt="Dr. Yusuf Bayrak" loading="lazy" data-fallback="self"></div><h4>Dr. Yusuf Bayrak</h4><p class="role">Staff Physician, Cleveland Clinic Abu Dhabi</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2d4fb905c6bcb5b2b.png" alt="Dr. Nikolaos Patelis" loading="lazy" data-fallback="self"></div><h4>Dr. Nikolaos Patelis</h4><p class="role">Staff Physician, Consultant Vascular Surgeon /Coordinator of Vascular Services, Mouwasat Hospital Services, Kingdom of Saudi Arabia</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2d4fb90f2bccb5b28.png" alt="Prof. Ugursay Kiziltepe" loading="lazy" data-fallback="self"></div><h4>Prof. Ugursay Kiziltepe</h4><p class="role">Professor of Cardiovascular Surgery, Dept of Cardiovascular Surgery, Health Sciences University, Antalya City Hospital, Antalya, Turkey</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2eb392b0a0a45a776.png" alt="Dr. Albert Alahmar" loading="lazy" data-fallback="self"></div><h4>Dr. Albert Alahmar</h4><p class="role">Head of Structural Heart Program at Dr Sulaiman Alhabib Hospital, Dubai, Honorary Lecturer, Leicester University, Associated Professor, Sharjah University, UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b229dcf5c25344c6ef.png" alt="Dr. Fernando Gallardo" loading="lazy" data-fallback="self"></div><h4>Dr. Fernando Gallardo</h4><p class="role">Head of Department Angiology and Vascular Surgery, Hospitales Quironsalud Marbella y CDG, Malaga Spain</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2a87beb652dc6020e.png" alt="Dr. Martin Claridge" loading="lazy" data-fallback="self"></div><h4>Dr. Martin Claridge</h4><p class="role">Consultant Vascular and Endovascular Surgeon, Birmingham Vascular Centre, United Kingdom</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6975f6b2c1fa0cfda3850e3e.png" alt="Dr. Julien Gaby Sfeir" loading="lazy" data-fallback="self"></div><h4>Dr. Julien Gaby Sfeir</h4><p class="role">Vascular and Endovascular Surgeon in LAUMCRH – Rizk Hospital, Beirut, Assistant Professor of Surgery – Gilbert and Rose - Marie, Chagoury School of Medicine, Lebanese American University - LAU</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ea0c7a20d037877b81de.png" alt="Dr. Abdulameer Mohsin Hussein" loading="lazy" data-fallback="self"></div><h4>Dr. Abdulameer Mohsin Hussein</h4><p class="role">Consultant Cardiothoracic &amp; Vascular Surgeon, MBchB, FIBMS, FACS, Iraq Medical City, Baghdad, Iraq</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ea530708e478b2530a5e.png" alt="Dr. Sabah N Rubaye" loading="lazy" data-fallback="self"></div><h4>Dr. Sabah N Rubaye</h4><p class="role">Consultant Cardiothoracic &amp; Vascular Surgeon, MBchB, FIBMS, FACS, Iraq Medical City, Baghdad, Iraq</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981eae399f1bf49a35d8a2d.png" alt="Dr. Ahmed Abdulrazaq Attia" loading="lazy" data-fallback="self"></div><h4>Dr. Ahmed Abdulrazaq Attia</h4><p class="role">Consultant Surgeon, AlKafaat Specialties Hospital, Baghdad, Iraq</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981eb2683a907c875237d62.png" alt="Dr. Obaid Aljasim" loading="lazy" data-fallback="self"></div><h4>Dr. Obaid Aljasim</h4><p class="role">Senior consultant and HOD Cardiothoracic Surgery, Dubai Hospital - DHA / UAE</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981eb50cf8ac072ea56f79d.png" alt="Dr. Refaat Salman" loading="lazy" data-fallback="self"></div><h4>Dr. Refaat Salman</h4><p class="role">EBIR, MHBA, FPAIRS, Consultant Vascular and interventional Radiologist. King Abdulaziz Medical City and King Abdullah Specialized Children Hospital, Riyadh, Saudi Arabia</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69770ef029dcf568a170a725.png" alt="Dr. Badriya Mohammed Almulla" loading="lazy" data-fallback="self"></div><h4>Dr. Badriya Mohammed Almulla</h4><p class="role">Senior Radiographer - CT Team Leader Dubai Hospital</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69770f5029dcf5e5d770b18c.png" alt="Prof. Giovanni Pratesi" loading="lazy" data-fallback="self"></div><h4>Prof. Giovanni Pratesi</h4><p class="role">Professor, Chief of Vascular Surgery Head Department of Cardio-Thoracic and Vascular Surgery, Ospedale Policlinico San Martino - IRCCS Azienda Ospedaliera Metropolitana (IRCCS AOM) Department of Surgical and Integrated Diagnostic Sciences, University of Genoa, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69770fc3c1fa0c6224b166bf.png" alt="Dr. Mohamed Sharkawy" loading="lazy" data-fallback="self"></div><h4>Dr. Mohamed Sharkawy</h4><p class="role">Professor of Vascular Surgery, Cairo University Senior coordinator for International Fellowship Programs Worldwide</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981ebe57a20d04c0b7baf79.png" alt="Dr. Alya Zaidan" loading="lazy" data-fallback="self"></div><h4>Dr. Alya Zaidan</h4><p class="role">B.S, M.P.H, MD American University of Antigua College of Medicine, Antigua and Barbuda - USA</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6981fce91dfc0213a202d236.png" alt="Dr. Ali Badra" loading="lazy" data-fallback="self"></div><h4>Dr. Ali Badra</h4><p class="role">Consultant of Vascular and Endovascular Surgery (P.H – Praticien Hospitaller): University Hospital of Brest, France</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6984e10bd017c3080cabc827.png" alt="Ms. Eileen Novis" loading="lazy" data-fallback="self"></div><h4>Ms. Eileen Novis</h4><p class="role">Chief Global Business Development Officer The Marfan Foundation, USA</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d733b2218031f.png" alt="Velio Ascenti" loading="lazy" data-fallback="self"></div><h4>Velio Ascenti</h4><p class="role">Consultant Interventional Radiologist, Policlinic of Milan, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d73ce66180307.png" alt="Matilde Pavan" loading="lazy" data-fallback="self"></div><h4>Matilde Pavan</h4><p class="role">Multimodality Imaging in the Diagnosis of Penetrating Aortic Ulcer, Università Degli Studi di Milano, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90ceae6bb326abad204.png" alt="Rossella Catona" loading="lazy" data-fallback="self"></div><h4>Rossella Catona</h4><p class="role">Radiology Resident, Università Degli Studi di Milano, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90beae6bb7c25bad1fc.png" alt="Gabriele Drago" loading="lazy" data-fallback="self"></div><h4>Gabriele Drago</h4><p class="role">Radiology Resident, Ospedale Maggiore Policlinico of Milan, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90be1783c04cf40d405.png" alt="Maria Giovanna Riga" loading="lazy" data-fallback="self"></div><h4>Maria Giovanna Riga</h4><p class="role">Doctor, Fondazione (IRCCS) Ca&#39; Granda Ospedale Maggiore Policlinico, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90b266d733afa180306.png" alt="Chiara Perrazo" loading="lazy" data-fallback="self"></div><h4>Chiara Perrazo</h4><p class="role">Radiology Resident, University of Milan, Italy</p></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/697ae90c266d7331a4180320.png" alt="Sonia Triggiani" loading="lazy" data-fallback="self"></div><h4>Sonia Triggiani</h4><p class="role">MD, Fondazione IRCCS Ospedale Maggiore Policlinico of Milan, Italy</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Meet the full summit faculty.</h2>
+      <p>The Speaker Faculty works alongside the Board of Organizers, Scientific Advisory Board and Training Courses Committee to shape GAS 2027.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="/faculty">View Summit Faculty</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
