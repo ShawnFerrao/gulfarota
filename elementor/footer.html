@@ -89,6 +89,9 @@
     opacity:0;visibility:hidden;pointer-events:none;transform:translateX(-8px);
     transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s;
   }
+  /* longer submenus (e.g. Faculty) open upward from the label instead of
+     downward, so they don't overflow past the footer at the page's bottom */
+  .gas-footer .foot-col .nav-group.has-flyout.flyout-up .flyout{top:auto;bottom:-.4rem;}
   /* invisible bridge over the gap between the label and the flyout, so the
      cursor never leaves a hoverable box while crossing to it */
   .gas-footer .foot-col .nav-group.has-flyout::after{
@@ -152,7 +155,7 @@
             </ul>
           </div>
         </div>
-        <div class="nav-group has-flyout">
+        <div class="nav-group has-flyout flyout-up">
           <button type="button" class="nav-group-label">Faculty
             <svg class="chevron" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M3 1.5L7 5L3 8.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
