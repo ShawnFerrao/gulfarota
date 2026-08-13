@@ -189,7 +189,7 @@
   .gas-home .marquee-track{display:flex;gap:3.25rem;width:max-content;animation:gasScroll 32s linear infinite;}
   @keyframes gasScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
   .gas-home .marquee-item{display:flex;align-items:center;gap:.6rem;white-space:nowrap;height:38px;}
-  .gas-home .marquee-item img{height:30px;width:auto;max-width:140px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:opacity .25s,filter .25s;}
+  .gas-home .marquee-item img{height:30px;width:auto;max-width:140px;object-fit:contain;filter:grayscale(.8);opacity:.88;transition:opacity .25s,filter .25s;}
   .gas-home .marquee-item img:hover{opacity:1;filter:grayscale(0);}
   .gas-home .marquee-item img.hidden{display:none;}
   .gas-home .marquee-item .dot{display:none;width:5px;height:5px;border-radius:50%;background:var(--brass-ink);}
@@ -408,7 +408,7 @@
 <!-- ============ PARTNERS ============ -->
 <section class="section" style="padding-bottom:0;">
   <div class="wrap">
-    <div class="section-head reveal" style="margin-bottom:0;border-top:none;padding-top:0;">
+    <div class="section-head reveal" style="margin-bottom:0;">
       <div>
         <p class="eyebrow">In collaboration with</p>
         <h2>Regional societies &amp; international partners.</h2>
@@ -501,7 +501,7 @@
     var html='';
     for(var r=0;r<2;r++){
       partnerLogos.forEach(function(src){
-        html+='<span class="marquee-item"><img src="'+src+'" alt="Partner logo" loading="lazy" data-fallback="marquee"><span class="dot"></span><span class="fallback-label">Partner</span></span>';
+        html+='<span class="marquee-item"><img src="'+src+'" alt="Partner logo" loading="eager" data-fallback="marquee"><span class="dot"></span><span class="fallback-label">Partner</span></span>';
       });
     }
     track.innerHTML=html;
