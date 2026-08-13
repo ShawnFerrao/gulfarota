@@ -50,8 +50,16 @@
   }
   .gas-speakers .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
 
-  /* ---- page header (ink band) ---- */
-  .gas-speakers .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  /* ---- page header (hero band) ---- */
+  .gas-speakers .page-header{position:relative;overflow:hidden;background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-speakers .page-header-media{position:absolute;inset:0;z-index:0;}
+  .gas-speakers .page-header-media img{width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:saturate(.85) brightness(.8);}
+  .gas-speakers .page-header-media img.hidden{display:none;}
+  .gas-speakers .page-header-media .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(0,26,63,.97) 0%,rgba(0,26,63,.93) 28%,rgba(0,26,63,.62) 58%,rgba(0,26,63,.32) 100%);
+  }
+  .gas-speakers .page-header > .wrap{position:relative;z-index:1;}
   .gas-speakers .page-header h1{font-size:var(--fs-display-1);max-width:22ch;color:var(--on-ink);}
   .gas-speakers .page-header .intro{margin-top:1.5rem;max-width:66ch;color:var(--on-ink-mist);font-size:1.05rem;font-style:italic;font-family:"Newsreader",Georgia,serif;}
 
@@ -116,6 +124,10 @@
 
 <!-- ============ PAGE HEADER ============ -->
 <section class="page-header">
+  <div class="page-header-media" aria-hidden="true">
+    <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Speaker-hero-scaled.jpg" alt="" loading="eager" data-fallback="hero">
+    <div class="scrim"></div>
+  </div>
   <div class="wrap">
     <p class="eyebrow">Faculty</p>
     <h1>Meet our esteemed speaker faculty.</h1>
