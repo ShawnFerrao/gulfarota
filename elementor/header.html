@@ -129,13 +129,14 @@
   }
   .gas-header-mobile.open{transform:translateY(0);}
   .gas-header-mobile .panel-inner{
-    padding:clamp(1.5rem,6vw,2.5rem);display:flex;flex-direction:column;
-    gap:clamp(1.1rem,4vh,2rem);justify-content:center;min-height:100%;
+    padding:clamp(1.5rem,6vw,2.5rem);padding-top:clamp(4.5rem,16vw,5.5rem);
+    display:flex;flex-direction:column;
+    gap:clamp(.9rem,3.2vh,1.4rem);justify-content:flex-start;min-height:100%;
   }
-  .gas-header-mobile a{font-family:"Newsreader";font-style:italic;font-size:clamp(1.4rem,7vw,2rem);color:var(--on-ink);}
+  .gas-header-mobile a{font-family:"Newsreader";font-style:italic;font-size:clamp(1.05rem,5vw,1.4rem);color:var(--on-ink);}
   .gas-header-mobile .close{position:absolute;top:1.5rem;right:1.5rem;color:var(--on-ink) !important;}
 
-  .gas-header-mobile .mobile-about-group{display:flex;flex-direction:column;gap:.9rem;}
+  .gas-header-mobile .mobile-about-group{display:flex;flex-direction:column;gap:.6rem;}
   .gas-header-mobile .mobile-group-label{
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.14em;
     text-transform:uppercase;color:var(--brass-soft);
@@ -227,12 +228,15 @@
       <a href="/gulf-aorta/">Gulf Aorta</a>
       <a href="/gas-2026/">GAS 2027</a>
     </div>
-    <a href="/board-of-directors/">Board of Directors</a>
-    <a href="/board-of-organizers/">Board of Organizers</a>
-    <a href="/abstract-presenters/">Abstract Presenters</a>
-    <a href="/training-courses-committee/">Training Courses Committee</a>
-    <a href="/interventional-technology-committee/">Interventional Technology</a>
-    <a href="/speaker-faculty/">Speaker Faculty</a>
+    <div class="mobile-about-group">
+      <span class="mobile-group-label">Faculty</span>
+      <a href="/board-of-directors/">Board of Directors</a>
+      <a href="/board-of-organizers/">Board of Organizers</a>
+      <a href="/abstract-presenters/">Abstract Presenters</a>
+      <a href="/training-courses-committee/">Training Courses Committee</a>
+      <a href="/interventional-technology-committee/">Interventional Technology</a>
+      <a href="/speaker-faculty/">Speaker Faculty</a>
+    </div>
     <div class="mobile-about-group">
       <span class="mobile-group-label">Previous Events</span>
       <a href="/2024-highlights/">2024 Highlights</a>
