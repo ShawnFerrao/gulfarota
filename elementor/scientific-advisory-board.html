@@ -1,0 +1,204 @@
+<!--
+  GULF AORTA SUMMIT — "SCIENTIFIC ADVISORY BOARD" PAGE (Elementor "HTML" widget)
+  ───────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /scientific-advisory-board, matching the original site's nav item).
+  No header/footer markup — those come from your global Elementor templates.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-sab.
+-->
+<div class="gas-sab">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-sab{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-sab,.gas-sab *,.gas-sab *::before,.gas-sab *::after{box-sizing:border-box;}
+  .gas-sab p{margin:0;}
+  .gas-sab a{color:inherit;text-decoration:none;}
+  .gas-sab h1,.gas-sab h2,.gas-sab h3,.gas-sab h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-sab .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-sab img{max-width:100%;display:block;}
+
+  .gas-sab .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-sab .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-sab .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-sab .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-sab .page-header h1{font-size:var(--fs-display-1);max-width:22ch;color:var(--on-ink);}
+  .gas-sab .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-sab .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-sab .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-sab .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+
+  /* ---- chairman spotlight ---- */
+  .gas-sab .chair-card{
+    display:flex;gap:2.25rem;align-items:center;
+  }
+  .gas-sab .chair-avatar{
+    width:256px;height:256px;position:relative;flex:none;border-radius:20px;overflow:hidden;
+    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 14px 30px -18px rgba(0,26,63,.22);
+  }
+  .gas-sab .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
+  .gas-sab .chair-avatar img.hidden{display:none;}
+  .gas-sab .chair-card h3{font-size:1.5rem;font-style:italic;font-weight:500;}
+  .gas-sab .chair-badge{
+    display:inline-flex;margin-top:.7rem;font-family:"IBM Plex Sans";font-weight:600;font-size:.86rem;letter-spacing:.01em;
+    color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
+    padding:.5rem 1.1rem;line-height:1.4;
+  }
+
+  /* ---- members grid ---- */
+  .gas-sab .members-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(2.25rem,4vw,3rem) clamp(1.5rem,3vw,2rem);
+  }
+  .gas-sab .person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;transition:transform .3s var(--ease);}
+  .gas-sab .person:hover{transform:translateY(-4px);}
+  .gas-sab .avatar{
+    width:160px;height:160px;position:relative;border-radius:14px;overflow:hidden;
+    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.18);
+  }
+  .gas-sab .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
+  .gas-sab .avatar img.hidden{display:none;}
+  .gas-sab .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;max-width:22ch;}
+  .gas-sab .person .role{font-family:"IBM Plex Sans";font-size:.82rem;color:var(--mist);line-height:1.45;max-width:24ch;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-sab .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-sab .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-sab .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-sab .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-sab .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-sab .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-sab .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-sab .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
+  .gas-sab .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-sab .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  @media (max-width:980px){
+    .gas-sab .members-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:560px){
+    .gas-sab .members-grid{grid-template-columns:1fr;}
+    .gas-sab .chair-card{flex-direction:column;text-align:center;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-sab *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Governance</p>
+    <h1>Scientific Advisory Board</h1>
+    <p class="intro">The clinical minds shaping GAS's scientific programme — chaired by Dr. Hussein Ahmed Lateef, and drawn from senior specialists across surgery, imaging, nursing and communications who steer the summit's content and quality standards.</p>
+  </div>
+</section>
+
+<!-- ============ CHAIR ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Chair</p>
+      <h2>Chairing the Scientific Advisory Board.</h2>
+    </div>
+    <div class="chair-card">
+      <div class="chair-avatar">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Hussein-Ahmed-Lateef-Sc.webp" alt="Dr. Hussein Ahmed Lateef" loading="lazy" data-fallback="self">
+      </div>
+      <div>
+        <h3>Dr. Hussein Ahmed Lateef</h3>
+        <span class="chair-badge">Chair of Scientific Board</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBERS AT LARGE ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Members at large</p>
+      <h2>Members of the Scientific Advisory Board.</h2>
+    </div>
+    <div class="members-grid">
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Loai-Abudaqa-SC.webp" alt="Dr. Loai Abudaqa" loading="lazy" data-fallback="self"></div><h4>Dr. Loai Abudaqa</h4><p class="role">Summit Program Co-Director</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Deena-Mohammed-AlQedrah-SC.webp" alt="Dr. Deena Mohammed AlQedrah" loading="lazy" data-fallback="self"></div><h4>Dr. Deena Mohammed AlQedrah</h4><p class="role">Director of Summit Program Content Strategy</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Tania-S.-Guzman-SC.webp" alt="Dr. Tania S. Guzman" loading="lazy" data-fallback="self"></div><h4>Dr. Tania S. Guzman</h4><p class="role">Director of Audit and Quality Improvement</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Khalid-Rashid-Makhdoomi-SC.webp" alt="Dr. Khalid Rashid Makhdoomi" loading="lazy" data-fallback="self"></div><h4>Dr. Khalid Rashid Makhdoomi</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Rima-Rafe-SC.webp" alt="Dr. Rima Rafe" loading="lazy" data-fallback="self"></div><h4>Dr. Rima Rafe</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Aram-B.-Hallshoyi-SC.webp" alt="Dr. Aram B. Hallshoyi" loading="lazy" data-fallback="self"></div><h4>Dr. Aram B. Hallshoyi</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Martin-Maresch-SC.webp" alt="Dr. Martin Maresch" loading="lazy" data-fallback="self"></div><h4>Dr. Martin Maresch</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Saher-Arour-SC.webp" alt="Dr. Saher Arour" loading="lazy" data-fallback="self"></div><h4>Dr. Saher Arour</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Wafaa-Elhadi-SC.webp" alt="Dr. Wafaa Elhadi" loading="lazy" data-fallback="self"></div><h4>Dr. Wafaa Elhadi</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Mohamad-Ftyan-SC.webp" alt="Dr. Mohamad Ftyan" loading="lazy" data-fallback="self"></div><h4>Dr. Mohamad Ftyan</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Irphan-Yonis-SC.webp" alt="Dr. Irphan Yonis" loading="lazy" data-fallback="self"></div><h4>Dr. Irphan Yonis</h4><p class="role">Director of Integrated Media and Communications</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Ayman-Saleh-SC.webp" alt="Dr. Ayman Saleh" loading="lazy" data-fallback="self"></div><h4>Dr. Ayman Saleh</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Viktoria-Hlushkova-SC.webp" alt="Dr. Viktoria Hlushkova" loading="lazy" data-fallback="self"></div><h4>Dr. Viktoria Hlushkova</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Samar-Tayseer-SC.webp" alt="Samar Tayseer" loading="lazy" data-fallback="self"></div><h4>Samar Tayseer</h4><p class="role">Chief Nursing Staff and Awareness Committee</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Osama-El-Sheikh-SC.webp" alt="Dr. Osama El-Sheikh" loading="lazy" data-fallback="self"></div><h4>Dr. Osama El-Sheikh</h4></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Amani-Alhamadi-SC.webp" alt="Amani Alhamadi" loading="lazy" data-fallback="self"></div><h4>Amani Alhamadi</h4><p class="role">Head of Philanthropy</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Ghadeer-Alassar-SC.webp" alt="Ghadeer Alassar" loading="lazy" data-fallback="self"></div><h4>Ghadeer Alassar</h4><p class="role">Interventional Technology Advisor</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Meet the full summit faculty.</h2>
+      <p>The Scientific Advisory Board works alongside the Board of Directors, Board of Organizers and Speaker Faculty to shape GAS 2027.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="/faculty">View Summit Faculty</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
