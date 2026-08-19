@@ -185,11 +185,11 @@
   .gas-home .badge .status{font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-ink);}
 
   /* ---- partners marquee ---- */
-  .gas-home .marquee{overflow:hidden;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding-block:1.5rem;}
-  .gas-home .marquee-track{display:flex;gap:3.25rem;width:max-content;animation:gasScroll 32s linear infinite;}
+  .gas-home .marquee{overflow:hidden;border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);padding-block:2.25rem;}
+  .gas-home .marquee-track{display:flex;gap:4rem;width:max-content;animation:gasScroll 32s linear infinite;}
   @keyframes gasScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .gas-home .marquee-item{display:flex;align-items:center;gap:.6rem;white-space:nowrap;height:38px;}
-  .gas-home .marquee-item img{height:30px;width:auto;max-width:140px;object-fit:contain;filter:grayscale(.8);opacity:.88;transition:opacity .25s,filter .25s;}
+  .gas-home .marquee-item{display:flex;align-items:center;gap:.6rem;white-space:nowrap;height:56px;}
+  .gas-home .marquee-item img{height:46px;width:auto;max-width:190px;object-fit:contain;filter:grayscale(.8);opacity:.88;transition:opacity .25s,filter .25s;}
   .gas-home .marquee-item img:hover{opacity:1;filter:grayscale(0);}
   .gas-home .marquee-item img.hidden{display:none;}
   .gas-home .marquee-item .dot{display:none;width:5px;height:5px;border-radius:50%;background:var(--brass-ink);}
@@ -281,6 +281,21 @@
       <div class="ticket-item"><span class="k">Format</span><span class="v">Workshops + scientific sessions</span></div>
       <div class="ticket-item"><span class="k">Accreditation</span><span class="v">EACCME® · DHA (sought)</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="section" style="padding-bottom:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <p class="eyebrow">In collaboration with</p>
+        <h2>Regional societies &amp; international partners.</h2>
+      </div>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="gasMarqueeTrack"></div>
   </div>
 </section>
 
@@ -403,21 +418,6 @@
         <div class="badge"><span class="name">Dubai Health Authority</span><span class="status">Sought</span></div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ PARTNERS ============ -->
-<section class="section" style="padding-bottom:0;">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <div>
-        <p class="eyebrow">In collaboration with</p>
-        <h2>Regional societies &amp; international partners.</h2>
-      </div>
-    </div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track" id="gasMarqueeTrack"></div>
   </div>
 </section>
 
