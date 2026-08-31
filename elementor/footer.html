@@ -44,7 +44,10 @@
   }
 
   .gas-footer .brand{display:flex;align-items:center;margin-bottom:1.2rem;}
-  .gas-footer .brand-word{display:flex;flex-direction:column;line-height:1.05;}
+  .gas-footer .brand-logo{height:44px;width:auto;display:block;}
+  .gas-footer .brand-logo.hidden{display:none;}
+  .gas-footer .brand-fallback-text{display:none;flex-direction:column;line-height:1.05;}
+  .gas-footer .brand.logo-fail .brand-fallback-text{display:flex;}
   .gas-footer .brand-word b{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;font-size:1.05rem;}
   .gas-footer .brand-word span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.6rem;letter-spacing:.16em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;display:block;}
 
@@ -131,7 +134,8 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="/">
-          <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
+          <img class="brand-logo" src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Artwork_logo1_sharp_xtra-1-1-scaled.png" alt="Gulf Aorta Summit — GAS 2027" loading="lazy" data-fallback="brand">
+          <span class="brand-word brand-fallback-text"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
         </a>
         <p>The Gulf's largest dedicated congress on aortic aneurysm disease — three days of live cases, masterclasses and faculty debate in Dubai.</p>
         <div class="social-row" aria-label="Social media">
@@ -208,3 +212,19 @@
   </div>
 </footer>
 </div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+    if (img.dataset.fallback === 'brand') {
+      var brand = img.closest('.brand');
+      if (brand) brand.classList.add('logo-fail');
+    }
+  }, true);
+})();
+</script>
