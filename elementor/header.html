@@ -59,7 +59,10 @@
   }
 
   .gas-header-bar .brand{display:flex;align-items:center;flex:none;}
-  .gas-header-bar .brand-word{display:flex;flex-direction:column;line-height:1.05;}
+  .gas-header-bar .brand-logo{height:40px;width:auto;display:block;}
+  .gas-header-bar .brand-logo.hidden{display:none;}
+  .gas-header-bar .brand-fallback-text{display:none;flex-direction:column;line-height:1.05;}
+  .gas-header-bar .brand.logo-fail .brand-fallback-text{display:flex;}
   .gas-header-bar .brand-word b{font-family:"Newsreader",Georgia,serif;font-style:italic;font-weight:500;font-size:1.1rem;letter-spacing:.01em;}
   .gas-header-bar .brand-word span{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.62rem;letter-spacing:.18em;color:var(--brass-soft);text-transform:uppercase;margin-top:.15rem;display:block;}
 
@@ -168,6 +171,7 @@
   }
   @media (max-width:360px){
     .gas-header-bar .wrap{padding-inline:1rem;}
+    .gas-header-bar .brand-logo{height:32px;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -178,7 +182,8 @@
 <header class="gas-header-bar">
   <div class="wrap">
     <a class="brand" href="/">
-      <span class="brand-word"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
+      <img class="brand-logo" src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Artwork_logo1_sharp_xtra-1-1-scaled.png" alt="Gulf Aorta Summit — GAS 2027" loading="eager" data-fallback="brand">
+      <span class="brand-word brand-fallback-text"><b>Gulf Aorta Summit</b><span>GAS · 2027 · Dubai</span></span>
     </a>
 
     <nav class="links" aria-label="Primary">
@@ -263,6 +268,18 @@
 
 <script>
 (function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+    if (img.dataset.fallback === 'brand') {
+      var brand = img.closest('.brand');
+      if (brand) brand.classList.add('logo-fail');
+    }
+  }, true);
+
   // dropdown-only nav triggers (e.g. "Previous Events") have no page of
   // their own — stop them from navigating, without an inline onclick=
   document.querySelectorAll('.nav-noop').forEach(function(a){
