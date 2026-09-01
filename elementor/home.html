@@ -111,15 +111,11 @@
     transition:opacity .6s var(--ease),visibility 0s .6s;
   }
   .gas-home .hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease);}
-  .gas-home .hero-slide-heading{font-size:var(--fs-display-1);max-width:23ch;color:var(--on-ink);}
-  .gas-home .hero-slide-logo{height:56px;width:auto;margin-bottom:1.5rem;}
+  .gas-home .hero-slide-centered{text-align:center;}
+  .gas-home .hero-slide-centered .eyebrow{justify-content:center;}
+  .gas-home .hero-slide-centered .hero-sub{margin-inline:auto;}
+  .gas-home .hero-slide-logo{height:150px;width:auto;margin:1.75rem auto;display:block;}
   .gas-home .hero-slide-logo.hidden{display:none;}
-  .gas-home .hero-logo-grid{display:flex;flex-wrap:wrap;align-items:center;gap:1.75rem 2.75rem;margin-top:2rem;}
-  .gas-home .hero-logo-grid .marquee-item img{
-    height:44px;max-width:170px;filter:grayscale(1) invert(1) brightness(1.6);opacity:.72;
-  }
-  .gas-home .hero-logo-grid .marquee-item img:hover{opacity:1;}
-  .gas-home .hero-logo-grid .fallback-label{color:var(--on-ink-mist);}
   .gas-home .hero-dots{display:flex;gap:.55rem;margin-top:2rem;}
   .gas-home .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(244,246,248,.28);border:0;padding:0;cursor:pointer;transition:background .25s,transform .25s;}
   .gas-home .hero-dot:hover{background:rgba(244,246,248,.5);}
@@ -290,12 +286,10 @@
         <h1 class="reveal-item">The Gulf's largest gathering on <em>aortic aneurysm</em> disease.</h1>
         <p class="hero-sub reveal-item">Two days of live case transmission, master classes and complex-case debate — regional and international faculty convene in Dubai to set the next standard in aortic care.</p>
       </div>
-      <div class="hero-slide" data-slide="1">
-        <img class="hero-slide-logo" src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Artwork_logo1_sharp_xtra-1-1-scaled.png" alt="Gulf Aorta Summit — GAS 2027" loading="lazy" data-fallback="brand">
+      <div class="hero-slide hero-slide-centered" data-slide="1">
         <p class="eyebrow">In collaboration with</p>
-        <h2 class="hero-slide-heading">Backed by the region's aortic community.</h2>
+        <img class="hero-slide-logo" src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Artwork_logo1_sharp_xtra-1-1-scaled.png" alt="Gulf Aorta Summit — GAS 2027" loading="lazy" data-fallback="brand">
         <p class="hero-sub">Regional societies, international partners and collaborating institutions supporting GAS 2027.</p>
-        <div class="hero-logo-grid" id="gasHeroLogos"></div>
       </div>
     </div>
     <div class="hero-dots" role="tablist" aria-label="Hero slides">
@@ -543,16 +537,7 @@
     if(reduced){ track.style.animation='none'; }
   }
 
-  var heroLogos=document.getElementById('gasHeroLogos');
-  if(heroLogos){
-    var logoHtml='';
-    partnerLogos.forEach(function(src){
-      logoHtml+='<span class="marquee-item"><img src="'+src+'" alt="Partner logo" loading="lazy" data-fallback="marquee"><span class="dot"></span><span class="fallback-label">Partner</span></span>';
-    });
-    heroLogos.innerHTML=logoHtml;
-  }
-
-  // hero slider: two slides (headline / partner logos) sharing the same
+  // hero slider: two slides (headline / GAS 2027 logo) sharing the same
   // CTA buttons and dates/venue ticket row underneath, which never swap
   var heroSlides=document.querySelectorAll('.hero-slide');
   var heroDots=document.querySelectorAll('.hero-dot');
