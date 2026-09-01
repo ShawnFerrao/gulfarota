@@ -103,6 +103,25 @@
   .gas-home .hero h1 em{font-style:italic;color:var(--brass-soft);font-weight:400;}
   .gas-home .hero-sub{margin-top:1.5rem;max-width:46ch;color:var(--on-ink-mist);font-size:1.06rem;}
   .gas-home .hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.25rem;}
+
+  /* ---- hero slider: slide 1 (headline) / slide 2 (partner logos) ---- */
+  .gas-home .hero-slides{display:grid;}
+  .gas-home .hero-slide{
+    grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;
+    transition:opacity .6s var(--ease),visibility 0s .6s;
+  }
+  .gas-home .hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease);}
+  .gas-home .hero-slide-heading{font-size:var(--fs-display-1);max-width:23ch;color:var(--on-ink);}
+  .gas-home .hero-logo-grid{display:flex;flex-wrap:wrap;align-items:center;gap:1.75rem 2.75rem;margin-top:2rem;}
+  .gas-home .hero-logo-grid .marquee-item img{
+    height:44px;max-width:170px;filter:grayscale(1) invert(1) brightness(1.6);opacity:.72;
+  }
+  .gas-home .hero-logo-grid .marquee-item img:hover{opacity:1;}
+  .gas-home .hero-logo-grid .fallback-label{color:var(--on-ink-mist);}
+  .gas-home .hero-dots{display:flex;gap:.55rem;margin-top:2rem;}
+  .gas-home .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(244,246,248,.28);border:0;padding:0;cursor:pointer;transition:background .25s,transform .25s;}
+  .gas-home .hero-dot:hover{background:rgba(244,246,248,.5);}
+  .gas-home .hero-dot.is-active{background:var(--brass);transform:scale(1.3);}
   .gas-home .ticket{
     margin-top:clamp(2.5rem,5vw,3.5rem);border-top:1px solid rgba(227,190,122,.25);padding-top:1.6rem;
     display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;
@@ -263,9 +282,23 @@
     <div class="scrim"></div>
   </div>
   <div class="wrap reveal-group hero-reveal">
-    <p class="eyebrow reveal-item">Third International Edition · GAS 2027</p>
-    <h1 class="reveal-item">The Gulf's largest gathering on <em>aortic aneurysm</em> disease.</h1>
-    <p class="hero-sub reveal-item">Two days of live case transmission, master classes and complex-case debate — regional and international faculty convene in Dubai to set the next standard in aortic care.</p>
+    <div class="hero-slides">
+      <div class="hero-slide is-active" data-slide="0">
+        <p class="eyebrow reveal-item">Third International Edition · GAS 2027</p>
+        <h1 class="reveal-item">The Gulf's largest gathering on <em>aortic aneurysm</em> disease.</h1>
+        <p class="hero-sub reveal-item">Two days of live case transmission, master classes and complex-case debate — regional and international faculty convene in Dubai to set the next standard in aortic care.</p>
+      </div>
+      <div class="hero-slide" data-slide="1">
+        <p class="eyebrow">In collaboration with</p>
+        <h2 class="hero-slide-heading">Backed by the region's aortic community.</h2>
+        <p class="hero-sub">Regional societies, international partners and collaborating institutions supporting GAS 2027.</p>
+        <div class="hero-logo-grid" id="gasHeroLogos"></div>
+      </div>
+    </div>
+    <div class="hero-dots" role="tablist" aria-label="Hero slides">
+      <button type="button" class="hero-dot is-active" data-goto="0" aria-label="Show slide 1"></button>
+      <button type="button" class="hero-dot" data-goto="1" aria-label="Show slide 2"></button>
+    </div>
     <div class="hero-cta reveal-item">
       <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
       <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Abstract%20Submission">Submit an Abstract</a>
@@ -505,6 +538,40 @@
     }
     track.innerHTML=html;
     if(reduced){ track.style.animation='none'; }
+  }
+
+  var heroLogos=document.getElementById('gasHeroLogos');
+  if(heroLogos){
+    var logoHtml='';
+    partnerLogos.forEach(function(src){
+      logoHtml+='<span class="marquee-item"><img src="'+src+'" alt="Partner logo" loading="lazy" data-fallback="marquee"><span class="dot"></span><span class="fallback-label">Partner</span></span>';
+    });
+    heroLogos.innerHTML=logoHtml;
+  }
+
+  // hero slider: two slides (headline / partner logos) sharing the same
+  // CTA buttons and dates/venue ticket row underneath, which never swap
+  var heroSlides=document.querySelectorAll('.hero-slide');
+  var heroDots=document.querySelectorAll('.hero-dot');
+  if(heroSlides.length > 1){
+    var heroIdx=0, heroTimer;
+    function goToHeroSlide(i){
+      heroIdx=i;
+      heroSlides.forEach(function(s,si){ s.classList.toggle('is-active', si===i); });
+      heroDots.forEach(function(d,di){ d.classList.toggle('is-active', di===i); });
+    }
+    function startHeroTimer(){
+      if(reduced) return;
+      heroTimer=setInterval(function(){ goToHeroSlide((heroIdx+1)%heroSlides.length); }, 6500);
+    }
+    heroDots.forEach(function(d){
+      d.addEventListener('click', function(){
+        clearInterval(heroTimer);
+        goToHeroSlide(parseInt(d.dataset.goto,10));
+        startHeroTimer();
+      });
+    });
+    startHeroTimer();
   }
 })();
 </script>
