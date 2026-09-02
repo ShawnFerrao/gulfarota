@@ -1,0 +1,175 @@
+<!--
+  GULF AORTA SUMMIT — PROGRAMME PAGE (Elementor "HTML" widget)
+  ────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug: /programme,
+  matching the "View the full programme" link already on the homepage).
+  No header/footer markup — those come from your global Elementor
+  templates.
+
+  The detailed schedule isn't finalised yet, so this is a "coming soon"
+  holding page: it sets expectations (what the programme will cover) and
+  drives Register Interest / Submit an Abstract in the meantime. Swap the
+  page-header + coming-soon copy for the real schedule once it's ready —
+  everything else (the "what to expect" cards, the closing CTA) can stay.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-programme.
+-->
+<div class="gas-programme">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-programme{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-programme,.gas-programme *,.gas-programme *::before,.gas-programme *::after{box-sizing:border-box;}
+  .gas-programme p{margin:0;}
+  .gas-programme a{color:inherit;text-decoration:none;}
+  .gas-programme h1,.gas-programme h2,.gas-programme h3,.gas-programme h4{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-programme .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+
+  .gas-programme .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-programme .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-ink);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-programme .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  .gas-programme .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);border:1px solid transparent;
+    transition:transform .35s var(--ease),background .25s,border-color .25s;white-space:nowrap;
+  }
+  .gas-programme .btn:hover{transform:translateY(-2px);}
+  .gas-programme .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-programme .btn-gold:hover{background:var(--brass-soft) !important;}
+  .gas-programme .btn-line{border-color:var(--hairline) !important;color:var(--ink-text) !important;}
+  .gas-programme .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-programme .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-programme .page-header .eyebrow{color:var(--brass-soft);}
+  .gas-programme .page-header .eyebrow::before{background:var(--brass-soft);}
+  .gas-programme .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-programme .page-header .intro{margin-top:1.5rem;max-width:60ch;color:var(--on-ink-mist);font-size:1.05rem;}
+  .gas-programme .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+  .gas-programme .page-header .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-programme .page-header .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  .gas-programme .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-programme .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-programme .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+
+  /* ---- coming soon banner ---- */
+  .gas-programme .soon{
+    text-align:center;padding-block:clamp(2.5rem,5vw,3.5rem);
+    border:1px solid var(--hairline);border-radius:16px;
+  }
+  .gas-programme .soon .status{
+    display:inline-flex;align-items:center;gap:.55em;font-family:"IBM Plex Mono";font-size:.74rem;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--brass-ink);
+    border:1px solid var(--brass-dim);border-radius:100px;padding:.55em 1.1em;margin-bottom:1.5rem;
+  }
+  .gas-programme .soon .status .dot{width:6px;height:6px;border-radius:50%;background:var(--brass-ink);animation:gasPulse 1.8s ease-in-out infinite;}
+  @keyframes gasPulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+  .gas-programme .soon h2{font-size:var(--fs-display-2);max-width:20ch;margin-inline:auto;}
+  .gas-programme .soon p{margin-top:1.1rem;max-width:56ch;margin-inline:auto;color:var(--mist);font-size:1.02rem;}
+
+  /* ---- what-to-expect grid ---- */
+  .gas-programme .outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;}
+  .gas-programme .outcome{background:var(--linen-raised);border-radius:12px;padding:1.4rem 1.3rem;}
+  .gas-programme .outcome .idx{font-family:"IBM Plex Mono";font-size:.68rem;color:var(--brass-ink);}
+  .gas-programme .outcome h4{font-family:"IBM Plex Sans";font-weight:600;font-size:.98rem;margin-top:.6rem;}
+  .gas-programme .outcome p{color:var(--mist);font-size:.88rem;margin-top:.5rem;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-programme .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-programme .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-programme .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-programme .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-programme .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  @media (max-width:980px){
+    .gas-programme .outcomes{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:600px){
+    .gas-programme .outcomes{grid-template-columns:1fr;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Scientific Programme</p>
+    <h1>The GAS 2027 programme.</h1>
+    <p class="intro">The full scientific programme — sessions, workshops and the live-case schedule — is currently being finalised with the Scientific Advisory Board and Training Courses Committee. Register your interest to be the first to know when it's announced.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Abstract%20Submission">Submit an Abstract</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMING SOON ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="soon">
+      <span class="status"><span class="dot"></span>Programme running soon</span>
+      <h2>The detailed schedule is on its way.</h2>
+      <p>We're finalising session times, workshop tracks and the live-case line-up for 29–30 January 2027 at the Jumeirah Emirates Towers, Dubai. Check back here or follow our channels for the announcement.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT TO EXPECT ============ -->
+<section class="section" style="background:var(--linen-raised);padding-top:0;">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What to expect</p>
+      <h2>Built around real cases, not just slides.</h2>
+    </div>
+    <div class="outcomes">
+      <div class="outcome"><span class="idx mono">01</span><h4>Cutting-edge technique</h4><p>Current approaches for tackling intricate aortic disease with confidence and precision.</p></div>
+      <div class="outcome"><span class="idx mono">02</span><h4>Endovascular outcomes</h4><p>Practical, case-led sessions built to maximise the outcome of intervention.</p></div>
+      <div class="outcome"><span class="idx mono">03</span><h4>Faculty exchange</h4><p>Structured debate with regional and international experts on challenging pathology.</p></div>
+      <div class="outcome"><span class="idx mono">04</span><h4>Case dissection</h4><p>Expert panels work through complex, real cases end to end.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Don't miss the announcement.</h2>
+      <p>Register your interest and we'll let you know the moment the full GAS 2027 programme goes live.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Notify%20me%20about%20the%20programme">Notify Me</a>
+    </div>
+  </div>
+</section>
+</div>
