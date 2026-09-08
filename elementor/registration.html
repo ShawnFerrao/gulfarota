@@ -1,0 +1,222 @@
+<!--
+  GULF AORTA SUMMIT — REGISTRATION PAGE (Elementor "HTML" widget)
+  ────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug: /registration).
+  No header/footer markup — those come from your global Elementor
+  templates.
+
+  Fee table and cancellation/refund policy are the real GAS 2027 figures.
+  "Register Interest" / "Register Now" buttons point at the live Zoho
+  Backstage tickets flow already used elsewhere on the site — update the
+  href everywhere below if that link ever changes.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-registration.
+-->
+<div class="gas-registration">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-registration{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-registration,.gas-registration *,.gas-registration *::before,.gas-registration *::after{box-sizing:border-box;}
+  .gas-registration p{margin:0;}
+  .gas-registration a{color:inherit;text-decoration:none;}
+  .gas-registration h1,.gas-registration h2,.gas-registration h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-registration .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+
+  .gas-registration .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-registration .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-ink);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-registration .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  .gas-registration .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);border:1px solid transparent;
+    transition:transform .35s var(--ease),background .25s,border-color .25s;white-space:nowrap;
+  }
+  .gas-registration .btn:hover{transform:translateY(-2px);}
+  .gas-registration .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-registration .btn-gold:hover{background:var(--brass-soft) !important;}
+  .gas-registration .btn-line{border-color:var(--hairline) !important;color:var(--ink-text) !important;}
+  .gas-registration .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-registration .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-registration .page-header .eyebrow{color:var(--brass-soft);}
+  .gas-registration .page-header .eyebrow::before{background:var(--brass-soft);}
+  .gas-registration .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-registration .page-header .intro{margin-top:1.5rem;max-width:62ch;color:var(--on-ink-mist);font-size:1.05rem;}
+  .gas-registration .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
+  .gas-registration .page-header .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-registration .page-header .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  .gas-registration .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-registration .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-registration .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
+  .gas-registration .section-head .kicker{margin-top:.85rem;max-width:60ch;color:var(--mist);font-size:1.02rem;}
+
+  /* ---- fee table ---- */
+  .gas-registration .fee-table-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;}
+  .gas-registration .fee-table{width:100%;border-collapse:collapse;min-width:520px;}
+  .gas-registration .fee-table th,.gas-registration .fee-table td{padding:1.05rem 1.3rem;text-align:left;}
+  .gas-registration .fee-table th{
+    font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--brass-ink);background:var(--linen-raised);border-bottom:1px solid var(--hairline);
+  }
+  .gas-registration .fee-table th.num,.gas-registration .fee-table td.num{text-align:right;white-space:nowrap;}
+  .gas-registration .fee-table tbody tr{border-top:1px solid var(--hairline);}
+  .gas-registration .fee-table tbody tr:hover{background:var(--linen-raised);}
+  .gas-registration .fee-table td.cat{font-weight:600;}
+  .gas-registration .fee-table td.num{font-family:"IBM Plex Mono";font-variant-numeric:tabular-nums;}
+  .gas-registration .fee-table .badge-early{
+    display:inline-block;margin-left:.6em;font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
+    padding:.2em .6em;vertical-align:middle;
+  }
+  .gas-registration .fee-note{margin-top:1.25rem;color:var(--mist);font-size:.88rem;}
+
+  /* ---- cancellation policy ---- */
+  .gas-registration .policy-list{display:flex;flex-direction:column;gap:1.1rem;max-width:74ch;}
+  .gas-registration .policy-item{display:flex;gap:.9rem;align-items:flex-start;}
+  .gas-registration .policy-item .mark{flex:none;width:1.3em;color:var(--brass-ink);font-weight:600;}
+  .gas-registration .policy-item p{color:var(--ink-text);font-size:.98rem;}
+  .gas-registration .policy-item a{color:var(--brass-ink);text-decoration:underline;text-underline-offset:2px;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-registration .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-registration .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-registration .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-registration .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-registration .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  @media (max-width:600px){
+    .gas-registration .fee-table th,.gas-registration .fee-table td{padding:.85rem 1rem;font-size:.92rem;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Registration</p>
+    <h1>Register for GAS 2027.</h1>
+    <p class="intro">Secure your place at the Gulf Aorta Summit, 29–30 January 2027, Jumeirah Emirates Towers, Dubai. Early bird pricing is available for a limited time — registration includes full access to the scientific programme, workshops, exhibition and poster area.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Registration%20Enquiry">Ask a Question</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEES ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Registration fees</p>
+      <h2>Choose the category that fits you.</h2>
+      <p class="kicker">Take advantage of Early Bird rates before they close. All fees cover full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
+    </div>
+    <div class="fee-table-wrap">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th>Registration Category</th>
+            <th class="num">USD</th>
+            <th class="num">AED</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cat">Physicians / Doctors<span class="badge-early">Early Bird</span></td>
+            <td class="num">135</td>
+            <td class="num">494</td>
+          </tr>
+          <tr>
+            <td class="cat">Physicians / Doctors <span class="mono">(Normal Price)</span></td>
+            <td class="num">185</td>
+            <td class="num">677</td>
+          </tr>
+          <tr>
+            <td class="cat">Health Professional<span class="badge-early">Early Bird</span></td>
+            <td class="num">115</td>
+            <td class="num">421</td>
+          </tr>
+          <tr>
+            <td class="cat">Health Professional <span class="mono">(Normal)</span></td>
+            <td class="num">150</td>
+            <td class="num">549</td>
+          </tr>
+          <tr>
+            <td class="cat">Physicians <span class="mono">(Onsite)</span></td>
+            <td class="num">275</td>
+            <td class="num">1007</td>
+          </tr>
+          <tr>
+            <td class="cat">Nurses / Students / Residents <span class="mono">(Regular Fee)</span></td>
+            <td class="num">85</td>
+            <td class="num">311</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fee-note">Prices shown in US Dollars and UAE Dirhams. Registration fee is waived for invited speakers.</p>
+  </div>
+</section>
+
+<!-- ============ CANCELLATION & REFUND ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Terms</p>
+      <h2>Cancellation and refund policy.</h2>
+    </div>
+    <div class="policy-list">
+      <div class="policy-item"><span class="mark">→</span><p>Everyone attending the conference must register and pay the registration fees.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>This rule does not apply to invited speakers, as the registration fee is waived for them.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>We ensure that delegates wishing to cancel and refund their registration fees are well aware of the process.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>Cancellations received 30 days prior to the event will receive a refund of the registration fees, less an administration charge of 30% of the conference fees.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>Registration cancellations must be notified in writing by email to <a href="mailto:info@gulfaorta.com">info@gulfaorta.com</a>.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>Cancellations made after this window, as well as 'no shows', are not eligible for a refund.</p></div>
+      <div class="policy-item"><span class="mark">→</span><p>Refunds will be processed one month after the event completion date.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Ready to secure your seat?</h2>
+      <p>Early Bird pricing won't last — register now to lock in your rate for GAS 2027.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+    </div>
+  </div>
+</section>
+</div>
