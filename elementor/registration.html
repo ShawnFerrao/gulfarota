@@ -81,20 +81,18 @@
   .gas-registration .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
   .gas-registration .section-head .kicker{margin-top:.85rem;max-width:60ch;color:var(--mist);font-size:1.02rem;}
 
-  /* ---- fee table ---- */
-  .gas-registration .fee-table-wrap{overflow-x:auto;border:1px solid var(--hairline);border-radius:12px;}
-  .gas-registration .fee-table{width:100%;border-collapse:collapse;min-width:520px;}
-  .gas-registration .fee-table th,.gas-registration .fee-table td{padding:1.05rem 1.3rem;text-align:left;}
-  .gas-registration .fee-table th{
-    font-family:"IBM Plex Mono";font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--brass-ink);background:var(--linen-raised);border-bottom:1px solid var(--hairline);
+  /* ---- fee cards ---- */
+  .gas-registration .fee-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+  .gas-registration .fee-card{
+    border:1px solid var(--hairline);border-radius:12px;padding:1.5rem 1.4rem;
+    display:flex;flex-direction:column;gap:.9rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
   }
-  .gas-registration .fee-table th.num,.gas-registration .fee-table td.num{text-align:right;white-space:nowrap;}
-  .gas-registration .fee-table tbody tr{border-top:1px solid var(--hairline);}
-  .gas-registration .fee-table tbody tr:hover{background:var(--linen-raised);}
-  .gas-registration .fee-table td.cat{font-weight:600;}
-  .gas-registration .fee-table td.num{font-family:"IBM Plex Mono";font-variant-numeric:tabular-nums;}
-  .gas-registration .fee-table .badge-early{
+  .gas-registration .fee-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.22);}
+  .gas-registration .fee-card h3{font-size:1.1rem;}
+  .gas-registration .fee-price{display:flex;align-items:baseline;gap:.6em;}
+  .gas-registration .fee-price .usd{font-family:"IBM Plex Mono";font-size:1.5rem;font-weight:600;color:var(--brass-ink);}
+  .gas-registration .fee-price .aed{font-family:"IBM Plex Mono";font-size:.82rem;color:var(--mist);}
+  .gas-registration .badge-early{
     display:inline-block;margin-left:.6em;font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.06em;
     text-transform:uppercase;color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
     padding:.2em .6em;vertical-align:middle;
@@ -127,10 +125,11 @@
   .gas-registration .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
 
   @media (max-width:980px){
+    .gas-registration .fee-card-grid{grid-template-columns:repeat(2,1fr);}
     .gas-registration .cat-grid{grid-template-columns:repeat(2,1fr);}
   }
   @media (max-width:600px){
-    .gas-registration .fee-table th,.gas-registration .fee-table td{padding:.85rem 1rem;font-size:.92rem;}
+    .gas-registration .fee-card-grid{grid-template-columns:1fr;}
     .gas-registration .cat-grid{grid-template-columns:1fr;}
   }
 </style>
@@ -156,48 +155,31 @@
       <h2>Choose the category that fits you.</h2>
       <p class="kicker">Take advantage of Early Bird rates before they close. All fees cover full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
     </div>
-    <div class="fee-table-wrap">
-      <table class="fee-table">
-        <thead>
-          <tr>
-            <th>Registration Category</th>
-            <th class="num">USD</th>
-            <th class="num">AED</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="cat">Physicians / Doctors<span class="badge-early">Early Bird</span></td>
-            <td class="num">135</td>
-            <td class="num">494</td>
-          </tr>
-          <tr>
-            <td class="cat">Physicians / Doctors <span class="mono">(Normal Price)</span></td>
-            <td class="num">185</td>
-            <td class="num">677</td>
-          </tr>
-          <tr>
-            <td class="cat">Health Professional<span class="badge-early">Early Bird</span></td>
-            <td class="num">115</td>
-            <td class="num">421</td>
-          </tr>
-          <tr>
-            <td class="cat">Health Professional <span class="mono">(Normal)</span></td>
-            <td class="num">150</td>
-            <td class="num">549</td>
-          </tr>
-          <tr>
-            <td class="cat">Physicians <span class="mono">(Onsite)</span></td>
-            <td class="num">275</td>
-            <td class="num">1007</td>
-          </tr>
-          <tr>
-            <td class="cat">Nurses / Students / Residents <span class="mono">(Regular Fee)</span></td>
-            <td class="num">85</td>
-            <td class="num">311</td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="fee-card-grid">
+      <div class="fee-card">
+        <h3>Physicians / Doctors<span class="badge-early">Early Bird</span></h3>
+        <div class="fee-price"><span class="usd">$135</span><span class="aed">AED 494</span></div>
+      </div>
+      <div class="fee-card">
+        <h3>Physicians / Doctors <span class="mono">(Normal Price)</span></h3>
+        <div class="fee-price"><span class="usd">$185</span><span class="aed">AED 677</span></div>
+      </div>
+      <div class="fee-card">
+        <h3>Health Professional<span class="badge-early">Early Bird</span></h3>
+        <div class="fee-price"><span class="usd">$115</span><span class="aed">AED 421</span></div>
+      </div>
+      <div class="fee-card">
+        <h3>Health Professional <span class="mono">(Normal)</span></h3>
+        <div class="fee-price"><span class="usd">$150</span><span class="aed">AED 549</span></div>
+      </div>
+      <div class="fee-card">
+        <h3>Physicians <span class="mono">(Onsite)</span></h3>
+        <div class="fee-price"><span class="usd">$275</span><span class="aed">AED 1007</span></div>
+      </div>
+      <div class="fee-card">
+        <h3>Nurses / Students / Residents <span class="mono">(Regular Fee)</span></h3>
+        <div class="fee-price"><span class="usd">$85</span><span class="aed">AED 311</span></div>
+      </div>
     </div>
     <p class="fee-note">Prices shown in US Dollars and UAE Dirhams. Registration fee is waived for invited speakers.</p>
 
