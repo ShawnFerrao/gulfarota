@@ -107,10 +107,10 @@
   /* ---- hero slider: slide 1 (headline) / slide 2 (partner logos) ---- */
   .gas-home .hero-slides{display:grid;}
   .gas-home .hero-slide{
-    grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;
-    transition:opacity .6s var(--ease),visibility 0s .6s;
+    grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;will-change:opacity;
+    transition:opacity 1.3s ease-in-out,visibility 0s 1.3s;
   }
-  .gas-home .hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s var(--ease);}
+  .gas-home .hero-slide.is-active{opacity:1;visibility:visible;pointer-events:auto;transition:opacity 1.3s ease-in-out;}
   .gas-home .hero-slide-centered{text-align:center;}
   .gas-home .hero-slide-centered .eyebrow{justify-content:center;}
   .gas-home .hero-slide-centered .hero-sub{margin-inline:auto;}
@@ -539,7 +539,7 @@
       heroSlides[heroIdx].classList.remove('is-active');
       heroIdx=(heroIdx+1)%heroSlides.length;
       heroSlides[heroIdx].classList.add('is-active');
-    }, 4000);
+    }, 7000);
   }
 })();
 </script>
