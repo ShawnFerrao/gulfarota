@@ -6,10 +6,8 @@
   No header/footer markup — those come from your global Elementor
   templates.
 
-  Only the chair's details were provided so far — this page currently
-  has a chair spotlight only, no members grid. Send over the rest of the
-  board (names, roles, photos) and a "Members" grid section can be added
-  below it, matching the pattern used on board-of-directors.html.
+  Chair spotlight (Prof. Payman Majd) plus a 13-person "Members at Large"
+  grid, matching the pattern used on training-courses-committee.html.
 
   Self-contained: fonts, tokens and styles scoped under .gas-pab.
 -->
@@ -83,6 +81,20 @@
     padding:.5rem 1.1rem;line-height:1.4;
   }
 
+  /* ---- members grid ---- */
+  .gas-pab .board-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(2.25rem,4vw,3rem) clamp(1.5rem,3vw,2rem);
+  }
+  .gas-pab .person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;transition:transform .3s var(--ease);}
+  .gas-pab .person:hover{transform:translateY(-4px);}
+  .gas-pab .avatar{
+    width:160px;height:160px;position:relative;border-radius:14px;overflow:hidden;
+    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -14px rgba(0,26,63,.18);
+  }
+  .gas-pab .avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
+  .gas-pab .avatar img.hidden{display:none;}
+  .gas-pab .person h4{font-size:.96rem;font-weight:600;font-family:"IBM Plex Sans";line-height:1.4;max-width:20ch;}
+
   /* ---- closing / CTA band ---- */
   .gas-pab .cta-band{background:var(--ink);color:var(--on-ink);}
   .gas-pab .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
@@ -98,6 +110,12 @@
   .gas-pab .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
   .gas-pab .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
 
+  @media (max-width:980px){
+    .gas-pab .board-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:640px){
+    .gas-pab .board-grid{grid-template-columns:repeat(2,1fr);}
+  }
   @media (max-width:560px){
     .gas-pab .chair-card{flex-direction:column;text-align:center;}
   }
@@ -130,6 +148,31 @@
         <h3>Prof. Payman Majd</h3>
         <span class="chair-badge">Chair of Advisory Board</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBERS AT LARGE ============ -->
+<section class="section" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">The board</p>
+      <h2>Members at Large.</h2>
+    </div>
+    <div class="board-grid">
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce791d32a020303fbdc383.png" alt="Prof. Jan Brunkwall" loading="lazy" data-fallback="self"></div><h4>Prof. Jan Brunkwall</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d8910295ea81c6f0ca2.png" alt="Dr. Ugursay Kiziltepe" loading="lazy" data-fallback="self"></div><h4>Dr. Ugursay Kiziltepe</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce71290563406b7bf9983b.png" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"></div><h4>Prof. Samer Koussayer</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6912c4fb0b647e5ea3d37ee9.png" alt="Prof. Orwa Falah" loading="lazy" data-fallback="self"></div><h4>Prof. Orwa Falah</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d732b5a2b5699a59b62.png" alt="Dr. Martin Claridge" loading="lazy" data-fallback="self"></div><h4>Dr. Martin Claridge</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d73520387008d75dd37.png" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self"></div><h4>Prof. Gianpaolo Carrafiello</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44dcf7f400aaefc7273ae.png" alt="Dr. Hassan Al-Thani" loading="lazy" data-fallback="self"></div><h4>Dr. Hassan Al-Thani</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d74b9f77729049fc040.png" alt="Dr. Adel Alali" loading="lazy" data-fallback="self"></div><h4>Dr. Adel Alali</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d74fc3ef86f0a61ce7b.png" alt="Prof. Mohamed Sharkawy" loading="lazy" data-fallback="self"></div><h4>Prof. Mohamed Sharkawy</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d732b5a2b371fa59b6a.png" alt="Prof. Murat Aksoy" loading="lazy" data-fallback="self"></div><h4>Prof. Murat Aksoy</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d74fc3ef88a1b61ce76.png" alt="Dr. Refaat Salman" loading="lazy" data-fallback="self"></div><h4>Dr. Refaat Salman</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69524671d2e1fc294b53d107.png" alt="Dr. Abdullah Alfawaz" loading="lazy" data-fallback="self"></div><h4>Dr. Abdullah Alfawaz</h4></div>
+      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d74fc3ef8d46661ce77.png" alt="Prof. Giovanni Pratesi" loading="lazy" data-fallback="self"></div><h4>Prof. Giovanni Pratesi</h4></div>
     </div>
   </div>
 </section>
