@@ -68,14 +68,20 @@
   .gas-training .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
   .gas-training .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
 
-  /* ---- director (featured, single) ---- */
-  .gas-training .leadership-grid{display:grid;grid-template-columns:1fr;justify-items:start;}
-  .gas-training .lead-card{display:flex;gap:1.75rem;align-items:center;max-width:34rem;}
-  .gas-training .lead-avatar{
-    width:224px;height:224px;position:relative;flex:none;border-radius:18px;overflow:hidden;
-    background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 14px 30px -18px rgba(0,26,63,.22);
+  /* ---- direction (featured, side-by-side) ---- */
+  .gas-training .leadership-grid{display:grid;grid-template-columns:repeat(2,minmax(200px,17.5rem));gap:clamp(2rem,4vw,3.5rem);justify-content:start;}
+  .gas-training .lead-card{display:flex;flex-direction:column;align-items:flex-start;}
+  .gas-training .lead-avatar-wrap{position:relative;width:224px;height:224px;margin-bottom:1.6rem;}
+  .gas-training .lead-avatar-ring{
+    position:absolute;inset:-16px;border-radius:50%;
+    background:repeating-conic-gradient(from 0deg,var(--brass-dim) 0deg 2.2deg,transparent 2.2deg 7deg);
+    opacity:.65;
   }
-  .gas-training .lead-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
+  .gas-training .lead-avatar{
+    position:relative;width:100%;height:100%;border-radius:50%;overflow:hidden;z-index:1;
+    background:var(--linen);box-shadow:0 0 0 6px var(--linen),0 14px 30px -18px rgba(0,26,63,.25);
+  }
+  .gas-training .lead-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;}
   .gas-training .lead-avatar img.hidden{display:none;}
   .gas-training .lead-card h3{font-size:1.2rem;font-style:italic;font-weight:500;}
   .gas-training .lead-badge{
@@ -119,8 +125,8 @@
   }
   @media (max-width:640px){
     .gas-training .board-grid{grid-template-columns:repeat(2,1fr);}
-    .gas-training .lead-card{flex-direction:column;text-align:center;align-items:center;}
-    .gas-training .leadership-grid{justify-items:center;}
+    .gas-training .leadership-grid{grid-template-columns:1fr;justify-items:center;justify-content:center;max-width:20rem;margin-inline:auto;}
+    .gas-training .lead-card{align-items:center;text-align:center;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-training *{transition-duration:.001ms !important;}
@@ -149,13 +155,24 @@
     </div>
     <div class="leadership-grid">
       <div class="lead-card">
-        <div class="lead-avatar">
-          <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce798099621fe883d4056f.png" alt="Dr. Aymen Alsibaie" loading="lazy" data-fallback="self">
+        <div class="lead-avatar-wrap">
+          <div class="lead-avatar-ring" aria-hidden="true"></div>
+          <div class="lead-avatar">
+            <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce798099621fe883d4056f.png" alt="Dr. Aymen Alsibaie" loading="lazy" data-fallback="self">
+          </div>
         </div>
-        <div>
-          <h3>Dr. Aymen Alsibaie</h3>
-          <span class="lead-badge">Director, Training Courses Committee</span>
+        <h3>Dr. Aymen Alsibaie</h3>
+        <span class="lead-badge">Director, Training Courses Committee</span>
+      </div>
+      <div class="lead-card">
+        <div class="lead-avatar-wrap">
+          <div class="lead-avatar-ring" aria-hidden="true"></div>
+          <div class="lead-avatar">
+            <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce791d32a020303fbdc383.png" alt="Prof. Jan Brunkwall" loading="lazy" data-fallback="self">
+          </div>
         </div>
+        <h3>Prof. Jan Brunkwall</h3>
+        <span class="lead-badge">Co-Director, Training Courses Committee</span>
       </div>
     </div>
   </div>
@@ -171,7 +188,6 @@
     <div class="board-grid">
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce71290563406b7bf9983b.png" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"></div><h4>Prof. Samer Koussayer</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce77aaee4040ff6db98e73.png" alt="Dr. Martin Maresch" loading="lazy" data-fallback="self"></div><h4>Dr. Martin Maresch</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce791d32a020303fbdc383.png" alt="Prof. Jan Brunkwall" loading="lazy" data-fallback="self"></div><h4>Prof. Jan Brunkwall</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce77e932a0204f84bda89a.png" alt="Dr. Tania Guzman" loading="lazy" data-fallback="self"></div><h4>Dr. Tania Guzman</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/69144cedfbef362fb9baebec.png" alt="Prof. Tamer Fouad Sayed" loading="lazy" data-fallback="self"></div><h4>Prof. Tamer Fouad Sayed</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce6f4d99621f7f9ed2ecbb.png" alt="Prof. Payman Majd" loading="lazy" data-fallback="self"></div><h4>Prof. Payman Majd</h4></div>
