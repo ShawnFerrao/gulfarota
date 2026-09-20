@@ -1,0 +1,145 @@
+<!--
+  GULF AORTA SUMMIT — "WELCOME LETTER" PAGE (Elementor "HTML" widget)
+  ─────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /welcome-letter). No header/footer markup — those come from your
+  global Elementor templates.
+
+  Rewritten from the Chairman's original GAS2026 welcome letter, updated
+  for GAS 2027 (dates, venue-day breakdown, "fifth wave" edition count
+  to match the rest of the site). Not linked into nav — link it from
+  wherever you'd like (e.g. the homepage's "Read the full welcome
+  letter" link, which currently points to the dead /about slug).
+
+  Self-contained: fonts, tokens and styles scoped under .gas-welcome.
+-->
+<div class="gas-welcome">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-welcome{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-welcome,.gas-welcome *,.gas-welcome *::before,.gas-welcome *::after{box-sizing:border-box;}
+  .gas-welcome p{margin:0;}
+  .gas-welcome a{color:inherit;text-decoration:none;}
+  .gas-welcome h1,.gas-welcome h2,.gas-welcome h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-welcome .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-welcome img{max-width:100%;display:block;}
+
+  .gas-welcome .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+  .gas-welcome .wrap-narrow{max-width:760px;margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-welcome .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-welcome .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-welcome .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-welcome .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-welcome .page-header .intro{margin-top:1.5rem;max-width:60ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-welcome .section{padding-block:clamp(3rem,7vw,5.5rem);}
+
+  /* ---- letter body ---- */
+  .gas-welcome .letter p{color:var(--ink-text);font-size:1.02rem;margin-bottom:1.3rem;}
+  .gas-welcome .letter p:first-of-type{
+    font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.2rem;color:var(--ink);
+  }
+  .gas-welcome .letter blockquote{
+    font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.15rem;color:var(--ink);
+    border-left:3px solid var(--brass);padding-left:1.5rem;margin:2rem 0;
+  }
+  .gas-welcome .signature{margin-top:2.5rem;padding-top:1.75rem;border-top:1px solid var(--hairline);}
+  .gas-welcome .signature .role{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--brass-ink);
+  }
+  .gas-welcome .signature h3{font-size:1.3rem;font-style:italic;margin-top:.5rem;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-welcome .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-welcome .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-welcome .cta-band h2{font-size:var(--fs-display-2);max-width:20ch;color:var(--on-ink);}
+  .gas-welcome .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
+  .gas-welcome .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+  .gas-welcome .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-welcome .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-welcome .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
+  .gas-welcome .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-welcome .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  @media (prefers-reduced-motion:reduce){
+    .gas-welcome *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">From the Chairman</p>
+    <h1>A welcome letter from GAS 2027.</h1>
+    <p class="intro">Prof. Arif Alnooryani, Chairman of the Gulf Aorta Summit, welcomes you to the fifth wave of the International Gulf Aortic Summit.</p>
+  </div>
+</section>
+
+<!-- ============ LETTER ============ -->
+<section class="section">
+  <div class="wrap-narrow letter">
+    <p>Dear colleagues,</p>
+    <p>It is our pleasure to welcome you to the Gulf Aorta Summit (GAS), held 29&ndash;31 January 2027 at the Jumeirah Emirates Towers, Dubai, UAE. Built hand-in-hand with worldwide societies, associations and educational institutes collaborating and partnering to build this experts' hub together, GAS2027 is a recognised international event in the field of Aorto&ndash;Cardiovascular Diseases. We are proud to present the fifth wave of the International Gulf Aortic Summit, GAS2027.</p>
+    <p>The event will be held in two forms: a two-day CME-accredited expertise scientific programme, and pre-summit workshops on 29 January. Proudly presenting the largest Aortic event in the GCC region, the three-day programme covers all the management approaches and challenges in aortic aneurysm disease, enhancing awareness and understanding across the field &mdash; with an appreciable contribution from well-esteemed local and international expert faculty, where many world-recognised speakers will share their expertise.</p>
+    <p>The high level of scientific content is presented through scientific talks, complex case discussions and interactive panel discussion, culminating in expert masterclasses and workshops. To keep the community up to date with the latest innovation in management approaches, our GAS industry partners will present the latest developments and the valuable specifications of each aorto-vascular graft device through industry symposiums.</p>
+    <p>All attendees will have the opportunity to share experience, update their knowledge and contribute to complex aortic aneurysm case management &mdash; in live transmission streaming from the hybrid angio-operating room to the conference hall, in high-quality two-way transmission.</p>
+    <blockquote>As an attendee, you combine the view of the conference discussion with a wide-shot coverage of the operating room in the live video stream.</blockquote>
+    <p>All of these collective efforts are geared towards paving the way for a successful International Gulf Aorta Summit &mdash; GAS2027, an event meticulously designed to illuminate the future of safe, comprehensive aortic aneurysm disease management and to help predict future outcomes.</p>
+    <p>We hope that, by working together, we will further strengthen and unify the best management options for aortic aneurysm disease.</p>
+    <p>Welcome &mdash; we look forward to you joining your colleagues at the Gulf Aorta Summit, GAS2027.</p>
+    <div class="signature">
+      <p class="role">Chairman</p>
+      <h3>Prof. Arif Alnooryani</h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Join us at GAS 2027.</h2>
+      <p>29&ndash;31 January 2027, Jumeirah Emirates Towers, Dubai &mdash; three days of live cases, masterclasses and faculty debate.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Interest</a>
+      <a class="btn btn-line" href="/gulf-aorta">About Gulf Aorta</a>
+    </div>
+  </div>
+</section>
+</div>
