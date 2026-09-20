@@ -8,21 +8,12 @@
 
   Self-contained: fonts, tokens and styles scoped under .gas-sponsors.
 
-  Rebuilt from the live GHL "Sponsors - GAS 2027" page: same tier
-  structure (Diamond, Platinum, Silver, Exhibitors) and the same
-  sponsor list/links, as a native responsive grid instead of fixed
-  per-breakpoint image rows.
-
-  Logo tiles without a real <img> yet still show a text .logo-mark
-  fallback (hidden automatically once an image is added — see the
-  sponsor-tile CSS). Diamond and Platinum now use real logo files;
-  Silver and Exhibitors are still text placeholders pending logos.
-
-  Left out from the source page (flag if these should come back):
-  - Two nav-adjacent utility buttons ("Get Your Conference Photos",
-    "Get Your Certificate") — not sponsorship content.
-  - Three Exhibitor logos with no link and no accessible name in the
-    source markup — can't be identified without the image itself.
+  "Lead Support & Partners" (University of Sharjah, UAE University, The
+  Marfan Foundation) sits at the top of the page. The named GAS 2027
+  commercial sponsors (Diamond/Platinum/Silver/Exhibitors) have been
+  cleared out while that programme is finalised — each tier keeps its
+  heading with a "To be confirmed." note. Swap the note back out for
+  real sponsor-tile logos/links once confirmed.
 -->
 <div class="gas-sponsors">
 <style>
@@ -118,6 +109,16 @@
   .gas-sponsors .sponsor-tile.placeholder .logo-mark{display:block;}
   .gas-sponsors .sponsor-tile.placeholder .logo-mark{color:var(--mist);font-style:normal;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;}
 
+  /* ---- to-be-confirmed note ---- */
+  .gas-sponsors .tbc-note{font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.15rem;color:var(--mist);}
+
+  /* ---- lead support & partners grid ---- */
+  .gas-sponsors .partners-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1.5rem,3vw,2.25rem);
+  }
+  .gas-sponsors .partners-grid .sponsor-tile{height:150px;padding:1.8rem 1.6rem;}
+  .gas-sponsors .partners-grid .sponsor-tile .logo-mark{font-size:1.15rem;}
+
   /* ---- diamond / platinum spotlight ---- */
   .gas-sponsors .spotlight{display:flex;gap:clamp(1.75rem,4vw,3rem);align-items:center;}
   .gas-sponsors .spotlight .sponsor-tile{width:260px;height:180px;flex:none;}
@@ -176,6 +177,7 @@
     .gas-sponsors .silver-grid{grid-template-columns:repeat(2,1fr);}
     .gas-sponsors .exhibitors-grid{grid-template-columns:repeat(2,1fr);}
     .gas-sponsors .platinum-grid{grid-template-columns:1fr;}
+    .gas-sponsors .partners-grid{grid-template-columns:1fr;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-sponsors *{transition-duration:.001ms !important;}
@@ -195,108 +197,71 @@
   </div>
 </section>
 
-<!-- ============ DIAMOND SPONSOR ============ -->
+<!-- ============ LEAD SUPPORT & PARTNERS ============ -->
 <section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" style="color:var(--brass-ink);">Lead support &amp; partners</p>
+      <h2>Backing the Gulf Aorta Summit.</h2>
+    </div>
+    <div class="partners-grid">
+      <div class="sponsor-tile">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/University-of-Sharajah.webp" alt="University of Sharjah" loading="lazy" data-fallback="self">
+        <span class="logo-mark">University<br>of Sharjah</span>
+      </div>
+      <div class="sponsor-tile">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/United-Arab-Emirates-Unversity.webp" alt="United Arab Emirates University" loading="lazy" data-fallback="self">
+        <span class="logo-mark">UAE<br>University</span>
+      </div>
+      <div class="sponsor-tile">
+        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/The-Marfan-Foundation.webp" alt="The Marfan Foundation" loading="lazy" data-fallback="self">
+        <span class="logo-mark">The Marfan<br>Foundation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIAMOND SPONSOR ============ -->
+<section class="section" style="background:var(--linen-raised);">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow" style="color:var(--brass-ink);">Diamond sponsor</p>
       <h2>Our lead partner for GAS 2027.</h2>
     </div>
-    <div class="spotlight">
-      <a class="sponsor-tile" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Al-Naghi-Medical-Company.webp" alt="Al Naghi Medical Company" loading="lazy" data-fallback="self">
-        <span class="logo-mark">Al Naghi<br>Medical</span>
-      </a>
-      <div class="spotlight-body">
-        <h3>Al Naghi Medical Company</h3>
-        <p>A leading provider of medical devices in the UAE, bringing state-of-the-art medical technology and solutions to the market. With offices in Abu Dhabi and Dubai, Al Naghi Medical supplies hospitals, universities and medical facilities across the UAE. Operating under the umbrella of Gulf Medical, founded in 1983, Al Naghi Medical builds long-term partnerships across the region's medical field.</p>
-        <a class="website-link" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">ammtuae.com &rarr;</a>
-      </div>
-    </div>
+    <p class="tbc-note">To be confirmed.</p>
   </div>
 </section>
 
 <!-- ============ PLATINUM SPONSORS ============ -->
-<section class="section" style="background:var(--linen-raised);">
+<section class="section">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow" style="color:var(--brass-ink);">Platinum sponsors</p>
       <h2>Supporting the summit floor.</h2>
-      <p class="tier-count">3 sponsors</p>
     </div>
-    <div class="platinum-grid">
-      <a class="sponsor-tile" href="https://ammtuae.com/" target="_blank" rel="noreferrer noopener">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/AMMT.avif" alt="AMMT" loading="lazy" data-fallback="self">
-        <span class="logo-mark">AMMT</span>
-      </a>
-      <a class="sponsor-tile" href="https://www.goremedical.com/" target="_blank" rel="noreferrer noopener">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/GORE.png" alt="Gore Medical" loading="lazy" data-fallback="self">
-        <span class="logo-mark">Gore Medical</span>
-      </a>
-      <a class="sponsor-tile" href="https://www.merit.com/" target="_blank" rel="noreferrer noopener">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Merit_Logo_RGB_Red_2018_with_Tagline-002-qny8c9dpbupsuh9mwznmv6n0qyix0xqg79e4sk5zxu.webp" alt="Merit Medical" loading="lazy" data-fallback="self">
-        <span class="logo-mark">Merit Medical</span>
-      </a>
-    </div>
+    <p class="tbc-note">To be confirmed.</p>
   </div>
 </section>
 
 <!-- ============ SILVER SPONSORS ============ -->
-<section class="section">
+<section class="section" style="background:var(--linen-raised);">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow" style="color:var(--brass-ink);">Silver sponsors</p>
       <h2>Backing this year's programme.</h2>
-      <p class="tier-count">11 sponsors</p>
     </div>
-    <div class="silver-grid">
-      <a class="sponsor-tile" href="https://advamed-me.com/homepage-uae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">AdvaMed</span></a>
-      <a class="sponsor-tile" href="https://www.advanced-hc.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Advanced<br>Healthcare</span></a>
-      <a class="sponsor-tile" href="https://asdinternationaluae.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">ASD<br>International</span></a>
-      <a class="sponsor-tile" href="https://www.dupharm.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Dupharm</span></a>
-      <a class="sponsor-tile" href="https://www.majesticmedical.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Majestic<br>Medical</span></a>
-      <a class="sponsor-tile" href="https://www.omxmedical.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">OMX<br>Medical</span></a>
-      <a class="sponsor-tile" href="https://www.rx-medical.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">RX<br>Medical</span></a>
-      <a class="sponsor-tile" href="https://safepharma.ae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">SafePharma</span></a>
-      <a class="sponsor-tile" href="http://unimed.co.ae/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Unimed</span></a>
-      <a class="sponsor-tile" href="https://www.thexengroup.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Thexen<br>Group</span></a>
-      <a class="sponsor-tile" href="https://www.adi.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">ADI</span></a>
-    </div>
-    <div class="silver-notes">
-      <div class="note">
-        <h4>ASD International Medical Requisites LLC</h4>
-        <p>A leading medical company based in the UAE, with plans to expand across the GCC and wider Middle East — built on an unwavering commitment to quality patient care.</p>
-      </div>
-      <div class="note">
-        <h4>Dupharm</h4>
-        <p>A trusted healthcare provider established in 1994, distributing pharmaceuticals, medical equipment and laboratory supplies across the UAE and the wider region.</p>
-      </div>
-    </div>
+    <p class="tbc-note">To be confirmed.</p>
   </div>
 </section>
 
 <!-- ============ EXHIBITORS ============ -->
-<section class="section" style="background:var(--linen-raised);">
+<section class="section">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow" style="color:var(--brass-ink);">On the summit floor</p>
       <h2>Exhibitors.</h2>
-      <p class="tier-count">12 exhibitors</p>
     </div>
-    <div class="exhibitors-grid">
-      <a class="sponsor-tile" href="https://www.alhayatuae.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Al Hayat</span></a>
-      <a class="sponsor-tile" href="https://al-umnia.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Al Umnia</span></a>
-      <a class="sponsor-tile" href="https://astuteimaging.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Astute<br>Imaging</span></a>
-      <a class="sponsor-tile" href="https://www.auroradrug.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Aurora<br>Drug</span></a>
-      <a class="sponsor-tile" href="https://www.baxter.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Baxter</span></a>
-      <a class="sponsor-tile" href="https://www.bmt-uae.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">BMT</span></a>
-      <a class="sponsor-tile" href="https://www.gulfdrug.com" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Gulf Drug</span></a>
-      <a class="sponsor-tile" href="https://www.japanlifeline.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Japan<br>Life Line</span></a>
-      <a class="sponsor-tile" href="https://www.medisure.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Medisure</span></a>
-      <a class="sponsor-tile" href="https://transimed.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Transimed</span></a>
-      <a class="sponsor-tile" href="https://www.pharmalink.ae" target="_blank" rel="noreferrer noopener"><span class="logo-mark">PharmaLink</span></a>
-      <a class="sponsor-tile" href="http://pulsecaremed.com/" target="_blank" rel="noreferrer noopener"><span class="logo-mark">Pulse Care<br>Medical</span></a>
-    </div>
+    <p class="tbc-note">To be confirmed.</p>
   </div>
 </section>
 
