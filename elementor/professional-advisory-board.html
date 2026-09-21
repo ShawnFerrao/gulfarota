@@ -65,6 +65,7 @@
   .gas-pab .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
 
   /* ---- chair spotlight ---- */
+  .gas-pab .chair-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(2rem,4vw,3rem);}
   .gas-pab .chair-card{
     display:flex;gap:2.25rem;align-items:center;
   }
@@ -116,6 +117,9 @@
   @media (max-width:640px){
     .gas-pab .board-grid{grid-template-columns:repeat(2,1fr);}
   }
+  @media (max-width:760px){
+    .gas-pab .chair-grid{grid-template-columns:1fr;}
+  }
   @media (max-width:560px){
     .gas-pab .chair-card{flex-direction:column;text-align:center;}
   }
@@ -140,13 +144,24 @@
       <p class="eyebrow" style="color:var(--brass-ink);">Chair</p>
       <h2>Leading the Professional Advisory Board.</h2>
     </div>
-    <div class="chair-card">
-      <div class="chair-avatar">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/Payman.webp" alt="Prof. Payman Majd" loading="lazy" data-fallback="self">
+    <div class="chair-grid">
+      <div class="chair-card">
+        <div class="chair-avatar">
+          <img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/Payman.webp" alt="Prof. Payman Majd" loading="lazy" data-fallback="self">
+        </div>
+        <div>
+          <h3>Prof. Payman Majd</h3>
+          <span class="chair-badge">Chair of Advisory Board</span>
+        </div>
       </div>
-      <div>
-        <h3>Prof. Payman Majd</h3>
-        <span class="chair-badge">Chair of Advisory Board</span>
+      <div class="chair-card">
+        <div class="chair-avatar">
+          <img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d73520387008d75dd37.png" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self">
+        </div>
+        <div>
+          <h3>Prof. Gianpaolo Carrafiello</h3>
+          <span class="chair-badge">Co-Chair of Advisory Board</span>
+        </div>
       </div>
     </div>
   </div>
@@ -165,7 +180,6 @@
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68ce71290563406b7bf9983b.png" alt="Prof. Samer Koussayer" loading="lazy" data-fallback="self"></div><h4>Prof. Samer Koussayer</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/6912c4fb0b647e5ea3d37ee9.png" alt="Prof. Orwa Falah" loading="lazy" data-fallback="self"></div><h4>Prof. Orwa Falah</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d732b5a2b5699a59b62.png" alt="Dr. Martin Claridge" loading="lazy" data-fallback="self"></div><h4>Dr. Martin Claridge</h4></div>
-      <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d73520387008d75dd37.png" alt="Prof. Gianpaolo Carrafiello" loading="lazy" data-fallback="self"></div><h4>Prof. Gianpaolo Carrafiello</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44dcf7f400aaefc7273ae.png" alt="Dr. Hassan Al-Thani" loading="lazy" data-fallback="self"></div><h4>Dr. Hassan Al-Thani</h4></div>
       <div class="person"><div class="avatar"><img src="https://assets.cdn.filesafe.space/xXmmT1dJF4Y9TpAkhBe3/media/68d44d74b9f77729049fc040.png" alt="Dr. Adel Alali" loading="lazy" data-fallback="self"></div><h4>Dr. Adel Alali</h4></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/Sherif-Omar-Elkerdawi.png" alt="Prof. Sherif Omar Elkerdawi" loading="lazy" data-fallback="self"></div><h4>Prof. Sherif Omar Elkerdawi</h4></div>
