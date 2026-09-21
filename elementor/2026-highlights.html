@@ -1,0 +1,125 @@
+<!--
+  GULF AORTA SUMMIT — 2026 HIGHLIGHTS PAGE (Elementor "HTML" widget)
+  ────────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /2026-highlights, matching the "Previous Events" nav pattern used by
+  2024-highlights.html and 2025-highlights.html). No header/footer
+  markup — those come from your global Elementor templates.
+
+  Only a recap video was provided for this edition, so this page is
+  intentionally lighter than 2025-highlights.html (which has fabricated
+  -free real event-analytics infographics built from real GAS2025 data).
+  Swap in stat panels once real GAS2026 numbers (attendees, countries,
+  specialty breakdown, etc.) are available — same component patterns as
+  2025-highlights.html can be reused directly.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-2026.
+-->
+<div class="gas-2026">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-2026{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-2026,.gas-2026 *,.gas-2026 *::before,.gas-2026 *::after{box-sizing:border-box;}
+  .gas-2026 p{margin:0;}
+  .gas-2026 a{color:inherit;text-decoration:none;}
+  .gas-2026 h1,.gas-2026 h2{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-2026 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-2026 img{max-width:100%;display:block;}
+
+  .gas-2026 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-2026 .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-2026 .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- page header (ink band) ---- */
+  .gas-2026 .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-2026 .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  .gas-2026 .page-header .intro{margin-top:1.5rem;max-width:64ch;color:var(--on-ink-mist);font-size:1.05rem;}
+
+  .gas-2026 .section{padding-block:clamp(3rem,7vw,5.5rem);}
+
+  /* ---- buttons ---- */
+  .gas-2026 .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-2026 .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-2026 .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
+  .gas-2026 .cta-band .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-2026 .cta-band .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+
+  /* ---- video ---- */
+  .gas-2026 .video-embed{
+    position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid var(--hairline);
+    background:var(--ink);
+  }
+  .gas-2026 .video-embed video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+  /* ---- closing / CTA band ---- */
+  .gas-2026 .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-2026 .cta-band .wrap{padding-block:clamp(2.5rem,5vw,3.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1.5rem;}
+  .gas-2026 .cta-band h2{font-size:1.4rem;font-style:italic;color:var(--on-ink);max-width:24ch;}
+  .gas-2026 .cta-band .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  @media (prefers-reduced-motion:reduce){
+    .gas-2026 *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Previous Events</p>
+    <h1>GAS 2026 Highlights</h1>
+    <p class="intro">A look back at the Gulf Aorta Summit's fourth wave — the speakers, delegates and disciplines that came together, and the moments captured along the way.</p>
+  </div>
+</section>
+
+<!-- ============ RECAP VIDEO ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="video-embed">
+      <video src="https://gulfaortasummit.com/wp-content/uploads/2026/09/GAS-2026.mp4" controls preload="metadata" playsinline></video>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <h2>Join us for the next chapter at GAS 2027.</h2>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <a class="btn btn-line" href="/gas-2026/">About GAS 2027</a>
+    </div>
+  </div>
+</section>
+</div>
