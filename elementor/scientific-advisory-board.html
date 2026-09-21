@@ -61,6 +61,7 @@
   .gas-sab .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
 
   /* ---- chairman spotlight ---- */
+  .gas-sab .chair-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(2rem,4vw,3rem);}
   .gas-sab .chair-card{
     display:flex;gap:2.25rem;align-items:center;
   }
@@ -110,6 +111,9 @@
   @media (max-width:980px){
     .gas-sab .members-grid{grid-template-columns:repeat(2,1fr);}
   }
+  @media (max-width:760px){
+    .gas-sab .chair-grid{grid-template-columns:1fr;}
+  }
   @media (max-width:560px){
     .gas-sab .members-grid{grid-template-columns:1fr;}
     .gas-sab .chair-card{flex-direction:column;text-align:center;}
@@ -135,13 +139,24 @@
       <p class="eyebrow" style="color:var(--brass-ink);">Chair</p>
       <h2>Chairing the Scientific Advisory Board.</h2>
     </div>
-    <div class="chair-card">
-      <div class="chair-avatar">
-        <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Hussein-Ahmed-Lateef-Sc.webp" alt="Dr. Hussein Ahmed Lateef" loading="lazy" data-fallback="self">
+    <div class="chair-grid">
+      <div class="chair-card">
+        <div class="chair-avatar">
+          <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Hussein-Ahmed-Lateef-Sc.webp" alt="Dr. Hussein Ahmed Lateef" loading="lazy" data-fallback="self">
+        </div>
+        <div>
+          <h3>Dr. Hussein Ahmed Lateef</h3>
+          <span class="chair-badge">Chair of Scientific Board</span>
+        </div>
       </div>
-      <div>
-        <h3>Dr. Hussein Ahmed Lateef</h3>
-        <span class="chair-badge">Chair of Scientific Board</span>
+      <div class="chair-card">
+        <div class="chair-avatar">
+          <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Irphan-Yonis-SC.webp" alt="Dr. Irphan Yonis" loading="lazy" data-fallback="self">
+        </div>
+        <div>
+          <h3>Dr. Irphan Yonis</h3>
+          <span class="chair-badge">Summit Program Co-Chair</span>
+        </div>
       </div>
     </div>
   </div>
@@ -155,7 +170,7 @@
       <h2>Members of the Scientific Advisory Board.</h2>
     </div>
     <div class="members-grid">
-      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Loai-Abudaqa-SC.webp" alt="Dr. Loai Abudaqa" loading="lazy" data-fallback="self"></div><h4>Dr. Loai Abudaqa</h4><p class="role">Summit Program Co-Director</p></div>
+      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Loai-Abudaqa-SC.webp" alt="Dr. Loai Abudaqa" loading="lazy" data-fallback="self"></div><h4>Dr. Loai Abudaqa</h4><p class="role">Director of Integrated Media and Communications</p></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Deena-Mohammed-AlQedrah-SC.webp" alt="Dr. Deena Mohammed AlQedrah" loading="lazy" data-fallback="self"></div><h4>Dr. Deena Mohammed AlQedrah</h4><p class="role">Director of Summit Program Content Strategy</p></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Tania-S.-Guzman-SC.webp" alt="Dr. Tania S. Guzman" loading="lazy" data-fallback="self"></div><h4>Dr. Tania S. Guzman</h4><p class="role">Director of Audit and Quality Improvement</p></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Khalid-Rashid-Makhdoomi-SC.webp" alt="Dr. Khalid Rashid Makhdoomi" loading="lazy" data-fallback="self"></div><h4>Dr. Khalid Rashid Makhdoomi</h4></div>
@@ -165,7 +180,6 @@
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Saher-Arour-SC.webp" alt="Dr. Saher Arour" loading="lazy" data-fallback="self"></div><h4>Dr. Saher Arour</h4></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Wafaa-Elhadi-SC.webp" alt="Dr. Wafaa Elhadi" loading="lazy" data-fallback="self"></div><h4>Dr. Wafaa Elhadi</h4></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Mohamad-Ftyan-SC.webp" alt="Dr. Mohamad Ftyan" loading="lazy" data-fallback="self"></div><h4>Dr. Mohamad Ftyan</h4></div>
-      <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Irphan-Yonis-SC.webp" alt="Dr. Irphan Yonis" loading="lazy" data-fallback="self"></div><h4>Dr. Irphan Yonis</h4><p class="role">Director of Integrated Media and Communications</p></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/09/Prof.-Dr.-Abdulameer-Mohsin-Hussein-update.png" alt="Prof. Dr. Abdulameer Mohsin Hussein" loading="lazy" data-fallback="self"></div><h4>Prof. Dr. Abdulameer Mohsin Hussein</h4></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Dr.-Ayman-Saleh-SC.webp" alt="Dr. Ayman Saleh" loading="lazy" data-fallback="self"></div><h4>Dr. Ayman Saleh</h4></div>
       <div class="person"><div class="avatar"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Samar-Tayseer-SC.webp" alt="Samar Tayseer" loading="lazy" data-fallback="self"></div><h4>Samar Tayseer</h4><p class="role">Chief Nursing Staff and Awareness Committee</p></div>
