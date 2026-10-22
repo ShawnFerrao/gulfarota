@@ -70,6 +70,10 @@
   .gas-footer .foot-col .contact-org{display:block;font-weight:600;font-size:.92rem;color:var(--on-ink);}
   .gas-footer .foot-col .legal-note{font-size:.78rem;line-height:1.55;color:var(--on-ink-mist);opacity:.75;}
 
+  /* ---- contact column: two distinct sub-sections ---- */
+  .gas-footer .contact-block{display:flex;flex-direction:column;gap:.35rem;}
+  .gas-footer .contact-block + .contact-block{margin-top:1.2rem;padding-top:1.1rem;border-top:1px solid rgba(244,246,248,.1);}
+
   /* ---- nav groups within a footer column (mirrors header dropdown groups) ---- */
   .gas-footer .foot-col .nav-group{margin-bottom:1.1rem;position:relative;}
   .gas-footer .foot-col .nav-group:last-child{margin-bottom:0;}
@@ -205,12 +209,16 @@
 
       <div class="foot-col">
         <h5>Contact</h5>
-        <ul>
-          <li><strong class="contact-org">Gulf Dunes</strong></li>
-          <li><a href="mailto:Info@gulfaortasummit.com">Info@gulfaortasummit.com</a></li>
-          <li><a href="https://www.gdplus.ae" target="_blank" rel="noreferrer noopener">www.gdplus.ae</a></li>
-          <li><address>Al Barsha Boutique Building, 3rd Floor, Al Barsha 1, Dubai, UAE</address></li>
-        </ul>
+        <div class="contact-block">
+          <strong class="contact-org">Gulf Aorta Admin</strong>
+          <a href="mailto:admin@gulfaortasummit.com">admin@gulfaortasummit.com</a>
+        </div>
+        <div class="contact-block">
+          <strong class="contact-org">Gulf Dunes</strong>
+          <a href="mailto:Info@gulfaortasummit.com">Info@gulfaortasummit.com</a>
+          <a href="https://www.gdplus.ae" target="_blank" rel="noreferrer noopener">www.gdplus.ae</a>
+          <address>Al Barsha Boutique Building, 3rd Floor, Al Barsha 1, Dubai, UAE</address>
+        </div>
       </div>
     </div>
 
