@@ -61,21 +61,21 @@
   .gas-sab .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
 
   /* ---- chairman spotlight ---- */
-  .gas-sab .chair-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(2rem,4vw,3rem);}
+  .gas-sab .chair-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2rem,4vw,3rem);}
   .gas-sab .chair-card{
-    display:flex;gap:2.25rem;align-items:center;
+    display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;
   }
   .gas-sab .chair-avatar{
-    width:256px;height:256px;position:relative;flex:none;border-radius:20px;overflow:hidden;
+    width:200px;height:200px;position:relative;flex:none;border-radius:20px;overflow:hidden;
     background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 14px 30px -18px rgba(0,26,63,.22);
   }
   .gas-sab .chair-avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1;}
   .gas-sab .chair-avatar img.hidden{display:none;}
-  .gas-sab .chair-card h3{font-size:1.5rem;font-style:italic;font-weight:500;}
+  .gas-sab .chair-card h3{font-size:1.25rem;font-style:italic;font-weight:500;}
   .gas-sab .chair-badge{
-    display:inline-flex;margin-top:.7rem;font-family:"IBM Plex Sans";font-weight:600;font-size:.86rem;letter-spacing:.01em;
+    display:inline-flex;margin-top:.5rem;font-family:"IBM Plex Sans";font-weight:600;font-size:.82rem;letter-spacing:.01em;
     color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
-    padding:.5rem 1.1rem;line-height:1.4;
+    padding:.5rem 1rem;line-height:1.4;
   }
 
   /* ---- members grid ---- */
@@ -116,7 +116,6 @@
   }
   @media (max-width:560px){
     .gas-sab .members-grid{grid-template-columns:1fr;}
-    .gas-sab .chair-card{flex-direction:column;text-align:center;}
   }
   @media (prefers-reduced-motion:reduce){
     .gas-sab *{transition-duration:.001ms !important;}
@@ -156,6 +155,15 @@
         <div>
           <h3>Dr. Irphan Yonis</h3>
           <span class="chair-badge">Scientific Board Co-Chair</span>
+        </div>
+      </div>
+      <div class="chair-card">
+        <div class="chair-avatar">
+          <img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Anna-Czeczotka-.png" alt="Anna Czeczótka" loading="lazy" data-fallback="self">
+        </div>
+        <div>
+          <h3>Anna Czeczótka</h3>
+          <span class="chair-badge">Coordinator of Integrated Media &amp; Communications (Electroradiology Technician)</span>
         </div>
       </div>
     </div>
