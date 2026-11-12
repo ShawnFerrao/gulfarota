@@ -53,7 +53,15 @@
   .gas-prc .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
 
   /* ---- page header (ink band) ---- */
-  .gas-prc .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-prc .page-header{position:relative;overflow:hidden;background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  .gas-prc .page-header-media{position:absolute;inset:0;z-index:0;}
+  .gas-prc .page-header-media img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:saturate(.5) brightness(.42);}
+  .gas-prc .page-header-media img.hidden{display:none;}
+  .gas-prc .page-header-media .scrim{
+    position:absolute;inset:0;
+    background:linear-gradient(100deg,rgba(0,26,63,.96) 0%,rgba(0,26,63,.9) 28%,rgba(0,26,63,.68) 58%,rgba(0,26,63,.42) 100%);
+  }
+  .gas-prc .page-header > .wrap{position:relative;z-index:1;}
   .gas-prc .page-header h1{font-size:var(--fs-display-1);max-width:22ch;color:var(--on-ink);}
   .gas-prc .page-header .subtitle{
     margin-top:.9rem;font-family:"Newsreader",Georgia,serif;font-style:italic;font-size:1.2rem;color:var(--brass-soft);
@@ -137,6 +145,10 @@
 
 <!-- ============ PAGE HEADER ============ -->
 <section class="page-header">
+  <div class="page-header-media" aria-hidden="true">
+    <img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Peer-review-header.webp" alt="" loading="eager" data-fallback="hero">
+    <div class="scrim"></div>
+  </div>
   <div class="wrap">
     <p class="eyebrow">Governance</p>
     <h1>Peer Review Committee</h1>
