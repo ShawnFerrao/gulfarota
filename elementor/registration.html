@@ -29,13 +29,15 @@
   / mobile viewports always get the plain stacked layout, matching how
   this kind of effect is typically handled responsively.
 
-  COLOR STRATEGY: only the hero and the closing CTA use the dark ink
-  background, as deliberate "bookends" — every section in between (Fees,
-  Categories, Policy) shares the same plain linen background, so the page
-  reads as one coherent canvas rather than a stack of differently-coloured
-  blocks. The two ink sections fade into linen at the edge that touches
-  a light section, instead of cutting hard, so the transition feels like
-  one continuous surface rather than a seam.
+  COLOR STRATEGY: the entire page — hero, fees, categories, policy and the
+  closing CTA — shares one single ink-navy background, with no section
+  colour changes at all. This is deliberate: with the diagonal pin+pan
+  effect, any colour boundary between sections becomes visible mid-pan as
+  an ugly diagonal seam/cut (light section edge showing next to a dark
+  one). Removing every colour seam removes that artifact entirely. All
+  text, card fills, borders and accents below are tuned for this one dark
+  background (light text, brass-gold accents, translucent card panels)
+  rather than the light theme used on the rest of the site.
 
   Note: position:sticky requires that no ancestor Elementor section/column
   around this widget has overflow:hidden (or a transform) on it — if the
@@ -57,13 +59,11 @@
     --ink:#001A3F;
     --brass:#E3BE7A;
     --brass-soft:#F2DBA8;
-    --brass-ink:#93701E;
+    --brass-ink:#F2DBA8;
     --brass-dim:rgba(227,190,122,.38);
-    --linen:#FFFFFF;
-    --linen-raised:#F2F5F8;
-    --mist:#595959;
-    --ink-text:#22344A;
-    --hairline:rgba(44,70,107,.16);
+    --mist:#9FB6CE;
+    --ink-text:#F4F6F8;
+    --hairline:rgba(244,246,248,.16);
     --on-ink:#F4F6F8;
     --on-ink-mist:#9FB6CE;
     --radius:2px;
@@ -73,21 +73,21 @@
     --fs-display-1:clamp(2.2rem,3.6vw + 1rem,3.6rem);
     --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
     display:block;
-    background:var(--linen);color:var(--ink-text);
+    background:var(--ink);color:var(--ink-text);
     font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     font-size:1rem;line-height:1.65;
   }
   .gas-registration,.gas-registration *,.gas-registration *::before,.gas-registration *::after{box-sizing:border-box;}
   .gas-registration p{margin:0;}
   .gas-registration a{color:inherit;text-decoration:none;}
-  .gas-registration h1,.gas-registration h2,.gas-registration h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-registration h1,.gas-registration h2,.gas-registration h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;color:var(--on-ink);}
   .gas-registration .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
 
   .gas-registration .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);width:100%;}
 
   .gas-registration .eyebrow{
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
-    text-transform:uppercase;color:var(--brass-ink);display:inline-flex;align-items:center;gap:.6em;
+    text-transform:uppercase;color:var(--brass-soft);display:inline-flex;align-items:center;gap:.6em;
     margin-bottom:1rem;
   }
   .gas-registration .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
@@ -100,30 +100,30 @@
   .gas-registration .btn:hover{transform:translateY(-2px);}
   .gas-registration .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
   .gas-registration .btn-gold:hover{background:var(--brass-soft) !important;}
-  .gas-registration .btn-line{border-color:var(--hairline) !important;color:var(--ink-text) !important;}
-  .gas-registration .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
+  .gas-registration .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-registration .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
 
   /* ============ SIDE NAV — tracks current section ============ */
   .gas-registration .page-nav{
     position:fixed;z-index:40;right:clamp(1rem,2.6vw,2.25rem);top:50%;transform:translateY(-50%);
     display:flex;flex-direction:column;gap:.1rem;
-    background:rgba(255,255,255,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-    border:1px solid var(--hairline);border-radius:100px;padding:.9rem .55rem;
-    box-shadow:0 14px 34px -20px rgba(0,26,63,.35);
+    background:rgba(0,26,63,.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid rgba(244,246,248,.16);border-radius:100px;padding:.9rem .55rem;
+    box-shadow:0 14px 34px -20px rgba(0,0,0,.55);
   }
   .gas-registration .page-nav__link{
-    display:flex;align-items:center;gap:.65rem;padding:.5rem .35rem;color:var(--mist);
+    display:flex;align-items:center;gap:.65rem;padding:.5rem .35rem;color:var(--on-ink-mist);
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;
   }
-  .gas-registration .page-nav__dot{width:7px;height:7px;border-radius:50%;background:var(--hairline);flex:none;transition:background .25s var(--ease),transform .25s var(--ease);}
+  .gas-registration .page-nav__dot{width:7px;height:7px;border-radius:50%;background:rgba(244,246,248,.28);flex:none;transition:background .25s var(--ease),transform .25s var(--ease);}
   .gas-registration .page-nav__label{
     opacity:0;max-width:0;overflow:hidden;white-space:nowrap;transition:opacity .25s var(--ease),max-width .3s var(--ease);
   }
   .gas-registration .page-nav__link:hover .page-nav__label,
   .gas-registration .page-nav__link.is-active .page-nav__label{opacity:1;max-width:13em;}
   .gas-registration .page-nav__link:hover,
-  .gas-registration .page-nav__link.is-active{color:var(--ink-text);}
-  .gas-registration .page-nav__link.is-active .page-nav__dot{background:var(--brass-ink);transform:scale(1.5);}
+  .gas-registration .page-nav__link.is-active{color:var(--on-ink);}
+  .gas-registration .page-nav__link.is-active .page-nav__dot{background:var(--brass-soft);transform:scale(1.5);}
 
   /* ============ default (no-JS / mobile): plain stacked sections ============ */
   .gas-registration .scroll-track{position:relative;}
@@ -137,7 +137,7 @@
 
   /* ============ pinned diagonal-pan mode (JS-enabled, enabled by .is-pinned-scroll) ============ */
   .gas-registration.is-pinned-scroll .scroll-stage{
-    position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--linen);
+    position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--ink);
   }
   .gas-registration.is-pinned-scroll .scroll-inner{
     position:relative;height:100%;width:100%;will-change:transform;
@@ -147,18 +147,10 @@
     padding-block:clamp(3rem,7vw,5rem);overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
 
-  /* ---- hero / page header (ink bookend, fading into linen at its lower edge) ---- */
-  .gas-registration .page-header{
-    background:linear-gradient(to bottom, var(--ink) 0%, var(--ink) 84%, var(--linen) 100%);
-    color:var(--on-ink);
-  }
-  .gas-registration .page-header .eyebrow{color:var(--brass-soft);}
-  .gas-registration .page-header .eyebrow::before{background:var(--brass-soft);}
-  .gas-registration .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
+  /* ---- hero / page header ---- */
+  .gas-registration .page-header h1{font-size:var(--fs-display-1);max-width:20ch;}
   .gas-registration .page-header .intro{margin-top:1.5rem;max-width:62ch;color:var(--on-ink-mist);font-size:1.05rem;}
   .gas-registration .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
-  .gas-registration .page-header .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
-  .gas-registration .page-header .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
   .gas-registration .scroll-hint{
     display:inline-flex;align-items:center;gap:.6em;margin-top:clamp(2.5rem,6vw,4rem);
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
@@ -178,17 +170,17 @@
   /* ---- fee cards ---- */
   .gas-registration .fee-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
   .gas-registration .fee-card{
-    border:1px solid var(--hairline);border-radius:12px;padding:1.3rem 1.25rem;
-    display:flex;flex-direction:column;gap:.8rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    border:1px solid var(--hairline);border-radius:12px;padding:1.3rem 1.25rem;background:rgba(244,246,248,.05);
+    display:flex;flex-direction:column;gap:.8rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease);
   }
-  .gas-registration .fee-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.22);}
+  .gas-registration .fee-card:hover{transform:translateY(-4px);background:rgba(244,246,248,.09);box-shadow:0 14px 28px -18px rgba(0,0,0,.55);}
   .gas-registration .fee-card h3{font-size:1.02rem;}
   .gas-registration .fee-price{display:flex;align-items:baseline;gap:.6em;}
-  .gas-registration .fee-price .usd{font-family:"IBM Plex Mono";font-size:1.4rem;font-weight:600;color:var(--brass-ink);}
+  .gas-registration .fee-price .usd{font-family:"IBM Plex Mono";font-size:1.4rem;font-weight:600;color:var(--brass-soft);}
   .gas-registration .fee-price .aed{font-family:"IBM Plex Mono";font-size:.8rem;color:var(--mist);}
   .gas-registration .badge-early{
     display:inline-block;margin-left:.6em;font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.06em;
-    text-transform:uppercase;color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
+    text-transform:uppercase;color:var(--brass-soft);border:1px solid var(--brass-dim);border-radius:100px;
     padding:.2em .6em;vertical-align:middle;
   }
   .gas-registration .fee-note{margin-top:1.4rem;color:var(--mist);font-size:.86rem;}
@@ -196,12 +188,12 @@
   /* ---- registration category cards ---- */
   .gas-registration .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
   .gas-registration .cat-card{
-    border:1px solid var(--hairline);border-radius:12px;padding:1.5rem 1.3rem;
-    display:flex;flex-direction:column;gap:.7rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    border:1px solid var(--hairline);border-radius:12px;padding:1.5rem 1.3rem;background:rgba(244,246,248,.05);
+    display:flex;flex-direction:column;gap:.7rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease);
   }
-  .gas-registration .cat-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.22);}
+  .gas-registration .cat-card:hover{transform:translateY(-4px);background:rgba(244,246,248,.09);box-shadow:0 14px 28px -18px rgba(0,0,0,.55);}
   .gas-registration .cat-card h3{font-size:1.06rem;}
-  .gas-registration .cat-card .price{font-family:"IBM Plex Mono";font-size:.84rem;color:var(--brass-ink);font-weight:600;}
+  .gas-registration .cat-card .price{font-family:"IBM Plex Mono";font-size:.84rem;color:var(--brass-soft);font-weight:600;}
   .gas-registration .cat-card p{color:var(--mist);font-size:.86rem;}
 
   /* ---- cancellation policy ---- */
@@ -209,17 +201,13 @@
     display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem 2.5rem;max-width:88ch;
   }
   .gas-registration .policy-item{display:flex;gap:.85rem;align-items:flex-start;}
-  .gas-registration .policy-item .mark{flex:none;width:1.3em;color:var(--brass-ink);font-weight:600;}
+  .gas-registration .policy-item .mark{flex:none;width:1.3em;color:var(--brass-soft);font-weight:600;}
   .gas-registration .policy-item p{color:var(--ink-text);font-size:.94rem;}
-  .gas-registration .policy-item a{color:var(--brass-ink);text-decoration:underline;text-underline-offset:2px;}
+  .gas-registration .policy-item a{color:var(--brass-soft);text-decoration:underline;text-underline-offset:2px;}
 
-  /* ---- closing / CTA band (ink bookend, fading in from linen at its upper edge) ---- */
-  .gas-registration .cta-band{
-    background:linear-gradient(to bottom, var(--linen) 0%, var(--ink) 16%, var(--ink) 100%);
-    color:var(--on-ink);
-  }
+  /* ---- closing / CTA band ---- */
   .gas-registration .cta-band .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
-  .gas-registration .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
+  .gas-registration .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;}
   .gas-registration .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
   .gas-registration .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
 
