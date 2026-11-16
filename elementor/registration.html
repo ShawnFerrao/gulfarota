@@ -1,9 +1,20 @@
 <!--
   GULF AORTA SUMMIT — REGISTRATION PAGE (Elementor "HTML" widget)
   ────────────────────────────────────────────────────────────
-  Paste into an HTML widget on its own page (suggested slug: /registration).
+  Paste into an HTML widget on its own page (suggested slug: /registration,
+  used as the site's "Register Now" page).
   No header/footer markup — those come from your global Elementor
   templates.
+
+  LAYOUT: a full-screen scrolling experience — each topic (Register, Fees,
+  Categories, Policy, Register Now) is its own near-full-viewport section,
+  with a fixed side nav on desktop that tracks the current section as you
+  scroll and lets you jump between them. Inspired by the single-page
+  scroll-with-side-nav pattern on adia.ae — reimplemented from scratch
+  with plain CSS (min-height sections + a sticky/fixed side nav +
+  IntersectionObserver) rather than copying any of ADIA's code, markup,
+  or content. All copy, fee figures, policy text and links below are
+  GAS's own.
 
   Fee table and cancellation/refund policy are the real GAS 2027 figures.
   "Register Interest" / "Register Now" buttons point at the live Zoho
@@ -46,7 +57,7 @@
   .gas-registration h1,.gas-registration h2,.gas-registration h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
   .gas-registration .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
 
-  .gas-registration .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+  .gas-registration .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);width:100%;}
 
   .gas-registration .eyebrow{
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
@@ -66,8 +77,37 @@
   .gas-registration .btn-line{border-color:var(--hairline) !important;color:var(--ink-text) !important;}
   .gas-registration .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
 
-  /* ---- page header (ink band) ---- */
-  .gas-registration .page-header{background:var(--ink);color:var(--on-ink);padding-block:clamp(3rem,7vw,5rem) clamp(2.5rem,5vw,3.5rem);}
+  /* ============ SIDE NAV (desktop) — tracks current section ============ */
+  .gas-registration .page-nav{
+    position:fixed;z-index:40;right:clamp(1rem,2.6vw,2.25rem);top:50%;transform:translateY(-50%);
+    display:flex;flex-direction:column;gap:.1rem;
+    background:rgba(255,255,255,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border:1px solid var(--hairline);border-radius:100px;padding:.9rem .55rem;
+    box-shadow:0 14px 34px -20px rgba(0,26,63,.35);
+  }
+  .gas-registration .page-nav__link{
+    display:flex;align-items:center;gap:.65rem;padding:.5rem .35rem;color:var(--mist);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;
+  }
+  .gas-registration .page-nav__dot{width:7px;height:7px;border-radius:50%;background:var(--hairline);flex:none;transition:background .25s var(--ease),transform .25s var(--ease);}
+  .gas-registration .page-nav__label{
+    opacity:0;max-width:0;overflow:hidden;white-space:nowrap;transition:opacity .25s var(--ease),max-width .3s var(--ease);
+  }
+  .gas-registration .page-nav__link:hover .page-nav__label,
+  .gas-registration .page-nav__link.is-active .page-nav__label{opacity:1;max-width:13em;}
+  .gas-registration .page-nav__link:hover,
+  .gas-registration .page-nav__link.is-active{color:var(--ink-text);}
+  .gas-registration .page-nav__link.is-active .page-nav__dot{background:var(--brass-ink);transform:scale(1.5);}
+
+  /* ============ full-screen scroll sections ============ */
+  .gas-registration .scroll-section{
+    min-height:100vh;min-height:100svh;display:flex;align-items:center;
+    padding-block:clamp(4rem,9vw,6.5rem);position:relative;
+  }
+  .gas-registration .scroll-section > .wrap{position:relative;z-index:1;}
+
+  /* ---- hero / page header (ink band) ---- */
+  .gas-registration .page-header{background:var(--ink);color:var(--on-ink);}
   .gas-registration .page-header .eyebrow{color:var(--brass-soft);}
   .gas-registration .page-header .eyebrow::before{background:var(--brass-soft);}
   .gas-registration .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
@@ -75,67 +115,94 @@
   .gas-registration .page-header .btn-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;}
   .gas-registration .page-header .btn-line{border-color:rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
   .gas-registration .page-header .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+  .gas-registration .scroll-hint{
+    display:inline-flex;align-items:center;gap:.6em;margin-top:clamp(2.5rem,6vw,4rem);
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--brass-soft);cursor:pointer;
+  }
+  .gas-registration .scroll-hint__notch{
+    width:28px;height:28px;border-radius:50%;border:1px solid rgba(227,190,122,.5);
+    display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease),border-color .3s;
+  }
+  .gas-registration .scroll-hint__notch::before{content:"";width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg) translateY(-1px);}
+  .gas-registration .scroll-hint:hover .scroll-hint__notch{transform:translateY(3px);border-color:var(--brass);}
 
-  .gas-registration .section{padding-block:clamp(3rem,7vw,5.5rem);}
   .gas-registration .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
   .gas-registration .section-head h2{font-size:var(--fs-display-2);max-width:30ch;}
   .gas-registration .section-head .kicker{margin-top:.85rem;max-width:60ch;color:var(--mist);font-size:1.02rem;}
 
   /* ---- fee cards ---- */
-  .gas-registration .fee-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;}
+  .gas-registration .fee-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
   .gas-registration .fee-card{
-    border:1px solid var(--hairline);border-radius:12px;padding:1.5rem 1.4rem;
-    display:flex;flex-direction:column;gap:.9rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    border:1px solid var(--hairline);border-radius:12px;padding:1.3rem 1.25rem;
+    display:flex;flex-direction:column;gap:.8rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
   }
   .gas-registration .fee-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.22);}
-  .gas-registration .fee-card h3{font-size:1.1rem;}
+  .gas-registration .fee-card h3{font-size:1.02rem;}
   .gas-registration .fee-price{display:flex;align-items:baseline;gap:.6em;}
-  .gas-registration .fee-price .usd{font-family:"IBM Plex Mono";font-size:1.5rem;font-weight:600;color:var(--brass-ink);}
-  .gas-registration .fee-price .aed{font-family:"IBM Plex Mono";font-size:.82rem;color:var(--mist);}
+  .gas-registration .fee-price .usd{font-family:"IBM Plex Mono";font-size:1.4rem;font-weight:600;color:var(--brass-ink);}
+  .gas-registration .fee-price .aed{font-family:"IBM Plex Mono";font-size:.8rem;color:var(--mist);}
   .gas-registration .badge-early{
-    display:inline-block;margin-left:.6em;font-family:"IBM Plex Mono";font-size:.62rem;letter-spacing:.06em;
+    display:inline-block;margin-left:.6em;font-family:"IBM Plex Mono";font-size:.6rem;letter-spacing:.06em;
     text-transform:uppercase;color:var(--brass-ink);border:1px solid var(--brass-dim);border-radius:100px;
     padding:.2em .6em;vertical-align:middle;
   }
-  .gas-registration .fee-note{margin-top:1.25rem;color:var(--mist);font-size:.88rem;}
+  .gas-registration .fee-note{margin-top:1.4rem;color:var(--mist);font-size:.86rem;}
 
   /* ---- registration category cards ---- */
-  .gas-registration .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:clamp(2.5rem,5vw,3.5rem);}
+  .gas-registration .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem;}
   .gas-registration .cat-card{
-    border:1px solid var(--hairline);border-radius:12px;padding:1.6rem 1.4rem;
-    display:flex;flex-direction:column;gap:.75rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    border:1px solid var(--hairline);border-radius:12px;padding:1.5rem 1.3rem;
+    display:flex;flex-direction:column;gap:.7rem;transition:transform .3s var(--ease),box-shadow .3s var(--ease);
   }
   .gas-registration .cat-card:hover{transform:translateY(-4px);box-shadow:0 14px 28px -18px rgba(0,26,63,.22);}
-  .gas-registration .cat-card h3{font-size:1.1rem;}
-  .gas-registration .cat-card .price{font-family:"IBM Plex Mono";font-size:.86rem;color:var(--brass-ink);font-weight:600;}
-  .gas-registration .cat-card p{color:var(--mist);font-size:.88rem;}
+  .gas-registration .cat-card h3{font-size:1.06rem;}
+  .gas-registration .cat-card .price{font-family:"IBM Plex Mono";font-size:.84rem;color:var(--brass-ink);font-weight:600;}
+  .gas-registration .cat-card p{color:var(--mist);font-size:.86rem;}
 
   /* ---- cancellation policy ---- */
-  .gas-registration .policy-list{display:flex;flex-direction:column;gap:1.1rem;max-width:74ch;}
-  .gas-registration .policy-item{display:flex;gap:.9rem;align-items:flex-start;}
+  .gas-registration .policy-list{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem 2.5rem;max-width:88ch;
+  }
+  .gas-registration .policy-item{display:flex;gap:.85rem;align-items:flex-start;}
   .gas-registration .policy-item .mark{flex:none;width:1.3em;color:var(--brass-ink);font-weight:600;}
-  .gas-registration .policy-item p{color:var(--ink-text);font-size:.98rem;}
+  .gas-registration .policy-item p{color:var(--ink-text);font-size:.94rem;}
   .gas-registration .policy-item a{color:var(--brass-ink);text-decoration:underline;text-underline-offset:2px;}
 
   /* ---- closing / CTA band ---- */
   .gas-registration .cta-band{background:var(--ink);color:var(--on-ink);}
-  .gas-registration .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-registration .cta-band .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
   .gas-registration .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
   .gas-registration .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
   .gas-registration .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
 
   @media (max-width:980px){
+    .gas-registration .page-nav{display:none;}
     .gas-registration .fee-card-grid{grid-template-columns:repeat(2,1fr);}
     .gas-registration .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .gas-registration .policy-list{grid-template-columns:1fr;}
   }
   @media (max-width:600px){
+    .gas-registration .scroll-section{min-height:auto;}
     .gas-registration .fee-card-grid{grid-template-columns:1fr;}
     .gas-registration .cat-grid{grid-template-columns:1fr;}
   }
+  @media (prefers-reduced-motion:reduce){
+    .gas-registration *{transition-duration:.001ms !important;}
+  }
 </style>
 
-<!-- ============ PAGE HEADER ============ -->
-<section class="page-header">
+<!-- ============ SIDE NAV ============ -->
+<nav class="page-nav" id="GasRegNav" aria-label="Registration page sections">
+  <a href="#RegHero" class="page-nav__link is-active" data-target="RegHero"><span class="page-nav__dot"></span><span class="page-nav__label">Register</span></a>
+  <a href="#RegFees" class="page-nav__link" data-target="RegFees"><span class="page-nav__dot"></span><span class="page-nav__label">Fees</span></a>
+  <a href="#RegCategories" class="page-nav__link" data-target="RegCategories"><span class="page-nav__dot"></span><span class="page-nav__label">Categories</span></a>
+  <a href="#RegPolicy" class="page-nav__link" data-target="RegPolicy"><span class="page-nav__dot"></span><span class="page-nav__label">Cancellation policy</span></a>
+  <a href="#RegCta" class="page-nav__link" data-target="RegCta"><span class="page-nav__dot"></span><span class="page-nav__label">Register now</span></a>
+</nav>
+
+<!-- ============ HERO / PAGE HEADER ============ -->
+<section class="scroll-section page-header" id="RegHero">
   <div class="wrap">
     <p class="eyebrow">Registration</p>
     <h1>Register for GAS 2027.</h1>
@@ -144,11 +211,12 @@
       <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
       <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Registration%20Enquiry">Ask a Question</a>
     </div>
+    <a href="#RegFees" class="scroll-hint" data-target="RegFees"><span class="scroll-hint__notch"></span>See registration fees</a>
   </div>
 </section>
 
 <!-- ============ FEES ============ -->
-<section class="section">
+<section class="scroll-section" id="RegFees">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Registration fees</p>
@@ -182,7 +250,17 @@
       </div>
     </div>
     <p class="fee-note">Prices shown in US Dollars and UAE Dirhams. Registration fee is waived for invited speakers.</p>
+  </div>
+</section>
 
+<!-- ============ CATEGORIES ============ -->
+<section class="scroll-section" id="RegCategories" style="background:var(--linen-raised);">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Who's registering</p>
+      <h2>Built for every role at GAS 2027.</h2>
+      <p class="kicker">Whichever category applies to you, every pass covers full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
+    </div>
     <div class="cat-grid">
       <div class="cat-card">
         <h3>Doctors / HCPs</h3>
@@ -209,7 +287,7 @@
 </section>
 
 <!-- ============ CANCELLATION & REFUND ============ -->
-<section class="section" style="background:var(--linen-raised);">
+<section class="scroll-section" id="RegPolicy">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Terms</p>
@@ -228,7 +306,7 @@
 </section>
 
 <!-- ============ CLOSING CTA ============ -->
-<section class="cta-band">
+<section class="scroll-section cta-band" id="RegCta">
   <div class="wrap">
     <div>
       <h2>Ready to secure your seat?</h2>
@@ -240,3 +318,53 @@
   </div>
 </section>
 </div>
+
+<script>
+(function(){
+  var root = document.currentScript.previousElementSibling;
+  // guard: find the wrapper regardless of exact DOM position
+  var wrapper = document.querySelector('.gas-registration');
+  if (!wrapper) return;
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var scrollBehavior = reduced ? 'auto' : 'smooth';
+
+  var sections = wrapper.querySelectorAll('.scroll-section[id]');
+  var navLinks = wrapper.querySelectorAll('.page-nav__link');
+
+  function setActive(id){
+    navLinks.forEach(function(link){
+      link.classList.toggle('is-active', link.getAttribute('data-target') === id);
+    });
+  }
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) setActive(entry.target.id);
+      });
+    }, { threshold: 0.5 });
+    sections.forEach(function(s){ io.observe(s); });
+  }
+
+  function jumpTo(id, e){
+    var target = document.getElementById(id);
+    if (!target) return;
+    if (e) e.preventDefault();
+    target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+  }
+
+  navLinks.forEach(function(link){
+    link.addEventListener('click', function(e){
+      jumpTo(link.getAttribute('data-target'), e);
+    });
+  });
+
+  var hint = wrapper.querySelector('.scroll-hint');
+  if (hint) {
+    hint.addEventListener('click', function(e){
+      jumpTo(hint.getAttribute('data-target'), e);
+    });
+  }
+})();
+</script>
