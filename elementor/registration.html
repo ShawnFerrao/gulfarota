@@ -29,6 +29,14 @@
   / mobile viewports always get the plain stacked layout, matching how
   this kind of effect is typically handled responsively.
 
+  COLOR STRATEGY: only the hero and the closing CTA use the dark ink
+  background, as deliberate "bookends" — every section in between (Fees,
+  Categories, Policy) shares the same plain linen background, so the page
+  reads as one coherent canvas rather than a stack of differently-coloured
+  blocks. The two ink sections fade into linen at the edge that touches
+  a light section, instead of cutting hard, so the transition feels like
+  one continuous surface rather than a seam.
+
   Note: position:sticky requires that no ancestor Elementor section/column
   around this widget has overflow:hidden (or a transform) on it — if the
   pin doesn't visually "stick" once live, check the parent section's
@@ -139,8 +147,11 @@
     padding-block:clamp(3rem,7vw,5rem);overflow-y:auto;-webkit-overflow-scrolling:touch;
   }
 
-  /* ---- hero / page header (ink band) ---- */
-  .gas-registration .page-header{background:var(--ink);color:var(--on-ink);}
+  /* ---- hero / page header (ink bookend, fading into linen at its lower edge) ---- */
+  .gas-registration .page-header{
+    background:linear-gradient(to bottom, var(--ink) 0%, var(--ink) 84%, var(--linen) 100%);
+    color:var(--on-ink);
+  }
   .gas-registration .page-header .eyebrow{color:var(--brass-soft);}
   .gas-registration .page-header .eyebrow::before{background:var(--brass-soft);}
   .gas-registration .page-header h1{font-size:var(--fs-display-1);max-width:20ch;color:var(--on-ink);}
@@ -202,8 +213,11 @@
   .gas-registration .policy-item p{color:var(--ink-text);font-size:.94rem;}
   .gas-registration .policy-item a{color:var(--brass-ink);text-decoration:underline;text-underline-offset:2px;}
 
-  /* ---- closing / CTA band ---- */
-  .gas-registration .cta-band{background:var(--ink);color:var(--on-ink);}
+  /* ---- closing / CTA band (ink bookend, fading in from linen at its upper edge) ---- */
+  .gas-registration .cta-band{
+    background:linear-gradient(to bottom, var(--linen) 0%, var(--ink) 16%, var(--ink) 100%);
+    color:var(--on-ink);
+  }
   .gas-registration .cta-band .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
   .gas-registration .cta-band h2{font-size:var(--fs-display-2);max-width:18ch;color:var(--on-ink);}
   .gas-registration .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:44ch;}
@@ -290,7 +304,7 @@
       </section>
 
       <!-- ============ CATEGORIES ============ -->
-      <section class="scroll-section" id="RegCategories" style="background:var(--linen-raised);">
+      <section class="scroll-section" id="RegCategories">
         <div class="wrap">
           <div class="section-head">
             <p class="eyebrow">Who's registering</p>
