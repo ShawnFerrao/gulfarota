@@ -6,15 +6,33 @@
   No header/footer markup — those come from your global Elementor
   templates.
 
-  LAYOUT: a full-screen scrolling experience — each topic (Register, Fees,
-  Categories, Policy, Register Now) is its own near-full-viewport section,
-  with a fixed side nav on desktop that tracks the current section as you
-  scroll and lets you jump between them. Inspired by the single-page
-  scroll-with-side-nav pattern on adia.ae — reimplemented from scratch
-  with plain CSS (min-height sections + a sticky/fixed side nav +
-  IntersectionObserver) rather than copying any of ADIA's code, markup,
-  or content. All copy, fee figures, policy text and links below are
-  GAS's own.
+  LAYOUT: a pinned, diagonally-panning scroll experience inspired by
+  adia.ae — each topic (Register, Fees, Categories, Policy, Register Now)
+  occupies its own full-viewport "cell" positioned on a virtual 2D plane
+  (alternating left/right), and as the visitor scrolls, a pinned stage
+  translates across that plane so the page visibly pans diagonally
+  between sections, not just straight up.
+
+  This is reimplemented from scratch (no code/content copied from ADIA) and
+  deliberately does NOT hijack the mouse wheel / touch input the way some
+  "scroll-jacking" sites do. Instead it uses a standard, more robust and
+  accessible technique: a tall scroll "track" + a position:sticky "stage" +
+  a transform that's driven by the real, native scroll position (read via
+  getBoundingClientRect on scroll/resize, in a rAF loop). Visually it reads
+  identically to full scroll-jacking, but trackpad/touch/keyboard scrolling,
+  momentum scrolling and screen-reader linear reading all keep working
+  normally, because nothing ever calls preventDefault() on scroll input.
+
+  Progressive enhancement: the default (no-JS / JS-blocked) layout is a
+  normal stacked page — the pin+pan effect is only switched on by JS after
+  it confirms the viewport is wide enough (>760px) to carry it well; narrow
+  / mobile viewports always get the plain stacked layout, matching how
+  this kind of effect is typically handled responsively.
+
+  Note: position:sticky requires that no ancestor Elementor section/column
+  around this widget has overflow:hidden (or a transform) on it — if the
+  pin doesn't visually "stick" once live, check the parent section's
+  Advanced > overflow setting in Elementor.
 
   Fee table and cancellation/refund policy are the real GAS 2027 figures.
   "Register Interest" / "Register Now" buttons point at the live Zoho
@@ -77,7 +95,7 @@
   .gas-registration .btn-line{border-color:var(--hairline) !important;color:var(--ink-text) !important;}
   .gas-registration .btn-line:hover{border-color:var(--brass-ink) !important;color:var(--brass-ink) !important;}
 
-  /* ============ SIDE NAV (desktop) — tracks current section ============ */
+  /* ============ SIDE NAV — tracks current section ============ */
   .gas-registration .page-nav{
     position:fixed;z-index:40;right:clamp(1rem,2.6vw,2.25rem);top:50%;transform:translateY(-50%);
     display:flex;flex-direction:column;gap:.1rem;
@@ -99,12 +117,27 @@
   .gas-registration .page-nav__link.is-active{color:var(--ink-text);}
   .gas-registration .page-nav__link.is-active .page-nav__dot{background:var(--brass-ink);transform:scale(1.5);}
 
-  /* ============ full-screen scroll sections ============ */
+  /* ============ default (no-JS / mobile): plain stacked sections ============ */
+  .gas-registration .scroll-track{position:relative;}
+  .gas-registration .scroll-stage{position:relative;}
+  .gas-registration .scroll-inner{position:relative;}
   .gas-registration .scroll-section{
-    min-height:100vh;min-height:100svh;display:flex;align-items:center;
-    padding-block:clamp(4rem,9vw,6.5rem);position:relative;
+    position:relative;display:flex;align-items:center;
+    min-height:100vh;min-height:100svh;padding-block:clamp(4rem,9vw,6.5rem);
   }
   .gas-registration .scroll-section > .wrap{position:relative;z-index:1;}
+
+  /* ============ pinned diagonal-pan mode (JS-enabled, enabled by .is-pinned-scroll) ============ */
+  .gas-registration.is-pinned-scroll .scroll-stage{
+    position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--linen);
+  }
+  .gas-registration.is-pinned-scroll .scroll-inner{
+    position:relative;height:100%;width:100%;will-change:transform;
+  }
+  .gas-registration.is-pinned-scroll .scroll-section{
+    position:absolute;top:0;left:0;width:100vw;height:100%;min-height:0;
+    padding-block:clamp(3rem,7vw,5rem);overflow-y:auto;-webkit-overflow-scrolling:touch;
+  }
 
   /* ---- hero / page header (ink band) ---- */
   .gas-registration .page-header{background:var(--ink);color:var(--on-ink);}
@@ -118,7 +151,7 @@
   .gas-registration .scroll-hint{
     display:inline-flex;align-items:center;gap:.6em;margin-top:clamp(2.5rem,6vw,4rem);
     font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-    color:var(--brass-soft);cursor:pointer;
+    color:var(--brass-soft);cursor:pointer;background:none;border:0;padding:0;
   }
   .gas-registration .scroll-hint__notch{
     width:28px;height:28px;border-radius:50%;border:1px solid rgba(227,190,122,.5);
@@ -183,7 +216,6 @@
     .gas-registration .policy-list{grid-template-columns:1fr;}
   }
   @media (max-width:600px){
-    .gas-registration .scroll-section{min-height:auto;}
     .gas-registration .fee-card-grid{grid-template-columns:1fr;}
     .gas-registration .cat-grid{grid-template-columns:1fr;}
   }
@@ -201,122 +233,130 @@
   <a href="#RegCta" class="page-nav__link" data-target="RegCta"><span class="page-nav__dot"></span><span class="page-nav__label">Register now</span></a>
 </nav>
 
-<!-- ============ HERO / PAGE HEADER ============ -->
-<section class="scroll-section page-header" id="RegHero">
-  <div class="wrap">
-    <p class="eyebrow">Registration</p>
-    <h1>Register for GAS 2027.</h1>
-    <p class="intro">Secure your place at the Gulf Aorta Summit, 29–31 January 2027, Jumeirah Emirates Towers, Dubai. Early bird pricing is available for a limited time — registration includes full access to the scientific programme, workshops, exhibition and poster area.</p>
-    <div class="btn-row">
-      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
-      <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Registration%20Enquiry">Ask a Question</a>
-    </div>
-    <a href="#RegFees" class="scroll-hint" data-target="RegFees"><span class="scroll-hint__notch"></span>See registration fees</a>
-  </div>
-</section>
+<div class="scroll-track" id="GasRegTrack">
+  <div class="scroll-stage" id="GasRegStage">
+    <div class="scroll-inner" id="GasRegInner">
 
-<!-- ============ FEES ============ -->
-<section class="scroll-section" id="RegFees">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Registration fees</p>
-      <h2>Choose the category that fits you.</h2>
-      <p class="kicker">Take advantage of Early Bird rates before they close. All fees cover full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
-    </div>
-    <div class="fee-card-grid">
-      <div class="fee-card">
-        <h3>Physicians / Doctors<span class="badge-early">Early Bird</span></h3>
-        <div class="fee-price"><span class="usd">$135</span><span class="aed">AED 494</span></div>
-      </div>
-      <div class="fee-card">
-        <h3>Physicians / Doctors <span class="mono">(Normal Price)</span></h3>
-        <div class="fee-price"><span class="usd">$185</span><span class="aed">AED 677</span></div>
-      </div>
-      <div class="fee-card">
-        <h3>Health Professional<span class="badge-early">Early Bird</span></h3>
-        <div class="fee-price"><span class="usd">$115</span><span class="aed">AED 421</span></div>
-      </div>
-      <div class="fee-card">
-        <h3>Health Professional <span class="mono">(Normal)</span></h3>
-        <div class="fee-price"><span class="usd">$150</span><span class="aed">AED 549</span></div>
-      </div>
-      <div class="fee-card">
-        <h3>Physicians <span class="mono">(Onsite)</span></h3>
-        <div class="fee-price"><span class="usd">$275</span><span class="aed">AED 1007</span></div>
-      </div>
-      <div class="fee-card">
-        <h3>Nurses / Students / Residents <span class="mono">(Regular Fee)</span></h3>
-        <div class="fee-price"><span class="usd">$85</span><span class="aed">AED 311</span></div>
-      </div>
-    </div>
-    <p class="fee-note">Prices shown in US Dollars and UAE Dirhams. Registration fee is waived for invited speakers.</p>
-  </div>
-</section>
+      <!-- ============ HERO / PAGE HEADER ============ -->
+      <section class="scroll-section page-header" id="RegHero">
+        <div class="wrap">
+          <p class="eyebrow">Registration</p>
+          <h1>Register for GAS 2027.</h1>
+          <p class="intro">Secure your place at the Gulf Aorta Summit, 29–31 January 2027, Jumeirah Emirates Towers, Dubai. Early bird pricing is available for a limited time — registration includes full access to the scientific programme, workshops, exhibition and poster area.</p>
+          <div class="btn-row">
+            <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+            <a class="btn btn-line" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Registration%20Enquiry">Ask a Question</a>
+          </div>
+          <button type="button" class="scroll-hint" id="GasRegHint"><span class="scroll-hint__notch"></span>See registration fees</button>
+        </div>
+      </section>
 
-<!-- ============ CATEGORIES ============ -->
-<section class="scroll-section" id="RegCategories" style="background:var(--linen-raised);">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Who's registering</p>
-      <h2>Built for every role at GAS 2027.</h2>
-      <p class="kicker">Whichever category applies to you, every pass covers full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
-    </div>
-    <div class="cat-grid">
-      <div class="cat-card">
-        <h3>Doctors / HCPs</h3>
-        <span class="price">From AED 494 · Early Bird</span>
-        <p>Full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
-      </div>
-      <div class="cat-card">
-        <h3>Residents &amp; Allied Health Professionals</h3>
-        <span class="price">From AED 421 · Early Bird</span>
-        <p>Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
-      </div>
-      <div class="cat-card">
-        <h3>Trainees &amp; Students</h3>
-        <span class="price">From AED 311</span>
-        <p>Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
-      </div>
-      <div class="cat-card">
-        <h3>Onsite Registration</h3>
-        <span class="price">From AED 1007</span>
-        <p>For delegates registering on the day. Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
-      </div>
-    </div>
-  </div>
-</section>
+      <!-- ============ FEES ============ -->
+      <section class="scroll-section" id="RegFees">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Registration fees</p>
+            <h2>Choose the category that fits you.</h2>
+            <p class="kicker">Take advantage of Early Bird rates before they close. All fees cover full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
+          </div>
+          <div class="fee-card-grid">
+            <div class="fee-card">
+              <h3>Physicians / Doctors<span class="badge-early">Early Bird</span></h3>
+              <div class="fee-price"><span class="usd">$135</span><span class="aed">AED 494</span></div>
+            </div>
+            <div class="fee-card">
+              <h3>Physicians / Doctors <span class="mono">(Normal Price)</span></h3>
+              <div class="fee-price"><span class="usd">$185</span><span class="aed">AED 677</span></div>
+            </div>
+            <div class="fee-card">
+              <h3>Health Professional<span class="badge-early">Early Bird</span></h3>
+              <div class="fee-price"><span class="usd">$115</span><span class="aed">AED 421</span></div>
+            </div>
+            <div class="fee-card">
+              <h3>Health Professional <span class="mono">(Normal)</span></h3>
+              <div class="fee-price"><span class="usd">$150</span><span class="aed">AED 549</span></div>
+            </div>
+            <div class="fee-card">
+              <h3>Physicians <span class="mono">(Onsite)</span></h3>
+              <div class="fee-price"><span class="usd">$275</span><span class="aed">AED 1007</span></div>
+            </div>
+            <div class="fee-card">
+              <h3>Nurses / Students / Residents <span class="mono">(Regular Fee)</span></h3>
+              <div class="fee-price"><span class="usd">$85</span><span class="aed">AED 311</span></div>
+            </div>
+          </div>
+          <p class="fee-note">Prices shown in US Dollars and UAE Dirhams. Registration fee is waived for invited speakers.</p>
+        </div>
+      </section>
 
-<!-- ============ CANCELLATION & REFUND ============ -->
-<section class="scroll-section" id="RegPolicy">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Terms</p>
-      <h2>Cancellation and refund policy.</h2>
-    </div>
-    <div class="policy-list">
-      <div class="policy-item"><span class="mark">→</span><p>Everyone attending the conference must register and pay the registration fees.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>This rule does not apply to invited speakers, as the registration fee is waived for them.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>We ensure that delegates wishing to cancel and refund their registration fees are well aware of the process.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>Cancellations received 30 days prior to the event will receive a refund of the registration fees, less an administration charge of 30% of the conference fees.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>Registration cancellations must be notified in writing by email to <a href="mailto:info@gulfaorta.com">info@gulfaorta.com</a>.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>Cancellations made after this window, as well as 'no shows', are not eligible for a refund.</p></div>
-      <div class="policy-item"><span class="mark">→</span><p>Refunds will be processed one month after the event completion date.</p></div>
-    </div>
-  </div>
-</section>
+      <!-- ============ CATEGORIES ============ -->
+      <section class="scroll-section" id="RegCategories" style="background:var(--linen-raised);">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Who's registering</p>
+            <h2>Built for every role at GAS 2027.</h2>
+            <p class="kicker">Whichever category applies to you, every pass covers full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
+          </div>
+          <div class="cat-grid">
+            <div class="cat-card">
+              <h3>Doctors / HCPs</h3>
+              <span class="price">From AED 494 · Early Bird</span>
+              <p>Full two-day access to the scientific programme, workshops, exhibition and poster area, including coffee breaks and refreshments.</p>
+            </div>
+            <div class="cat-card">
+              <h3>Residents &amp; Allied Health Professionals</h3>
+              <span class="price">From AED 421 · Early Bird</span>
+              <p>Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
+            </div>
+            <div class="cat-card">
+              <h3>Trainees &amp; Students</h3>
+              <span class="price">From AED 311</span>
+              <p>Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
+            </div>
+            <div class="cat-card">
+              <h3>Onsite Registration</h3>
+              <span class="price">From AED 1007</span>
+              <p>For delegates registering on the day. Full two-day access to the scientific programme, exhibition and poster area, including coffee breaks and refreshments.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<!-- ============ CLOSING CTA ============ -->
-<section class="scroll-section cta-band" id="RegCta">
-  <div class="wrap">
-    <div>
-      <h2>Ready to secure your seat?</h2>
-      <p>Early Bird pricing won't last — register now to lock in your rate for GAS 2027.</p>
-    </div>
-    <div class="btn-row">
-      <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+      <!-- ============ CANCELLATION & REFUND ============ -->
+      <section class="scroll-section" id="RegPolicy">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Terms</p>
+            <h2>Cancellation and refund policy.</h2>
+          </div>
+          <div class="policy-list">
+            <div class="policy-item"><span class="mark">→</span><p>Everyone attending the conference must register and pay the registration fees.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>This rule does not apply to invited speakers, as the registration fee is waived for them.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>We ensure that delegates wishing to cancel and refund their registration fees are well aware of the process.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>Cancellations received 30 days prior to the event will receive a refund of the registration fees, less an administration charge of 30% of the conference fees.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>Registration cancellations must be notified in writing by email to <a href="mailto:info@gulfaorta.com">info@gulfaorta.com</a>.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>Cancellations made after this window, as well as 'no shows', are not eligible for a refund.</p></div>
+            <div class="policy-item"><span class="mark">→</span><p>Refunds will be processed one month after the event completion date.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CLOSING CTA ============ -->
+      <section class="scroll-section cta-band" id="RegCta">
+        <div class="wrap">
+          <div>
+            <h2>Ready to secure your seat?</h2>
+            <p>Early Bird pricing won't last — register now to lock in your rate for GAS 2027.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn-gold" href="https://maarefahmgt.zohobackstage.com/GulfAortaSummit#/tickets?lang=en" target="_blank" rel="noreferrer noopener">Register Now</a>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-</section>
+</div>
 </div>
 
 <script>
@@ -324,45 +364,137 @@
   var wrapper = document.querySelector('.gas-registration');
   if (!wrapper) return;
 
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var scrollBehavior = reduced ? 'auto' : 'smooth';
-
-  var sections = wrapper.querySelectorAll('.scroll-section[id]');
+  var track = wrapper.querySelector('#GasRegTrack');
+  var stage = wrapper.querySelector('#GasRegStage');
+  var inner = wrapper.querySelector('#GasRegInner');
+  var sections = Array.prototype.slice.call(wrapper.querySelectorAll('.scroll-section[id]'));
   var navLinks = wrapper.querySelectorAll('.page-nav__link');
+  var hint = wrapper.querySelector('#GasRegHint');
+  if (!track || !stage || !inner || !sections.length) return;
 
-  function setActive(id){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // horizontal sway (in vw) per section — alternating left/right, like a zigzag path
+  var swingVw = [0, -14, 14, -14, 0];
+
+  var engineOn = false;
+  var ticking = false;
+
+  function setActiveById(id){
     navLinks.forEach(function(link){
       link.classList.toggle('is-active', link.getAttribute('data-target') === id);
     });
   }
 
-  if ('IntersectionObserver' in window && sections.length) {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) setActive(entry.target.id);
-      });
-    }, { threshold: 0.5 });
-    sections.forEach(function(s){ io.observe(s); });
+  function layoutSections(){
+    sections.forEach(function(section, i){
+      var x = swingVw[i] !== undefined ? swingVw[i] : 0;
+      section.style.top = (i * 100) + 'vh';
+      section.style.left = x + 'vw';
+    });
+    track.style.height = (sections.length * 100) + 'vh';
   }
 
-  function jumpTo(id, e){
-    var target = document.getElementById(id);
-    if (!target) return;
-    if (e) e.preventDefault();
-    target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+  function clearLayout(){
+    sections.forEach(function(section){
+      section.style.top = '';
+      section.style.left = '';
+    });
+    track.style.height = '';
+    inner.style.transform = '';
   }
+
+  function render(){
+    ticking = false;
+    if (!engineOn) return;
+
+    var rect = track.getBoundingClientRect();
+    var total = track.offsetHeight - window.innerHeight;
+    var progress = total > 0 ? (-rect.top) / total : 0;
+    progress = Math.min(1, Math.max(0, progress));
+
+    var segCount = sections.length - 1;
+    var virtual = progress * segCount;
+    var idx = Math.min(segCount - 1, Math.floor(virtual));
+    var t = virtual - idx;
+
+    var xA = swingVw[idx] !== undefined ? swingVw[idx] : 0;
+    var xB = swingVw[idx + 1] !== undefined ? swingVw[idx + 1] : xA;
+    var x = xA + (xB - xA) * t;
+    var y = (idx + t) * 100;
+
+    inner.style.transform = 'translate(' + (-x) + 'vw, ' + (-y) + 'vh)';
+
+    var activeIdx = Math.round(virtual);
+    setActiveById(sections[activeIdx].id);
+  }
+
+  function requestRender(){
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(render);
+    }
+  }
+
+  function scrollToIndex(index){
+    index = Math.min(sections.length - 1, Math.max(0, index));
+    if (!engineOn) {
+      sections[index].scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+      return;
+    }
+    var rect = track.getBoundingClientRect();
+    var trackTopAbs = rect.top + window.scrollY;
+    var total = track.offsetHeight - window.innerHeight;
+    var p = sections.length > 1 ? index / (sections.length - 1) : 0;
+    window.scrollTo({ top: trackTopAbs + p * total, behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  function enableEngine(){
+    if (engineOn) return;
+    engineOn = true;
+    wrapper.classList.add('is-pinned-scroll');
+    layoutSections();
+    render();
+  }
+
+  function disableEngine(){
+    if (!engineOn) return;
+    engineOn = false;
+    wrapper.classList.remove('is-pinned-scroll');
+    clearLayout();
+  }
+
+  function evaluateMode(){
+    if (window.innerWidth > 760) {
+      enableEngine();
+    } else {
+      disableEngine();
+    }
+  }
+
+  window.addEventListener('scroll', requestRender, { passive: true });
+  window.addEventListener('resize', function(){
+    evaluateMode();
+    requestRender();
+  });
 
   navLinks.forEach(function(link){
     link.addEventListener('click', function(e){
-      jumpTo(link.getAttribute('data-target'), e);
+      var id = link.getAttribute('data-target');
+      var index = sections.findIndex(function(s){ return s.id === id; });
+      if (index > -1) {
+        e.preventDefault();
+        scrollToIndex(index);
+      }
     });
   });
 
-  var hint = wrapper.querySelector('.scroll-hint');
   if (hint) {
-    hint.addEventListener('click', function(e){
-      jumpTo(hint.getAttribute('data-target'), e);
+    hint.addEventListener('click', function(){
+      scrollToIndex(1);
     });
   }
+
+  evaluateMode();
 })();
 </script>
