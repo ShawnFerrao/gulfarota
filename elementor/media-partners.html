@@ -1,0 +1,195 @@
+<!--
+  GULF AORTA SUMMIT — "MEDIA PARTNERS" PAGE (Elementor "HTML" widget)
+  ───────────────────────────────────────────────────────────────
+  Paste into an HTML widget on its own page (suggested slug:
+  /media-partners). No header/footer markup — those come from your
+  global Elementor templates.
+
+  Lists the journals, magazines and media outlets partnering with
+  GAS 2027 — distinct from sponsors.html (commercial sponsors) and
+  endorsed-by.html (societies/hospitals/universities).
+
+  To add another logo, copy an existing <div class="org-tile"> block
+  inside .org-grid and swap the src/alt/label. If a logo isn't ready
+  yet, drop the <img> and add class="placeholder" to the div — the
+  <span class="logo-mark"> then shows as fallback text.
+
+  Self-contained: fonts, tokens and styles scoped under .gas-media.
+-->
+<div class="gas-media">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300..700;1,300..700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap');
+
+  .gas-media{
+    --ink:#001A3F;
+    --brass:#E3BE7A;
+    --brass-soft:#F2DBA8;
+    --brass-ink:#93701E;
+    --brass-dim:rgba(227,190,122,.38);
+    --linen:#FFFFFF;
+    --linen-raised:#F2F5F8;
+    --mist:#595959;
+    --ink-text:#22344A;
+    --hairline:rgba(44,70,107,.16);
+    --on-ink:#F4F6F8;
+    --on-ink-mist:#9FB6CE;
+    --radius:2px;
+    --maxw:1180px;
+    --pad:clamp(1.25rem,4vw,3.25rem);
+    --ease:cubic-bezier(.16,.8,.24,1);
+    --fs-display-2:clamp(1.8rem,2.4vw + 1rem,2.5rem);
+    display:block;
+    background:var(--linen);color:var(--ink-text);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:1rem;line-height:1.65;
+  }
+  .gas-media,.gas-media *,.gas-media *::before,.gas-media *::after{box-sizing:border-box;}
+  .gas-media p{margin:0;}
+  .gas-media a{color:inherit;text-decoration:none;}
+  .gas-media h1,.gas-media h2,.gas-media h3{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;}
+  .gas-media .mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;}
+  .gas-media img{max-width:100%;display:block;}
+
+  .gas-media .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--pad);}
+
+  .gas-media .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass-ink);display:inline-flex;align-items:center;gap:.6em;
+    margin-bottom:1rem;
+  }
+  .gas-media .eyebrow::before{content:"";width:1.4em;height:1px;background:currentColor;display:inline-block;}
+
+  /* ---- buttons ---- */
+  .gas-media .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:.86rem;letter-spacing:.02em;
+    padding:.9em 1.45em;border-radius:var(--radius);transition:transform .35s var(--ease),background .25s,border-color .25s;
+  }
+  .gas-media .btn-gold{background:var(--brass) !important;color:var(--ink) !important;}
+  .gas-media .btn-gold:hover{background:var(--brass-soft) !important;transform:translateY(-2px);}
+  .gas-media .btn-line{border:1px solid rgba(244,246,248,.3) !important;color:var(--on-ink) !important;}
+  .gas-media .btn-line:hover{border-color:var(--brass) !important;color:var(--brass-soft) !important;}
+  .gas-media .btn-row{display:flex;flex-wrap:wrap;gap:1rem;}
+
+  /* ---- page header (ink band, with background photo) ---- */
+  .gas-media .page-header{position:relative;overflow:hidden;background:var(--ink);color:var(--on-ink);padding-block:clamp(3.5rem,8vw,5.5rem) clamp(3rem,6vw,4.5rem);text-align:center;}
+  .gas-media .page-header-media{position:absolute;inset:0;z-index:0;}
+  .gas-media .page-header-media img{width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:saturate(.4) brightness(.38);}
+  .gas-media .page-header-media img.hidden{display:none;}
+  .gas-media .page-header-media .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,26,63,.92) 0%,rgba(0,26,63,.88) 55%,rgba(0,26,63,.96) 100%);}
+  .gas-media .page-header > .wrap{position:relative;z-index:1;}
+  .gas-media .page-header h1{font-size:clamp(1.7rem,2.4vw + 1rem,2.6rem);max-width:46ch;margin-inline:auto;color:var(--on-ink);}
+  .gas-media .page-header .intro{margin-top:1.25rem;max-width:62ch;margin-inline:auto;color:var(--on-ink-mist);font-size:1.05rem;}
+  .gas-media .badge-pill{
+    display:inline-flex;align-items:center;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);background:var(--brass-soft);border-radius:100px;padding:.7rem 1.6rem;
+    margin-bottom:1.5rem;
+  }
+
+  .gas-media .section{padding-block:clamp(3rem,7vw,5.5rem);}
+  .gas-media .section-head{border-top:1px solid var(--hairline);padding-top:1.1rem;margin-bottom:clamp(2rem,4vw,3rem);}
+  .gas-media .section-head h2{font-size:var(--fs-display-2);max-width:34ch;}
+
+  /* ---- org tile (shared building block) ---- */
+  .gas-media .org-tile{
+    display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+    border-radius:12px;background:var(--linen);box-shadow:0 0 0 1px var(--hairline),0 10px 22px -16px rgba(0,26,63,.16);
+    transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+    padding:.6rem .75rem;height:150px;
+  }
+  .gas-media a.org-tile:hover{
+    transform:translateY(-4px);box-shadow:0 0 0 1px var(--brass-dim),0 16px 30px -16px rgba(0,26,63,.24);
+  }
+  .gas-media .org-tile img{width:100%;height:100%;object-fit:contain;}
+  .gas-media .org-tile img.hidden{display:none;}
+  .gas-media .org-tile .logo-mark{
+    display:none;font-family:"IBM Plex Sans";font-weight:600;font-size:.86rem;line-height:1.3;color:var(--ink-text);
+  }
+  .gas-media .org-tile img.hidden ~ .logo-mark,
+  .gas-media .org-tile:not(:has(img)) .logo-mark{display:block;}
+  .gas-media .org-tile.placeholder{background:var(--linen-raised);box-shadow:inset 0 0 0 1px var(--hairline);}
+  .gas-media .org-tile.placeholder .logo-mark{
+    display:block;color:var(--mist);font-weight:500;font-size:.78rem;
+  }
+
+  /* ---- grid ---- */
+  .gas-media .org-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.1rem,2.2vw,1.5rem);}
+
+  /* ---- closing CTA ---- */
+  .gas-media .cta-band{background:var(--ink);color:var(--on-ink);}
+  .gas-media .cta-band .wrap{padding-block:clamp(3rem,6vw,4.5rem);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:2rem;}
+  .gas-media .cta-band h2{font-size:var(--fs-display-2);max-width:20ch;color:var(--on-ink);}
+  .gas-media .cta-band p{color:var(--on-ink-mist);margin-top:.6rem;max-width:46ch;}
+
+  @media (max-width:980px){
+    .gas-media .org-grid{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:640px){
+    .gas-media .org-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gas-media *{transition-duration:.001ms !important;}
+  }
+</style>
+
+<!-- ============ PAGE HEADER ============ -->
+<section class="page-header">
+  <div class="page-header-media" aria-hidden="true">
+    <img src="https://gulfaortasummit.com/wp-content/uploads/2026/08/Medical-tech-cover-new-scaled.jpg" alt="" loading="eager" data-fallback="hero">
+    <div class="scrim"></div>
+  </div>
+  <div class="wrap">
+    <span class="badge-pill">Media Partners</span>
+    <h1>GAS 2027 is proud to partner with leading medical journals, magazines and media platforms covering the region and beyond.</h1>
+  </div>
+</section>
+
+<!-- ============ MEDIA PARTNERS GRID ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Press &amp; publications</p>
+      <h2>Media partners.</h2>
+    </div>
+    <div class="org-grid">
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Journal-Of-Clinical-Medicine.jpeg" alt="Journal of Clinical Medicine" loading="lazy" data-fallback="self"><span class="logo-mark">Journal of Clinical Medicine</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/MedGateToday-Magazine.jpeg" alt="MedGate Today Magazine" loading="lazy" data-fallback="self"><span class="logo-mark">MedGate Today Magazine</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Atlantis-Press.jpeg" alt="Atlantis Press" loading="lazy" data-fallback="self"><span class="logo-mark">Atlantis Press</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Healthcare-Business-Review.jpeg" alt="Healthcare Business Review" loading="lazy" data-fallback="self"><span class="logo-mark">Healthcare Business Review</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/The-Arab-Hospital-Magazine.jpeg" alt="The Arab Hospital Magazine" loading="lazy" data-fallback="self"><span class="logo-mark">The Arab Hospital Magazine</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Arab-Heart.jpeg" alt="Arab Heart" loading="lazy" data-fallback="self"><span class="logo-mark">Arab Heart</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/International-Hospital.jpeg" alt="International Hospital" loading="lazy" data-fallback="self"><span class="logo-mark">International Hospital</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Clinical-Laboratory.jpeg" alt="Clinical Laboratory" loading="lazy" data-fallback="self"><span class="logo-mark">Clinical Laboratory</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Jo-Heart.jpeg" alt="Jo Heart" loading="lazy" data-fallback="self"><span class="logo-mark">Jo Heart</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Capitalbay.jpeg" alt="Capitalbay" loading="lazy" data-fallback="self"><span class="logo-mark">Capitalbay</span></div>
+      <div class="org-tile"><img src="https://gulfaortasummit.com/wp-content/uploads/2026/11/Hospitals-by-Arab-Hospital-Magazines.jpeg" alt="Hospitals by Arab Hospital Magazine" loading="lazy" data-fallback="self"><span class="logo-mark">Hospitals by Arab Hospital Magazine</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="cta-band">
+  <div class="wrap">
+    <div>
+      <h2>Want to partner with GAS 2027?</h2>
+      <p>Get in touch if your publication or media platform would like to cover the Gulf Aorta Summit.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="mailto:info@gulfaorta.com?subject=GAS%202027%20—%20Media%20Partnership%20Enquiry">Get in Touch</a>
+      <a class="btn btn-line" href="/gulf-aorta-overview-2026">About GAS 2027</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+(function(){
+  // delegated, capture-phase image-fallback handler (no inline onerror= attributes
+  // — some hosts' security plugins flag inline event-handler attributes as XSS)
+  document.addEventListener('error', function(e){
+    var img = e.target;
+    if (!img || img.tagName !== 'IMG' || !img.dataset || !img.dataset.fallback) return;
+    img.classList.add('hidden');
+  }, true);
+})();
+</script>
